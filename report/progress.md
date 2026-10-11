@@ -11,6 +11,18 @@
 
 当前目标是先在公开数据集上复现 EfficientAD 完整推理，再根据实测形状、耗时和资源预算拆分 PS/PL，最后迁移到 ALINX Zynq 板并考虑实物。没有板卡完整型号、选定代码/权重、模型层形状和资源报告时，不能可靠地指定最终网络规模、PS/PL 数据通路或性能指标。
 
+## 2026-10-11：给三名队员制定开发大纲
+
+**起点：** 当前分支 `feat/amd-contest-rules`，前一提交 `6ca9e79`；工作区干净。队长提出让 AI 制定大纲并将工作分给三名队员，团队尚不知道所谓“论文开源代码”的准确链接；当前仓库没有 EfficientAD 实现、权重和数据集结果。
+
+**做了什么：** 新增 [三人开发大纲与交接表](team_outline.md)，分为 A 算法/数据、B 板卡/系统、C PL 加速/课程 SoC 三条工作线，列出截至团队所说 11 月 4 日的检查点、交付接口、完成判据和收缩方案。选择自称非官方、文档有 MVTec AD 运行入口的 `nelson1425/EfficientAD` 作为**待复现第一候选**，Anomalib 实现作为备选；团队不必等待未知链接。更新根 README、`report/README.md` 和迁移计划的入口与待办。
+
+**为什么：** 三人新手若同时研究代码、数据、板端和 PL，容易把尚未对齐的输入输出拼不起来；按交付接口拆分可并行推进，也能尽早发现电脑环境、模型权重和板卡版本是否阻塞。公开论文、非官方实现、预训练教师权重与训练好的完整模型是不同事物，不能混称。
+
+**如何验证：** 核对 [候选代码仓库 README](https://github.com/nelson1425/EfficientAD)、[Anomalib EfficientAd 文档](https://github.com/open-edge-platform/anomalib/blob/main/src/anomalib/models/image/efficient_ad/README.md)及 [MVTec AD 官方页](https://www.mvtec.com/research-teaching/datasets/mvtec-ad)的运行入口、模型分支和数据许可；`python -B -m unittest discover -s sim -v` 现有 6 项软件测试通过，`git diff --check` 通过。文档审查和旧测试不等于新代码、训练、准确率或板上结果。
+
+**未完成与下一步：** 队长给 A/B/C 填真实姓名并核对正式截止日期；A 固定实现和环境、做电脑端完整推理；B 确认 AX7021 版本与启动；C 先做评分图数值边界和仿真，再依 A 的真实特征形状决定 PL 接口。尚未下载数据/权重、安装训练依赖或运行 EfficientAD。
+
 ## 2026-10-11：确认团队目标与 EfficientAD 迁移顺序
 
 **起点：** 当前位于尚未上传的 `feat/amd-contest-rules` 分支，前一提交 `ad8a194` 只加入规则文档；仓库仍无 EfficientAD 网络和权重。团队再次确认共三人、均大三，板卡品牌 ALINX、器件 Zynq-7020；组长希望先用数据集测试 EfficientAD，再把推理链路搬到板端，最后考虑实物。

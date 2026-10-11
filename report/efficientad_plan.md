@@ -7,7 +7,7 @@
 | 项目 | 已核实 | 尚需确认 |
 | --- | --- | --- |
 | 论文 | [EfficientAD 原论文（WACV 2024）](https://openaccess.thecvf.com/content/WACV2024/papers/Batzner_EfficientAD_Accurate_Visual_Anomaly_Detection_at_Millisecond-Level_Latencies_WACV_2024_paper.pdf) 可公开阅读，报告了 MVTec AD、VisA、MVTec LOCO AD 上的实验 | 可读论文不等于作者公开了训练代码、权重或允许任意再分发 |
-| 代码 | [nelson1425/EfficientAD](https://github.com/nelson1425/EfficientAD) 是可参考的公开仓库，仓库自称**非官方实现**并标示 Apache-2.0 许可 | 组长具体指向哪个仓库/提交、模型权重的来源及许可；选定后记录 URL、提交哈希、依赖版本与文件校验值 |
+| 代码 | [nelson1425/EfficientAD](https://github.com/nelson1425/EfficientAD) 是**第一候选**公开仓库，仓库自称非官方实现并标示 Apache-2.0 许可；[Anomalib EfficientAd](https://github.com/open-edge-platform/anomalib/blob/main/src/anomalib/models/image/efficient_ad/README.md) 是备选 | 固定实际采用的提交、依赖和权重来源/许可；通过本机复现门槛后再将候选定为正式基线，见 [三人开发大纲](team_outline.md) |
 | 数据 | [MVTec AD 官方数据页](https://www.mvtec.com/research-teaching/datasets/mvtec-ad) 提供正常训练图、正常/异常测试图及像素标注，许可为 CC BY-NC-SA 4.0 | 首选对象类别、下载与引用方式、训练/验证/测试清单；原始数据不直接并入本项目 MIT 仓库 |
 
 现有 `src/score_map.py` 只计算**已对齐特征**的局部教师–学生平方差；`src/image_baseline.py` 是固定位置像素模板，用于文件与结果保存流程检查。两者都不是完整 EfficientAD 推理，也没有论文实验成绩。原论文还使用自动编码器分支处理更广域的逻辑异常，并结合两类异常图；因此不能只跑现有 `score_map.py` 就称为完成论文迁移。
@@ -27,5 +27,5 @@
 ## 当前需要的外部信息
 
 1. ALINX 板卡的型号**版本**、FPGA 完整订货料号、DDR 容量、板上系统与可用接口；照片使 AX7021 成为候选，但还不足以选择板级工程、约束和镜像。
-2. 组长选定的 EfficientAD 代码仓库链接与拟用权重；在拿到链接前，`nelson1425/EfficientAD` 只作为**候选**，不复制到项目，也不把其结果当成本队实测。
+2. 不再等待未知的组长仓库链接。A 先评估 `nelson1425/EfficientAD`，若依赖或完整流程不适合，再评估 Anomalib；固定代码提交、教师权重和数据版本后才算选定。两者均未在本队电脑上运行，外部仓库结果不能当成本队实测。
 3. 电脑是否有可用 GPU、显存和工具版本；据此决定基线运行与训练时间。数据集须从官方渠道取得，保留许可、来源与划分记录。
