@@ -5,7 +5,7 @@
 | 项目 | 内容 |
 | --- | --- |
 | 团队 | AMDYES |
-| 队员 | 3 人，均为大三；在读本科资格以报名审核为准 |
+| 组队 | 1 名队长、2 名队员，均为大三；在读本科资格以报名审核为准 |
 | 参赛厂商 | AMD |
 | 选定赛道 | AMD 自主选题（初级），对应选题指南第 3.3 节 |
 | 目标器件 | ALINX 板卡，实物照片可见 XC7Z020；布局疑似 AX7021 系列，版本待核对 |
@@ -27,7 +27,7 @@
 - [工作记录与下一步](report/progress.md)：记录每次改动、原因、验证和待办，供队员同步进度。
 - [AMD 自主选题赛道规则核对表](report/contest_rules.md)：初级组资格、器件、交付物、AI 协作记录与待核验事项；开始新任务前先核对。
 - [EfficientAD 数据集与板端迁移计划](report/efficientad_plan.md)：来源核对、阶段完成判据和 ALINX 板卡待确认信息。
-- [三人开发大纲与交接表](report/team_outline.md)：截至 11 月 4 日的 A/B/C 分工、交付接口、检查点和收缩方案。
+- [三人开发大纲](report/team_outline.md)：队长和两位队员各做什么、什么时候交接。
 - [GitHub 协作步骤](report/collaboration.md)：通过 GitHub Desktop 获取项目、提交分支和同步。
 - [异常评分图参考实现](src/score_map.py)：消费已对齐的教师/学生特征，不含网络训练或权重。
 - [图片模板基线](src/image_baseline.py)：固定机位、同尺寸图片的像素差异判定；与 EfficientAD 模型分开记录。

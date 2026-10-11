@@ -1,6 +1,6 @@
 # EfficientAD 数据集验证与 Zynq 推理迁移计划
 
-本页记录**团队目标与执行顺序**，不是已完成结果，也不是 AMD 指南的附加硬性条款。2026-10-11 团队确认：三名队员均为大三；板卡品牌为 ALINX，实物照片可见 XC7Z020、布局疑似 AX7021 系列（版本待核对，见 [board/README.md](../board/README.md)）；先在公开数据集上验证 EfficientAD，再将推理链路迁移到板端，最后考虑自采实物。课程 RISC-V SoC 路线仍单独验收。赛道规定见 [contest_rules.md](contest_rules.md)。
+本页记录**团队目标与执行顺序**，不是已完成结果，也不是 AMD 指南的附加硬性条款。2026-10-11 团队确认：1 名队长和 2 名队员均为大三；板卡品牌为 ALINX，实物照片可见 XC7Z020、布局疑似 AX7021 系列（版本待核对，见 [board/README.md](../board/README.md)）；先在公开数据集上验证 EfficientAD，再将推理链路迁移到板端，最后考虑自采实物。课程 RISC-V SoC 路线仍单独验收。赛道规定见 [contest_rules.md](contest_rules.md)。
 
 ## 论文、代码和数据分别核对
 
