@@ -19,13 +19,15 @@
 
 硬件侧计划围绕卷积、特征差分与通道累加设计可复用加速单元，研究 INT8 权重与激活量化、分块缓存及数据流优化。竞赛版拟由 Zynq 的 ARM（PS）负责图像输入、参数配置与结果显示，FPGA（PL）负责计算加速。课程版可在 PL 中加入 RISC-V SoC 并复用加速器；两版分别构建和验证。网络规模、接口和阈值由后续基线测试与资源评估确定。
 
-当前仓库在文档骨架之外仅增加了异常评分图的**软件参考计算**与数值检查。尚无教师/学生网络、模型权重、硬件加速器、构建脚本或板级实测数据。软件参考计算不能单独完成缺陷检测。
+当前仓库已有异常评分图的软件参考计算，以及一个固定机位的**灰度像素模板演示**：输入正常参考图和待测图，保存差异图、缺陷掩码、红色叠加图和 JSON 判定。演示只在人工生成的规则工件图片上验证，使用像素差异而非教师/学生网络；阈值未用真实样本标定。尚无模型权重、真实数据评估、硬件加速器、构建脚本或板级实测数据。
 
 ## 当前开发入口
 
 - [工作记录与下一步](report/progress.md)：记录每次改动、原因、验证和待办，供队员同步进度。
 - [GitHub 协作步骤](report/collaboration.md)：通过 GitHub Desktop 获取项目、提交分支和同步。
 - [异常评分图参考实现](src/score_map.py)：消费已对齐的教师/学生特征，不含网络训练或权重。
+- [图片模板基线](src/image_baseline.py)：固定机位、同尺寸图片的像素差异判定；与 EfficientAD 模型分开记录。
+- [模拟图片生成器](sim/make_demo_images.py)：生成正常、缺角、缺孔三张人工图片，仅用于流程检查。
 
 在仓库根目录安装软件参考模块依赖并运行数值检查：
 
@@ -33,6 +35,18 @@
 python -m pip install -r requirements.txt
 python -m unittest discover -s sim -v
 ```
+
+在仓库根目录运行电脑端图片演示（PowerShell、终端均可；生成文件放在被 Git 忽略的 `build/work/`）：
+
+```sh
+python -m sim.make_demo_images --output-dir build/work/demo_inputs
+python -m src.image_baseline build/work/demo_inputs/normal.png build/work/demo_inputs/missing_corner.png --output-dir build/work/demo_corner
+python -m src.image_baseline build/work/demo_inputs/normal.png build/work/demo_inputs/missing_hole.png --output-dir build/work/demo_hole
+```
+
+在 `build/work/demo_corner/` 和 `build/work/demo_hole/` 查看 `result.json`（判定、区域数、像素数、区域坐标）、`score.npy`（浮点平方差）、`score.png`（差异可视化）、`mask.png`（保留的异常区域）和 `overlay.png`（待测图上红色标记）。上述模拟图应分别判为 `defect`，缺角面积 256 像素、缺孔面积 144 像素；正常图与自身比较应判为 `normal`。这只是软件流程的预期值，不是检测准确率或板上结果。
+
+换成自采图片时，用一张正常图片作为 `reference`，把待测图片作为 `target`。两张图必须同尺寸、相机与工件位置对齐、照明尽量固定，否则移动或光照变化也会产生红色区域。`--threshold` 是归一化灰度差的平方阈值，默认 `0.25`；`--min-area` 是保留区域的最小像素数，默认 `9`。这些默认值只为模拟图片设置，需要从独立的真实验证集重新确定。输出框坐标的 `right`、`bottom` 为不包含边界。
 
 加入模型之后，保存教师和学生的 `[C,H,W]` 特征为 `.npy`，再执行：
 
@@ -54,9 +68,12 @@ fpga/
 ├── requirements.txt
 ├── src/
 │   ├── README.md
+│   ├── image_baseline.py
 │   └── score_map.py
 ├── sim/
 │   ├── README.md
+│   ├── make_demo_images.py
+│   ├── test_image_baseline.py
 │   └── test_score_map.py
 ├── build/
 │   └── README.md
@@ -88,7 +105,7 @@ fpga/
 
 选题指南第 3.3.3.1 节推荐 Vivado / Vitis 2026.1 或 2025.2。若采用其他版本，应在设计报告中解释原因并验证构建脚本可复现。实际使用的工具版本、板卡型号、操作系统及软件依赖将在实现阶段记录。
 
-目前可复现的是仓库结构和异常评分图的软件参考计算：
+目前可复现的是仓库结构、评分图参考计算和人工图片上的电脑端模板演示：
 
 ```sh
 git clone https://github.com/shenyiqiu2020-create/fpga.git
@@ -106,6 +123,17 @@ cd fpga
 7. 在 `skill/` 和 `report/` 整理已验证经验、优化对比、协作记录和完整复现说明。
 
 上述系统步骤尚未实现，当前不能用于训练、生成 bitstream 或运行板端检测。规则要求作品最终在板上跑通并提供实测输出，离线数值检查与板级实测结果分别记录。
+
+## 两条实施路线与最小演示
+
+两版可复用同一套图片采集规范、软件参考算法、阈值评估、测试图片和结果格式，但必须分别构建与验收。
+
+| 路线 | 必须补齐的部分 | 当前状态 |
+| --- | --- | --- |
+| 竞赛版 | Zynq ARM PS 读图、显示和保存；选定并验证一项 PL 计算模块，和软件黄金参考比对；整机上板记录输入、输出、耗时与资源 | 尚未开始板端工作 |
+| 课程版 | 在 PL 构建真正运行程序的 RISC-V 内核及存储、总线、外设组成的 SoC，接入可复用检测模块；单独保存程序运行与接口验证证据 | 尚未开始；仅有 Zynq ARM 不满足此要求 |
+
+11 月 4 日截止的最小竞赛演示目标：固定一种规则工件和一套拍摄条件，输入正常/缺陷图片，展示异常位置、合格判定和累计统计，保存可核对的结果；板端至少验证一个 PL 算子。优先让图片和结果链路可复现，再按真实数据、板卡接口与资源测试决定模型和加速范围。若教师/学生模型来不及验证，可以保留经真实样本验证的几何或模板方法，并在报告中说明与原算法方向的差异；若 PL 集成来不及完成，只能称为电脑端或 PS 端原型，不能称为已完成的 FPGA 竞赛作品。具体阶段和收缩条件见 [工作记录](report/progress.md)。
 
 ## 提交依据
 
