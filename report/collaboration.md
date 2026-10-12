@@ -1,4 +1,4 @@
-# GitHub 协作步骤（第一次使用版）
+# GitHub 协作与交接流程
 
 仓库地址：<https://github.com/shenyiqiu2020-create/fpga>。这是队长创建的私人仓库；如果打不开，请先登录自己的 GitHub 账号，接受队长发出的邀请，或请队长确认账号权限。不要在群聊发送密码、访问令牌和私钥。
 
@@ -9,12 +9,6 @@
 3. 选定电脑上的本地目录并 Clone。此后在 GitHub Desktop 选择仓库，点 **Fetch origin / Pull origin** 获取队友更新。
 4. 用编辑器打开本地 `fpga` 文件夹。先看根目录 `README.md` 和 [工作记录](progress.md)，再开始自己的任务。
 
-## 如何使用这次交付的更新包
-
-以下步骤仅适用于仍持有旧更新包的队员。评分图更新已经出现在 `main` 的提交 `14bb78d`；若 GitHub Desktop 已经 Pull 到该提交，不要再复制旧包。若确实需要导入另一个尚未提交的更新包，先在 GitHub Desktop **Pull**，再在自己的工作分支操作。压缩包内顶层直接是 `README.md`、`src/`、`sim/`、`report/` 等，复制到本地克隆的 `fpga/` 根目录，保持相对路径。
-
-若 GitHub Desktop 的 Changes 显示队友在同一文件已有更新，先打开差异，逐段合并；不要直接覆盖队友内容。建议由一位队员导入一次，其余队员通过 Pull 获取该提交，避免重复复制。
-
 ## 平时如何提交和同步
 
 1. 工作前点击 **Fetch origin / Pull origin**，确认自己从最新状态开始。
@@ -24,6 +18,8 @@
 5. 点击 **Publish branch / Push origin** 上传分支，然后选择 **Create Pull Request**，让另一位队员看改动和运行记录。合并后其他队员 Pull。
 
 提交只保存到本机；Push 后才会上传到 GitHub。Pull Request 是合并到主分支前供队友查看的变更页。遇到冲突时，先保留双方内容，核对后再提交；不要用强制推送覆盖主分支。
+
+接手前先看 [工作交接报告](team_outline.md) 和 [最新进度](progress.md)，再核对实际分支、未提交文件及远端更新。历史更新包的内容已合入主分支，不再作为当前交接来源。
 
 ## 本项目的约定
 

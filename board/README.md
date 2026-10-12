@@ -7,14 +7,14 @@
 | 项目 | 当前状态 |
 | --- | --- |
 | 目标器件系列 | Zynq-7020 |
-| 板卡品牌与芯片 | 用户实物照片可见 ALINX 标识、芯片表面 `XC7Z020` 与 `CLG484` 字样 |
+| 板卡品牌与芯片 | 2026-10-11 板卡正面照片可见 ALINX 标识、芯片表面 `XC7Z020` 与 `CLG484` 字样 |
 | 板卡型号与版本 | **推测为 AX7021 系列，仍待实物型号标签或购买记录确认**；照片中的 5 个网口、两侧 J15/J16 扩展口及底部独立网口 PHY 布局，与 ALINX AX7021 资料相符，不能据此确定 PCB 修订版 |
 | 器件完整订货料号 | 照片确认 `XC7Z020` 和 `CLG484` 封装字样；速度等级、温度等级仍须对照板卡资料或器件清单核对 |
 | 相机型号与接口 | 待确认 |
 | 照明与工件定位方案 | 按固定照明与定位条件设计，具体配置待确认 |
 | 板端系统与 PS 软件环境 | 待确认 |
 
-照片来自队员于 2026-10-11 提供的板卡正面。网口金属壳上的 `AX911130A1` 是接口外壳标记，**不是整板型号**。ALINX [AX7021 产品页](https://www.en.alinx.com/Product/SoC-development-Boards/Zynq-7000-SoC/AX7021.html)和 [AX7021 用户手册](https://www.alinx.com/public/upload/file/AX7021_User_Manual.pdf)列出 5 路以太网、2 个 40 针扩展口及 KSZ9031RNX PHY；[AX7021B 用户手册](https://www.alinx.com/public/upload/file/AX7021B_User_Manual.pdf)也列出 5 路以太网，但采用 JL2121 PHY。因此先按“AX7021 系列候选”检索资料，**在确认版本前不要直接使用某版引脚约束、设备树或启动镜像**。
+照片来源：2026-10-11 团队提供的板卡正面图。网口金属壳上的 `AX911130A1` 是接口外壳标记，**不是整板型号**。ALINX [AX7021 产品页](https://www.en.alinx.com/Product/SoC-development-Boards/Zynq-7000-SoC/AX7021.html)和 [AX7021 用户手册](https://www.alinx.com/public/upload/file/AX7021_User_Manual.pdf)列出 5 路以太网、2 个 40 针扩展口及 KSZ9031RNX PHY；[AX7021B 用户手册](https://www.alinx.com/public/upload/file/AX7021B_User_Manual.pdf)也列出 5 路以太网，但采用 JL2121 PHY。因此先按“AX7021 系列候选”检索资料，**在确认版本前不要直接使用某版引脚约束、设备树或启动镜像**。
 
 ## 后续应提供
 
