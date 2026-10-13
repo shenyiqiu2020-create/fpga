@@ -13,6 +13,8 @@
 
 大规模数据和模型文件应先评估仓库存储方式。用于复现的必要输入不能仅存在于个人机器而没有获取说明。
 
-当前未添加真实工件样本、权重、标注或参考结果。`sim/make_demo_images.py` 可生成人工演示图片，用于检查软件流程；不能用于报告真实检测精度。
+仓库中未加入真实工件样本、外部权重或 MVTec AD 原图。`sim/make_demo_images.py` 可生成人工演示图片，用于检查软件流程；不能用于报告真实检测精度。
 
-团队当前顺序为先在公开数据集上验证 EfficientAD，再做 Zynq 板端推理，最后考虑自采实物。MVTec AD 是论文使用且结构适合第一阶段的候选数据集，但对象类别、实现仓库和数据划分尚未定；以 [迁移计划](../report/efficientad_plan.md) 为准。MVTec AD 的 CC BY-NC-SA 4.0 数据不得因本仓库采用 MIT 就被视为 MIT；下载原图、标注或权重前核对来源与许可，不直接提交原始大文件。
+团队当前顺序为先在公开数据集上验证 EfficientAD，再做 Zynq 板端推理，最后考虑自采实物。2026-10-12 已在本机 Git 忽略的 `build/work/data/mvtec_ad/bottle/` 提取 MVTec AD `bottle` 类：正常训练图 209 张；测试图中正常 20 张、`broken_large` 20 张、`broken_small` 22 张、`contamination` 21 张；63 张异常图各有像素标注。候选脚本以固定种子 42 将正常训练图分为训练 188 张、归一化验证 21 张，测试图不参与训练。来源为队员放入的 `mvtec_anomaly_detection.tar.xz`；本机 SHA-256 为 `CF4313B13603BEC67ABB49CA959488F7EEDCE2A9F7795EC54446C649AC98CD3D`。压缩包内 `readme.txt` 和 `license.txt` 写明 MVTec Software GmbH 及 CC BY-NC-SA 4.0，来源入口见 [MVTec AD 官方页面](https://www.mvtec.com/research-teaching/datasets/mvtec-ad)。本机哈希用于复核同一压缩包，不是官方发布的校验值。
+
+本机只提取 `bottle`、许可和说明文件；完整压缩包、数据、模型与异常图均在 Git 忽略的 `build/work/`，不随本 MIT 仓库分发。公开数据集的瓶身破损/污染，与计划采购的白色尼龙扎带座缺角/堵孔并非同一对象；此数据只能用于先验证模型流程和板端迁移接口，不能证明实物检测性能。真实数据运行及评估见 [迁移计划](../report/efficientad_plan.md)。
