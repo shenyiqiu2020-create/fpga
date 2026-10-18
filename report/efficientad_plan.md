@@ -1,6 +1,6 @@
 # EfficientAD 数据集验证与 Zynq 推理迁移计划
 
-本页记录**团队目标与执行顺序**，不是已完成结果，也不是 AMD 指南的附加硬性条款。2026-10-11 团队确认：1 名队长和 2 名队员均为大三；板卡品牌为 ALINX，实物照片可见 XC7Z020、布局疑似 AX7021 系列（版本待核对，见 [board/README.md](../board/README.md)）；先在公开数据集上验证 EfficientAD，再将推理链路迁移到板端，最后考虑自采实物。2026-10-15 组员报告工件已到货 100 件，尚未试拍；采集与按工件编号划分见 [data/capture_plan.md](../data/capture_plan.md)。课程 RISC-V SoC 路线仍单独验收，新课程页面要求见 [course_requirements.md](course_requirements.md)。赛道规定见 [contest_rules.md](contest_rules.md)。
+本页记录**团队目标与执行顺序**，不是已完成结果，也不是 AMD 指南的附加硬性条款。2026-10-11 团队确认：1 名队长和 2 名队员均为大三；板卡品牌为 ALINX，实物照片可见 XC7Z020、布局疑似 AX7021 系列（版本待核对，见 [board/README.md](../board/README.md)）；先在公开数据集上验证 EfficientAD，再将推理链路迁移到板端，最后考虑自采实物。2026-10-15 组员报告工件已到货 100 件；2026-10-18 提供两张结构参考照，确认正常件有两个实心圆、两个盲凹孔，尚无固定机位数据集。采集与按工件编号划分见 [data/capture_plan.md](../data/capture_plan.md)。课程 RISC-V SoC 路线仍单独验收，新课程页面要求见 [course_requirements.md](course_requirements.md)。赛道规定见 [contest_rules.md](contest_rules.md)。
 
 ## 论文、代码和数据分别核对
 
@@ -48,7 +48,7 @@ Pop-Location
 python -B -m sim.evaluate_efficientad_maps --class-root build/work/data/mvtec_ad/bottle --maps-root build/work/efficientad-real/bottle-repro/anomaly_maps/mvtec_ad/bottle/test --output-dir build/work/efficientad-real/bottle-repro/evaluation
 ```
 
-2026-10-12 本机 100 步运行用时约 93 秒，候选程序与独立脚本均得图像级 AUC `75.9524%`；1,000 步用时约 284 秒，两者均得 `95.7143%`。两次均保存 83 张融合异常图 TIFF（每张 `900×900`、float32、值有限），以及三网络最终文件；输出位于 `build/work/efficientad-real/bottle-100step/` 与 `bottle-1000step/`。独立脚本在各运行目录的 `evaluation/` 保存 `per_image.csv` 和 `summary.json`，逐图读取后核对数量、尺寸与有限数值。AUC 衡量测试图排序，**不是**以某个阈值做出的判定正确率。阈值和分图导出见下节；仍无像素定位指标或板上运行结果。`bottle` 瓶身异常不能代表拟采购尼龙扎带座的缺角或堵孔效果。
+2026-10-12 本机 100 步运行用时约 93 秒，候选程序与独立脚本均得图像级 AUC `75.9524%`；1,000 步用时约 284 秒，两者均得 `95.7143%`。两次均保存 83 张融合异常图 TIFF（每张 `900×900`、float32、值有限），以及三网络最终文件；输出位于 `build/work/efficientad-real/bottle-100step/` 与 `bottle-1000step/`。独立脚本在各运行目录的 `evaluation/` 保存 `per_image.csv` 和 `summary.json`，逐图读取后核对数量、尺寸与有限数值。AUC 衡量测试图排序，**不是**以某个阈值做出的判定正确率。阈值和分图导出见下节；仍无像素定位指标或板上运行结果。`bottle` 瓶身异常不能代表已到货尼龙扎带座拟试的缺角、槽/肋条断裂效果。
 
 1,000 步最终模型文件的本机 SHA-256：`teacher_final.pth` 为 `976FDA79AEF1DB98A108B4922DFA6FB904CAE86F9E81700ED75C470D2A72FDAB`；`student_final.pth` 为 `412DF3C0E32D0247D884647EBBBBB46AF42C05D39A99CB49A91761E79460B1C2`；`autoencoder_final.pth` 为 `5DEB5DB376B9DE6F84F895C0D6E8CAC873C4DD4A2162AB742EC9C6F415A486F8`。这是本机训练产物的身份记录，文件仍在 Git 忽略目录，不随仓库上传。
 

@@ -5,7 +5,7 @@
 ## 数据组织要求
 
 - 登记工件种类、成像分辨率、照明与定位条件。
-- 区分正常样本、局部破损、缺角、缺孔等缺陷样本。
+- 区分正常样本与实际工件上可确认的缺陷类型；本批固定座优先考虑缺角、槽/肋条断裂，不把两个正常实心圆写成“缺孔”。
 - 明确训练、验证、测试与量化校准划分，说明划分方法和样本数量。
 - 标注缺陷区域或几何参考，说明异常阈值和统计指标如何确定。
 - 黄金参考应注明生成脚本、参数、模型权重版本和文件校验值。
@@ -15,6 +15,6 @@
 
 仓库中未加入真实工件样本、外部权重或 MVTec AD 原图。`sim/make_demo_images.py` 可生成人工演示图片，用于检查软件流程；不能用于报告真实检测精度。
 
-团队当前顺序为先在公开数据集上验证 EfficientAD，再做 Zynq 板端推理，最后考虑自采实物。2026-10-15 组员报告白色尼龙扎带固定座到货 100 件，尚无本队实拍图片；首轮采集数量、缺陷制作和按工件编号划分见[工件采集方案](capture_plan.md)。2026-10-12 已在本机 Git 忽略的 `build/work/data/mvtec_ad/bottle/` 提取 MVTec AD `bottle` 类：正常训练图 209 张；测试图中正常 20 张、`broken_large` 20 张、`broken_small` 22 张、`contamination` 21 张；63 张异常图各有像素标注。候选脚本以固定种子 42 将正常训练图分为训练 188 张、归一化验证 21 张，测试图不参与训练。来源为队员放入的 `mvtec_anomaly_detection.tar.xz`；本机 SHA-256 为 `CF4313B13603BEC67ABB49CA959488F7EEDCE2A9F7795EC54446C649AC98CD3D`。压缩包内 `readme.txt` 和 `license.txt` 写明 MVTec Software GmbH 及 CC BY-NC-SA 4.0，来源入口见 [MVTec AD 官方页面](https://www.mvtec.com/research-teaching/datasets/mvtec-ad)。本机哈希用于复核同一压缩包，不是官方发布的校验值。
+团队当前顺序为先在公开数据集上验证 EfficientAD，再做 Zynq 板端推理，最后考虑自采实物。2026-10-15 组员报告白色尼龙扎带固定座到货 100 件；2026-10-18 提供两张实物结构参考照，尚无可作数据集的固定机位照片。正常结构中的两个圆为实心，另两个为不贯通凹孔，原“堵贯通孔”类别不适用；首轮采集数量、缺陷制作和按工件编号划分见[工件采集方案](capture_plan.md)。2026-10-12 已在本机 Git 忽略的 `build/work/data/mvtec_ad/bottle/` 提取 MVTec AD `bottle` 类：正常训练图 209 张；测试图中正常 20 张、`broken_large` 20 张、`broken_small` 22 张、`contamination` 21 张；63 张异常图各有像素标注。候选脚本以固定种子 42 将正常训练图分为训练 188 张、归一化验证 21 张，测试图不参与训练。来源为队员放入的 `mvtec_anomaly_detection.tar.xz`；本机 SHA-256 为 `CF4313B13603BEC67ABB49CA959488F7EEDCE2A9F7795EC54446C649AC98CD3D`。压缩包内 `readme.txt` 和 `license.txt` 写明 MVTec Software GmbH 及 CC BY-NC-SA 4.0，来源入口见 [MVTec AD 官方页面](https://www.mvtec.com/research-teaching/datasets/mvtec-ad)。本机哈希用于复核同一压缩包，不是官方发布的校验值。
 
-本机只提取 `bottle`、许可和说明文件；完整压缩包、数据、模型与异常图均在 Git 忽略的 `build/work/`，不随本 MIT 仓库分发。公开数据集的瓶身破损/污染，与计划采购的白色尼龙扎带座缺角/堵孔并非同一对象；此数据只能用于先验证模型流程和板端迁移接口，不能证明实物检测性能。真实数据运行及评估见 [迁移计划](../report/efficientad_plan.md)。
+本机只提取 `bottle`、许可和说明文件；完整压缩包、数据、模型与异常图均在 Git 忽略的 `build/work/`，不随本 MIT 仓库分发。公开数据集的瓶身破损/污染，与已到货白色尼龙扎带座拟试的缺角、槽/肋条断裂并非同一对象；此数据只能用于先验证模型流程和板端迁移接口，不能证明实物检测性能。真实数据运行及评估见 [迁移计划](../report/efficientad_plan.md)。
