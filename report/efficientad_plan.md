@@ -1,6 +1,6 @@
 # EfficientAD 数据集验证与 Zynq 推理迁移计划
 
-本页记录**团队目标与执行顺序**，不是已完成结果，也不是 AMD 指南的附加硬性条款。2026-10-11 团队确认：1 名队长和 2 名队员均为大三；板卡品牌为 ALINX，实物照片可见 XC7Z020、布局疑似 AX7021 系列（版本待核对，见 [board/README.md](../board/README.md)）；先在公开数据集上验证 EfficientAD，再将推理链路迁移到板端，最后考虑自采实物。2026-10-15 组员报告工件已到货 100 件；2026-10-18 提供两张结构参考照，确认正常件有两个实心圆、两个盲凹孔，尚无固定机位数据集。采集与按工件编号划分见 [data/capture_plan.md](../data/capture_plan.md)。课程 RISC-V SoC 路线仍单独验收，新课程页面要求见 [course_requirements.md](course_requirements.md)。赛道规定见 [contest_rules.md](contest_rules.md)。
+本页记录**团队目标与执行顺序**，不是已完成结果，也不是 AMD 指南的附加硬性条款。2026-10-11 团队确认：1 名队长和 2 名队员均为大三；板卡品牌为 ALINX，实物照片可见 XC7Z020、布局疑似 AX7021 系列（版本待核对，见 [board/README.md](../board/README.md)）；先在公开数据集上验证 EfficientAD，再将推理链路迁移到板端，最后考虑自采实物。2026-10-15 组员报告工件已到货 100 件；2026-10-18 提供两张结构参考照，确认正常件有两个实心圆、两个盲凹孔；2026-10-22 确认三张试拍正面照来自三个不同正常件。现场目标允许工件正面平面旋转；尚无正式数据集或经验证的方向处理。采集与按工件编号划分见 [data/capture_plan.md](../data/capture_plan.md)。课程 RISC-V SoC 路线仍单独验收，新课程页面要求见 [course_requirements.md](course_requirements.md)。赛道规定见 [contest_rules.md](contest_rules.md)。
 
 ## 论文、代码和数据分别核对
 
