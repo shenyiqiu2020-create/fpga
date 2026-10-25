@@ -16,6 +16,17 @@ build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_photo "D
 
 自动裁剪只在已试拍的木色、棕色、绿色等有对比背景上验证过；工件贴到画面边缘、白底或其它复杂背景可能被拒绝或裁错。拍摄方向无需预先转正，但不能据此宣称任意视角、光照和背景均可靠。当前冻结模型对唯一独立正常测试件 `N05` 的两张照片都误报，单张输出应视作实验结果，不能作为可靠的工业判废依据。
 
+## EfficientAD 黄金样本交接
+
+`export_tie_mount_golden.py` 使用同一个冻结的 300 步模型包，把已有 `256×256` 裁剪图导出为输入张量、归一化教师特征、学生两半特征、自动编码器特征、教师–学生与自动编码器异常图、融合图、最高分及二分类结论。每份 `metadata.json` 记录模型包、源图及数组 SHA-256、实物组号和人工标签。导出时会与原推理函数逐项比对。可在仓库根目录复现一份：
+
+```powershell
+build/work/efficientad-env/Scripts/python.exe -B -m sim.export_tie_mount_golden build/work/data/tie_mount_grouped_v1/prepared/tie_mount/validation/good/0007_N02.png --object-group N02 --reference-label normal --output-dir build/work/results/tie_mount_golden_v3/N02_01
+build/work/efficientad-env/Scripts/python.exe -B -m sim.verify_tie_mount_golden build/work/results/tie_mount_golden_v3/N02_01
+```
+
+本机还导出了 `N05_01`（正常件，模型误报缺陷）和 `D07_01`（缺损件，模型报缺陷），分别来自 `build/work/data/tie_mount_grouped_v1/prepared/tie_mount/test/good/0013_N05.png` 与 `build/work/data/tie_mount_holdout_20261025/crops/D07_01.png`；复现时仅替换输入、`--object-group`、`--reference-label` 与输出目录即可。`verify_tie_mount_golden.py` 只依赖 NumPy，会核验数组身份并从特征重算两分支异常图、融合图、分数与判定。黄金样本仅证明电脑端的数值一致性；它不是盲测成绩、量化误差结果或 FPGA 板上验证。数组约 20 MB/份，模型权重与样本仍在 Git 忽略的 `build/work/`，组员须通过单独交接取得同版文件。硬件方可先选定某个算子和张量边界，再用这些数据比较其输出；课程版实际 RISC-V 内核和竞赛版 PS/PL 仍需分别实现与验证。
+
 对应比赛规则第 3.3.5.1 和 3.3.5.4 节，保存仿真或验证脚本、测试配置及结果。
 
 ## 计划验证内容
