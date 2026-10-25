@@ -2,6 +2,16 @@
 
 本文件按时间保留开发记录。最新状态和任务接口见 [项目工作交接报告](team_outline.md)；历史条目只表示当时的认识，不能直接当作当前待办。每次提交记录改动、原因、运行方法、验证结果、限制和下一步；电脑端、仿真与板上结果分别注明。
 
+## 2026-10-25：`do4` / `do5` 两件新缺损实物的冻结模型留出测试
+
+**身份与输入：** 用户将新拍照片分别放在 `D:\工件照片\do4`、`do5`，每个目录 4 张同一缺损件照片。目录名与旧数据集的 `D04/D05` 容易混淆，所以本轮内部记为 **`D07` = `do4`、`D08` = `do5`**；旧 `D04/D05` 不改名。两件均为首版正面可见外缘缺口，不含已退出首版的斜肋断损 `D03`。8 张相机 JPEG 按字节保存在 Git 忽略的 `build/work/data/tie_mount_holdout_20261025/raw/`，来源、SHA-256、裁剪图与实物组见[留出集索引](../data/tie_mount_holdout_20261025_inventory.csv)。8 张均由当前裁剪器生成 `256×256` 图，人工复核外缘和缺口完整可见。原图、裁剪图及结果文件没有提交到 Git。
+
+**真正留出：** 未把这 8 张用于训练、归一化或调阈值。直接加载先前 `tie_mount_grouped_v1_300step` 的教师、学生、自动编码器权重、正常验证件决定的归一化和阈值 `0.069755934`。新推理脚本 `sim/infer_tie_mount_holdout.py` 先在旧测试集 9 张图上逐像素回放，三类异常图共 27 张与原导出图最大绝对差均为 `0.0`；随后才对新图推理。结果目录为 Git 忽略的 `build/work/results/tie_mount_holdout_20261025_baseline/`，含逐图 CSV、三类 TIFF 图、模型哈希与阈值哈希。
+
+**结果与限制：** 冻结的整图阈值把 `D07` 的 4/4 张和 `D08` 的 4/4 张都报为异常，即本轮 **2/2 件新缺损件均至少有一张被报异常**。这只是两件缺损实物的留出检查，没有新增正常对照；先前独立正常件 `N05` 的 2/2 张均曾被此基线误报，因此不能宣称“识别准确率 100%”或实际可用。人工为 8 张裁剪图事后画了[可见缺口粗框](../data/tie_mount_holdout_20261025_rois.csv)，融合图整图最高点仅 **5/8** 落在缺口框中：`D07` 为 4/4，`D08` 为 1/4；另三张 `D08` 的最高点落在别处边缘或背景。`D08_04` 的框内最大分 `0.0237`，低于整图阈值，说明其整图“异常”并不能归功于模型看见这个缺口。粗框在看过裁剪图和诊断叠图后修订，是排错区域，不是盲标、精确分割真值或可靠的定位成绩。同件多张高度相关，不能按八件计算。
+
+**下一步：** 先保留 `D07/D08` 实物，不需用户再拍正常件或继续破坏。A 工作线应针对模型在正常件的外缘阴影/背景误报和 `D08` 缺口定位不足做训练与推理一致的受控改进；改进前固定独立正常与缺损实物的评估协议，不能在这 8 张留出照片上挑阈值、框或预处理来宣称泛化。仍保留完整 EfficientAD（教师–学生、自动编码器、融合图），课程版 RISC-V 核要求不变。复核命令：`build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_holdout --external-repo build/work/external/efficientad --images-dir build/work/data/tie_mount_holdout_20261025/crops --trainings-dir build/work/results/tie_mount_grouped_v1_300step/trainings/mvtec_loco/tie_mount --normalization build/work/results/tie_mount_grouped_v1_300step/components/normalization.npz --summary build/work/results/tie_mount_grouped_v1_300step/components/summary.json --output-dir build/work/results/tie_mount_holdout_20261025_baseline`。粗框复核使用 `sim.evaluate_tie_mount_defect_rois --flat`，参数见[仿真说明](../sim/README.md)。以上均为电脑端结果，尚无板端检测。
+
 ## 2026-10-25：统一灰底的受控失败对照
 
 **方法：** 在上述 19 张按实物划分的 `256×256` 裁剪图上，用 `sim/neutralize_tie_mount_background.py` 的白色候选掩膜把掩膜外统一为 RGB `(128,128,128)`。相同变换同时用于正常训练、正常验证和正常/缺损测试，实物划分、预训练教师、小模型、随机种子及 300 训练步与未增强版相同。完整保留教师–学生、自动编码器和融合图；并非仅在推理阶段改背景。变换图、训练权重、逐图分数与异常图只保存在 Git 忽略的 `build/work/`。
