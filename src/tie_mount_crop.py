@@ -63,13 +63,11 @@ def locate_mount(image: Image.Image) -> tuple[int, int, int, int]:
     distance = np.linalg.norm(pixels - background, axis=2)
     mask = ((brightness > max(130.0, float(background.mean()) + 15.0))
             & (chroma < 30.0) & (distance > 35.0))
-    # Restrict the search, not the final crop, to reject bright objects at the frame edge.
-    y0, y1 = height // 10, height - height // 10
-    x0, x1 = width // 10, width - width // 10
-    mask[:y0] = False
-    mask[y1:] = False
-    mask[:, :x0] = False
-    mask[:, x1:] = False
+    # A visible run of white at the frame edge means the contour may be cut off.
+    # Check this before component search; otherwise a clipped close-up can pass.
+    if any(np.count_nonzero(edge_pixels) >= 3 for edge_pixels in
+           (mask[0], mask[-1], mask[:, 0], mask[:, -1])):
+        raise ValueError("part touches the image boundary")
     area, left, top, right, bottom = _largest_component(mask)
     fraction = area / (width * height)
     bbox_width, bbox_height = right - left, bottom - top
@@ -83,13 +81,19 @@ def locate_mount(image: Image.Image) -> tuple[int, int, int, int]:
     cx = (left + right) * scale_x / 2
     cy = (top + bottom) * scale_y / 2
     side = max(bbox_width * scale_x, bbox_height * scale_y) * 1.22
-    side = int(np.ceil(side))
-    if side > min(original_width, original_height):
-        raise ValueError("part is too close to the image boundary")
+    # Keep all of a rotated part when the requested 22% context cannot fit in
+    # the shorter frame dimension. The detected contour must still fit.
+    side = min(int(np.ceil(side)), original_width, original_height)
     crop_left = round(cx - side / 2)
     crop_top = round(cy - side / 2)
     crop_left = max(0, min(original_width - side, crop_left))
     crop_top = max(0, min(original_height - side, crop_top))
+    margin = max(1, round(side * 0.01))
+    if not (crop_left + margin <= left * scale_x
+            and right * scale_x <= crop_left + side - margin
+            and crop_top + margin <= top * scale_y
+            and bottom * scale_y <= crop_top + side - margin):
+        raise ValueError("part is too close to the image boundary")
     return crop_left, crop_top, crop_left + side, crop_top + side
 
 
