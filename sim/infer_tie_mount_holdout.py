@@ -19,6 +19,7 @@ import torch
 from PIL import Image
 
 from sim.export_efficientad_components import full_size_map
+from sim.model_bundle import DEFAULT_BUNDLE_MANIFEST, MODEL_NAMES, sha256_file, verify_model_bundle
 
 
 def run(args: argparse.Namespace) -> dict:
@@ -30,6 +31,11 @@ def run(args: argparse.Namespace) -> dict:
     if not image_paths:
         raise ValueError("no PNG crops found")
 
+    # Fail before loading any weights or writing any result if calibration,
+    # threshold, and model files are not the frozen set named by this manifest.
+    bundle = verify_model_bundle(args.bundle_manifest, args.trainings_dir,
+                                 args.normalization, args.summary)
+
     sys.path.insert(0, str(args.external_repo.resolve()))
     import efficientad as candidate  # noqa: E402
 
@@ -39,14 +45,13 @@ def run(args: argparse.Namespace) -> dict:
         candidate.get_pdn_small(2 * candidate.out_channels),
         candidate.get_autoencoder(candidate.out_channels),
     )
-    model_names = ("teacher_final.pth", "student_final.pth", "autoencoder_final.pth")
     model_hashes = {}
-    for model, name in zip(models, model_names):
+    for model, name in zip(models, MODEL_NAMES):
         path = args.trainings_dir / name
         saved = torch.load(path, map_location="cpu")
         model.load_state_dict(saved.state_dict())
         model.eval().to(device)
-        model_hashes[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+        model_hashes[name] = bundle["sha256"][name]
 
     with np.load(args.normalization) as calibration:
         required = ("teacher_mean", "teacher_std", "q_st_start", "q_st_end",
@@ -88,6 +93,8 @@ def run(args: argparse.Namespace) -> dict:
         writer.writeheader()
         writer.writerows(rows)
     manifest = {"device": str(device), "images_dir": str(args.images_dir),
+                "model_bundle_id": bundle["bundle_id"],
+                "model_bundle_manifest_sha256": sha256_file(args.bundle_manifest),
                 "model_hashes": model_hashes,
                 "normalization_sha256": hashlib.sha256(args.normalization.read_bytes()).hexdigest(),
                 "summary_sha256": hashlib.sha256(args.summary.read_bytes()).hexdigest(),
@@ -104,6 +111,8 @@ def main() -> None:
     parser.add_argument("--trainings-dir", required=True, type=Path)
     parser.add_argument("--normalization", required=True, type=Path)
     parser.add_argument("--summary", required=True, type=Path)
+    parser.add_argument("--bundle-manifest", type=Path,
+                        default=DEFAULT_BUNDLE_MANIFEST)
     parser.add_argument("--output-dir", required=True, type=Path)
     args = parser.parse_args()
     print(json.dumps(run(args), ensure_ascii=False, indent=2))

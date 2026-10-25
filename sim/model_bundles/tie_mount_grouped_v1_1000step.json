@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "bundle_id": "tie_mount_grouped_v1_1000step",
+  "sha256": {
+    "teacher_final.pth": "976fda79aef1db98a108b4922dfa6fb904cae86f9e81700ed75c470d2a72fdab",
+    "student_final.pth": "cc54793155e66df44800f5b2b5e45f51883524576ecaf7474cc4aae422ec75f9",
+    "autoencoder_final.pth": "da67651e8bca76cba4ff27bbaba7dd4216642b51f352668b0c21890905b34751",
+    "normalization.npz": "2314f66331f67eadacb5f405baf4eb14a61abe2b20163a4dca363dc8122a27fb",
+    "summary.json": "9d10dfc7c789b4a92b525bbb2b617344d92e4f951bdef6e4eeca070808b62144"
+  }
+}

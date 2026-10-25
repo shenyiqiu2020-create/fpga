@@ -10,7 +10,9 @@
 build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_photo "D:\工件照片\待测.jpg" --output-dir build/work/results/tie_mount_one_photo
 ```
 
-输出目录必须尚不存在。脚本先用 `src/tie_mount_crop.py` 从原始 JPEG/PNG 定位白色方形工件并生成 `256×256` 裁剪图，然后加载冻结的教师、学生、自动编码器权重及正常验证件确定的归一化与阈值。`result.json` 中的 `predicted_defect`/`verdict` 是整件二分类结论，`score` 与 `threshold` 可供软件接口读取；`inference/maps/` 保存三类异常图用于排错。模型文件默认在本机 Git 忽略的 `build/work/`，换电脑可通过 `--external-repo`、`--trainings-dir`、`--normalization`、`--summary` 显式指定。此入口不重训或重设阈值；原图和输出也不会自动提交 Git。
+输出目录必须尚不存在。脚本先核对模型包，再用 `src/tie_mount_crop.py` 从原始 JPEG/PNG 定位白色方形工件并生成 `256×256` 裁剪图，加载冻结的教师、学生、自动编码器权重及正常验证件确定的归一化与阈值。`result.json` 中的 `predicted_defect`/`verdict` 是整件二分类结论，`score` 与 `threshold` 可供软件接口读取；`inference/maps/` 保存三类异常图用于排错。模型文件默认在本机 Git 忽略的 `build/work/`，换电脑可通过 `--external-repo`、`--trainings-dir`、`--normalization`、`--summary` 显式指定。此入口不重训或重设阈值；原图和输出也不会自动提交 Git。
+
+默认模型包清单是 `sim/model_bundles/tie_mount_grouped_v1_300step.json`。推理前逐文件校验三个权重、`normalization.npz` 和 `summary.json` 的 SHA-256，避免把不同训练轮次的权重、归一化或阈值混用；`result.json` 会记录模型包 ID 和清单哈希。显式更换上述任一文件时，必须同时用 `--bundle-manifest` 指向对应清单，校验失败会拒绝推理。清单只记录文件身份，不能代替文件本身；仓库没有上传原图和权重。1000 步清单只供受控对照复现，该配置仍有正常件误报，**不是默认模型**。由受信任的同轮文件生成新清单可用 `python -B -m sim.model_bundle --bundle-id <id> --trainings-dir <dir> --normalization <file> --summary <file> --output <new.json>`。
 
 自动裁剪只在已试拍的木色、棕色、绿色等有对比背景上验证过；工件贴到画面边缘、白底或其它复杂背景可能被拒绝或裁错。拍摄方向无需预先转正，但不能据此宣称任意视角、光照和背景均可靠。当前冻结模型对唯一独立正常测试件 `N05` 的两张照片都误报，单张输出应视作实验结果，不能作为可靠的工业判废依据。
 
@@ -42,7 +44,7 @@ build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_photo "D
 
 `evaluate_tie_mount_defect_rois.py` 用[可见缺口粗框](../data/tie_mount_visible_defect_rois.csv)逐图检查融合图及两类分图的整图最高点与缺口框内最大分；`--overlay-dir` 可生成黄框/红点复核图。输入分别由 `--class-root`、`--maps-root`、`--annotations` 指定，结果 CSV 由 `--output` 指定。此处框是事后排错区域，不能直接当作像素真值或正式定位准确率；本次只有 2/9 张缺损照的未增强版融合图最高点落在框内，详见[进度记录](../report/progress.md)。
 
-`infer_tie_mount_holdout.py` 用已有教师、学生、自动编码器权重及已保存的归一化和正常验证阈值，对新的 `256×256` 裁剪图做**冻结推理**；不从新图重算阈值。输出逐图判定 CSV、三类 TIFF 异常图和模型/校准哈希清单。`--external-repo` 指向 Git 忽略的候选 EfficientAD 源码，`--images-dir` 指向平铺 PNG 目录，`--trainings-dir` 指向含三个 `*_final.pth` 的目录，`--normalization`、`--summary` 指向已有校准文件，`--output-dir` 必须是新目录。留出批次的完整命令和结果见[进度记录](../report/progress.md)。在旧 9 张测试图上回放的 27 张分图与原导出图最大绝对差为 0.0。对新批次进行区域排错时，`evaluate_tie_mount_defect_rois.py` 加 `--flat`，并令 `--class-root build/work/data/tie_mount_holdout_20261025/crops --maps-root build/work/results/tie_mount_holdout_20261025_baseline/maps --annotations data/tie_mount_holdout_20261025_rois.csv --output build/work/results/tie_mount_holdout_20261025_baseline/roi_audit.csv --overlay-dir build/work/results/tie_mount_holdout_20261025_baseline/roi_overlays`。区域框为事后人工复核，不作为模型输入或部署阈值。
+`infer_tie_mount_holdout.py` 用已有教师、学生、自动编码器权重及已保存的归一化和正常验证阈值，对新的 `256×256` 裁剪图做**冻结推理**；不从新图重算阈值。输出逐图判定 CSV、三类 TIFF 异常图和模型/校准哈希清单。`--external-repo` 指向 Git 忽略的候选 EfficientAD 源码，`--images-dir` 指向平铺 PNG 目录，`--trainings-dir` 指向含三个 `*_final.pth` 的目录，`--normalization`、`--summary` 指向已有校准文件；更换模型包时也须指定匹配的 `--bundle-manifest`；`--output-dir` 必须是新目录。留出批次的完整命令和结果见[进度记录](../report/progress.md)。在旧 9 张测试图上回放的 27 张分图与原导出图最大绝对差为 0.0。对新批次进行区域排错时，`evaluate_tie_mount_defect_rois.py` 加 `--flat`，并令 `--class-root build/work/data/tie_mount_holdout_20261025/crops --maps-root build/work/results/tie_mount_holdout_20261025_baseline/maps --annotations data/tie_mount_holdout_20261025_rois.csv --output build/work/results/tie_mount_holdout_20261025_baseline/roi_audit.csv --overlay-dir build/work/results/tie_mount_holdout_20261025_baseline/roi_overlays`。区域框为事后人工复核，不作为模型输入或部署阈值。
 
 `neutralize_tie_mount_background.py` 为灰底受控对照脚本：`--class-root` 指向已裁剪的 `tie_mount`，`--output-root` 指向新的空目录，`--background` 默认 128；全部训练、验证、测试照片均应用同一候选白色掩膜与置灰规则，保留原尺寸和分组。脚本记录源图 SHA-256 与掩膜占比，但不保证任意背景都能分割准确。实际 300 步完整 EfficientAD 对照的正常误报未改善，缺口定位更差，**不可将此选项直接接入默认推理**；见[进度记录](../report/progress.md)。
 

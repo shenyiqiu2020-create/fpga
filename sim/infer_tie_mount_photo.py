@@ -15,6 +15,7 @@ from pathlib import Path
 
 from src.tie_mount_crop import crop_mount
 from sim.infer_tie_mount_holdout import run as infer_crops
+from sim.model_bundle import DEFAULT_BUNDLE_MANIFEST, verify_model_bundle
 
 
 def run(args: argparse.Namespace) -> dict:
@@ -22,6 +23,11 @@ def run(args: argparse.Namespace) -> dict:
         raise FileNotFoundError(args.photo)
     if args.output_dir.exists():
         raise FileExistsError(args.output_dir)
+
+    # Check before creating the crop directory. An explicit alternate model
+    # needs an explicit matching bundle manifest.
+    verify_model_bundle(args.bundle_manifest, args.trainings_dir,
+                        args.normalization, args.summary)
 
     # Locate before creating output so a rejected photo leaves no result folder.
     crop, crop_record = crop_mount(args.photo, size=256)
@@ -37,6 +43,7 @@ def run(args: argparse.Namespace) -> dict:
         trainings_dir=args.trainings_dir,
         normalization=args.normalization,
         summary=args.summary,
+        bundle_manifest=args.bundle_manifest,
         output_dir=infer_dir,
     ))
     with (infer_dir / "predictions.csv").open(newline="", encoding="utf-8") as stream:
@@ -59,6 +66,8 @@ def run(args: argparse.Namespace) -> dict:
         "model_hashes": manifest["model_hashes"],
         "normalization_sha256": manifest["normalization_sha256"],
         "threshold_summary_sha256": manifest["summary_sha256"],
+        "model_bundle_id": manifest["model_bundle_id"],
+        "model_bundle_manifest_sha256": manifest["model_bundle_manifest_sha256"],
         "device": manifest["device"],
     }
     (args.output_dir / "result.json").write_text(
@@ -79,6 +88,8 @@ def main() -> None:
                         default=Path("build/work/results/tie_mount_grouped_v1_300step/components/normalization.npz"))
     parser.add_argument("--summary", type=Path,
                         default=Path("build/work/results/tie_mount_grouped_v1_300step/components/summary.json"))
+    parser.add_argument("--bundle-manifest", type=Path,
+                        default=DEFAULT_BUNDLE_MANIFEST)
     args = parser.parse_args()
     print(json.dumps(run(args), ensure_ascii=False, indent=2))
 
