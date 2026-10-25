@@ -2,6 +2,20 @@
 
 本文件按时间保留开发记录。最新状态和任务接口见 [项目工作交接报告](team_outline.md)；历史条目只表示当时的认识，不能直接当作当前待办。每次提交记录改动、原因、运行方法、验证结果、限制和下一步；电脑端、仿真与板上结果分别注明。
 
+## 2026-10-25：从现有聊天照片恢复试验数据并首次训练方形工件
+
+**恢复来源：** 用户已在会话中给出照片，本轮未要求重复导出。先前保存的 `build/work/tmp/tie_mount_crops_13_v3.jpg` 中恢复 9 张正常件、`D01` 四张 `256×256` 裁剪图；本机仍可读取的聊天附件中保存 `D02` 四张、`D03` 七张 JPEG。合计 24 张照片记录，来源及 SHA-256 在 Git 忽略的 `build/work/data/tie_mount_chat_pilot/inventory.csv`。正常件和 `D01` 的原始聊天临时文件已失效，恢复图是有损拼图的图块，不能冒充手机原图。正常 9 图已知来自三个实物，但逐图身份关系无法可靠重建。
+
+**试验输入：** 按照片暂分 5 张正常训练、2 张正常验证、2 张正常测试；`D01` 四张、`D02` 三张、`D03` 四张用于异常试跑。新版裁剪器排除 `D02` 一张贴边、`D03` 两张截断；人工再排除 `D03` 一张断口可见性弱的旧照片。输入清单位于 `build/work/data/tie_mount_chat_pilot_dataset_v2/records.csv`。这不是按实物身份验证过的独立划分，也不能据 9 张正常照片推断 9 件不同实物。
+
+**电脑端结果：** 在 RTX 4060 上用固定的第一候选 EfficientAD 小模型、原有教师权重、无 ImageNet 辅助惩罚项训练 300 步，产出三个模型检查点、13 张测试异常图及分图；两张正常验证图的最大分数设阈值 `0.098188` 后，11 张缺陷照片中只判出 5 张，6 张漏判，2 张正常测试照片未报异常。候选脚本打印图像 AUC 100%，但正常测试图仅两张且分数均为 0，正常照片身份可能跨集合，因此**该 AUC 与 5/11 均不能作为独立实物检出率**。异常热图常集中在外缘及背景交界，部分缺角和斜肋断口未成为高分区域；代表图见 Git 忽略的 `build/work/results/tie_mount_chat_pilot_300step/representative_maps.png`。独立导出的融合图与候选原图最大绝对差为 0。
+
+**复现入口：** 数据筛选表为 `build/work/data/tie_mount_chat_pilot_dataset_v2/records.csv`；训练命令为 `build/work/efficientad-env/Scripts/python.exe build/work/external/efficientad/efficientad.py --dataset mvtec_loco --subdataset tie_mount --mvtec_loco_path build/work/data/tie_mount_chat_pilot_dataset_v2 --weights build/work/external/efficientad/models/teacher_small.pth --output_dir build/work/results/tie_mount_chat_pilot_300step --train_steps 300`。用 `python -m sim.export_efficientad_components` 指向该次的 `trainings/mvtec_loco/tie_mount`、`anomaly_maps/mvtec_loco/tie_mount/test` 和独立 `validation` 目录，输出 `components/summary.json` 与逐图分数。阈值下按照片计，`D01` 2/4、`D02` 1/3、`D03` 2/4 被判异常；同件多张照片高度相关。
+
+**失败对照：** 另将背景初步掩膜成统一灰色，并把 5 张训练正常图增加 90°、180°、270° 旋转版本。300 步训练完成，但候选代码对两张验证图的 student–teacher 图取 90% 和 99.5% 分位数，两值相等 `2.113648`，归一化分母为 0，测试图出现 NaN/Inf，AUC 计算中止。掩膜方案不能直接沿用；需检查前景边缘质量、采用与掩膜匹配的归一化和评分，再用独立工件验证。不能把此失败运行说成背景鲁棒性提升。
+
+**下一步：** 当前不需用户重复导出旧照片，也不需继续破坏现有三件缺陷工件。A 工作线先修正对背景/旋转敏感的预处理和异常图校准，并用现有试验图定位失败原因。若要提交可信的“拍照判断有无缺陷”结果，再补有明确实物对应关系的正常训练、验证和测试照片，以及更多**独立**缺陷实物；原图优于聊天压缩图，但可在后续正式评估阶段再收集。课程版 RISC-V 内核仍需单独构建与验证。以上均为电脑端试验，没有板上推理结果。
+
 ## 2026-10-25：`D03` 补拍通过与裁剪器边界修正
 
 **输入与目的：** 组员补发 `D03` 棕色正放和绿色斜放两张聊天 JPEG，补足此前断口较弱和裁剪拒绝的视角；二者仍属于同一件斜肋断损工件，独立缺陷实物总数仍为 3 件。
