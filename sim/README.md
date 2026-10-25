@@ -2,6 +2,18 @@
 
 **当前首版：** 对单张正面工件照片只验收“正常 / 有可见外缘缺损”。`evaluate_tie_mount_binary.py` 读取冻结阈值的[逐图分数表](../data/tie_mount_binary_baseline_20261025.csv)，分别输出照片级 TP/FN/TN/FP 和“同件任一视角报缺损”的实物级结果。运行 `python -B -m sim.evaluate_tie_mount_binary data/tie_mount_binary_baseline_20261025.csv`。不在测试数据上找新阈值；结果详见[进度记录](../report/progress.md)。下方区域/位置脚本仍可用于 EfficientAD 排错与以后功能扩展，不决定这版二分类验收。
 
+## 单张原始照片推理
+
+在仓库根目录用隔离的 EfficientAD 环境运行：
+
+```powershell
+build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_photo "D:\工件照片\待测.jpg" --output-dir build/work/results/tie_mount_one_photo
+```
+
+输出目录必须尚不存在。脚本先用 `src/tie_mount_crop.py` 从原始 JPEG/PNG 定位白色方形工件并生成 `256×256` 裁剪图，然后加载冻结的教师、学生、自动编码器权重及正常验证件确定的归一化与阈值。`result.json` 中的 `predicted_defect`/`verdict` 是整件二分类结论，`score` 与 `threshold` 可供软件接口读取；`inference/maps/` 保存三类异常图用于排错。模型文件默认在本机 Git 忽略的 `build/work/`，换电脑可通过 `--external-repo`、`--trainings-dir`、`--normalization`、`--summary` 显式指定。此入口不重训或重设阈值；原图和输出也不会自动提交 Git。
+
+自动裁剪只在已试拍的木色、棕色、绿色等有对比背景上验证过；工件贴到画面边缘、白底或其它复杂背景可能被拒绝或裁错。拍摄方向无需预先转正，但不能据此宣称任意视角、光照和背景均可靠。当前冻结模型对唯一独立正常测试件 `N05` 的两张照片都误报，单张输出应视作实验结果，不能作为可靠的工业判废依据。
+
 对应比赛规则第 3.3.5.1 和 3.3.5.4 节，保存仿真或验证脚本、测试配置及结果。
 
 ## 计划验证内容
