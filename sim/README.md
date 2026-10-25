@@ -1,5 +1,7 @@
 # 仿真与验证
 
+**当前首版：** 对单张正面工件照片只验收“正常 / 有可见外缘缺损”。`evaluate_tie_mount_binary.py` 读取冻结阈值的[逐图分数表](../data/tie_mount_binary_baseline_20261025.csv)，分别输出照片级 TP/FN/TN/FP 和“同件任一视角报缺损”的实物级结果。运行 `python -B -m sim.evaluate_tie_mount_binary data/tie_mount_binary_baseline_20261025.csv`。不在测试数据上找新阈值；结果详见[进度记录](../report/progress.md)。下方区域/位置脚本仍可用于 EfficientAD 排错与以后功能扩展，不决定这版二分类验收。
+
 对应比赛规则第 3.3.5.1 和 3.3.5.4 节，保存仿真或验证脚本、测试配置及结果。
 
 ## 计划验证内容
