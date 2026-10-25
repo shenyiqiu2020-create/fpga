@@ -22,4 +22,6 @@
 
 `export_efficientad_components.py` 在隔离 Python 3.10 环境中读取候选实现与本机训练文件，重算教师特征标准化和验证图分位数，导出正常验证图及测试图的两类分图和融合图。脚本要求重算融合图与上次保存的图逐张误差不超过 `1e-4`，再用正常验证图最高图像分数设阈值，保存逐图判定与误检漏检统计；它不计算像素定位指标。阈值的逻辑及参考图误差检查由 `test_evaluate_efficientad_maps.py` 覆盖。
 
+`prepare_tie_mount_dataset.py` 读取 `file,object_group,split,label` 清单，禁止同一实物跨集合，调用 `src/tie_mount_crop.py` 裁剪并生成候选 EfficientAD 可读取的 `tie_mount/{train,validation,test}` 目录。`object_group` 只是拍摄记录，不要求在工件上写字。输入原图和生成目录放在 Git 忽略的 `build/work/`。`export_efficientad_components.py` 的 `--validation-root` 可读取独立的 `validation/good`，避免默认逐张随机切分。完整步骤见[采集方案](../data/capture_plan.md)。
+
 `evaluate_efficientad_localization.py` 将每张异常测试图与 MVTec AD 的 `ground_truth/*/*_mask.png` 对齐，分别计算融合图、教师–学生图、自动编码器图的像素 ROC AUC，并对 63 张异常图取逐图平均。它保存逐图 CSV、按类别汇总 JSON，以及 8 张图像级误判的输入/标注/融合热图对照 PNG；热图按每张图单独拉伸，仅供肉眼复核。AUC 的并列分数处理和坏掩码拒绝由 `test_evaluate_efficientad_maps.py` 检查。运行结果和指标边界见 [迁移计划](../report/efficientad_plan.md)。

@@ -75,11 +75,26 @@ def export(args: argparse.Namespace) -> dict:
         str(args.class_root / "train"),
         transform=transforms.Lambda(candidate.train_transform),
     )
-    train_size = int(0.9 * len(full_train))
-    train_set, validation_set = torch.utils.data.random_split(
-        full_train, [train_size, len(full_train) - train_size],
-        torch.Generator().manual_seed(candidate.seed),
-    )
+    if args.validation_root is not None:
+        if not args.validation_root.is_dir():
+            raise FileNotFoundError(args.validation_root)
+        train_set = full_train
+        validation_set = candidate.ImageFolderWithoutTarget(
+            str(args.validation_root),
+            transform=transforms.Lambda(candidate.train_transform),
+        )
+        validation_paths = [Path(sample[0]) for sample in validation_set.samples]
+        train_paths = {Path(sample[0]).resolve() for sample in full_train.samples}
+        if train_paths.intersection(path.resolve() for path in validation_paths):
+            raise ValueError("training and validation contain the same source file")
+    else:
+        train_size = int(0.9 * len(full_train))
+        train_set, validation_set = torch.utils.data.random_split(
+            full_train, [train_size, len(full_train) - train_size],
+            torch.Generator().manual_seed(candidate.seed),
+        )
+        validation_paths = [Path(full_train.samples[index][0])
+                            for index in validation_set.indices]
     train_loader = DataLoader(train_set, batch_size=1, shuffle=True,
                               num_workers=4, pin_memory=True)
     validation_loader = DataLoader(validation_set, batch_size=1)
@@ -107,8 +122,7 @@ def export(args: argparse.Namespace) -> dict:
             return tuple(full_size_map(value, height, width) for value in maps)
 
     validation_rows = []
-    for index in validation_set.indices:
-        path = Path(full_train.samples[index][0])
+    for path in validation_paths:
         maps = predict_image(path)
         save_maps(args.output_dir, "validation", "good", path.stem, maps)
         validation_rows.append({"image": path.name, "score_max": float(maps[0].max())})
@@ -143,7 +157,8 @@ def export(args: argparse.Namespace) -> dict:
             writer.writeheader()
             writer.writerows(rows)
     summary = {
-        "threshold_rule": "max of 21 normal validation image scores; defect if score > threshold",
+        "threshold_rule": (f"max of {len(validation_rows)} normal validation image scores; "
+                           "defect if score > threshold"),
         "threshold": threshold,
         "validation_normal_count": len(validation_rows),
         "test_image_count": len(test_rows),
@@ -167,6 +182,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--external-repo", type=Path, required=True)
     parser.add_argument("--class-root", type=Path, required=True)
+    parser.add_argument("--validation-root", type=Path,
+                        help="Separate validation/good folder; avoids per-image random split")
     parser.add_argument("--trainings-dir", type=Path, required=True)
     parser.add_argument("--reference-maps-root", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
