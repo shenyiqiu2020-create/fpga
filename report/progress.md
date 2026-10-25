@@ -14,6 +14,8 @@
 
 **本机复现：** 清单、裁剪和两个模型结果分别在上述 `photos.csv`、`prepared/`、`prepared_rot90/`、`build/work/results/tie_mount_grouped_v1_300step/`、`build/work/results/tie_mount_grouped_rot90_300step/`。`sim/prepare_tie_mount_dataset.py --train-quarter-turns` 只扩增训练集；两次 `components/summary.json`、`test_predictions.csv`、`normalization.npz` 和异常图均保存在 Git 忽略目录。源照片、模型和输出不随 Git 提交。`sim.test_prepare_tie_mount_dataset` 两项通过。前一条“只有两件正常、两件首版缺损”的描述是收到本批照片之前的历史状态。
 
+**补充定位诊断：** 人工复核两张测试热图拼图后，`N05` 正常件的异常热点集中在工件外边与背景交界，`D05` 的最高响应落在底边，而肉眼可见缺口在另一侧；因此单看整图最高分无法保证缺陷定位正确。现有白色前景外接矩形的角度搜索也受高光、背景分割和缺角影响：新批正常件的部分外缘缺损分数达到 `0.6989–1.0000`。不能直接把该角度估计接入 EfficientAD 当作可靠的任意方向归一化，更不能在当前测试照片上反复改阈值挑最好结果。下一次软件试验应先以独立实物和缺陷区域标注核查裁剪、方向估计与异常图热点，再决定是否引入归一化；保留当前两版结果作为未通过的排错基线。
+
 ## 2026-10-25：明确保留最初作品简介的 EfficientAD 主线
 
 **用户纠正：** `D03` 暂不纳入首版、以及新增外缘几何基线，均不代表更换作品算法。最初作品简介中的 EfficientAD 继续作为主算法，保留教师–学生分支、自动编码器相关分支、异常图归一化与融合、图像判定和异常位置；竞赛版仍按电脑端验证与 Zynq PS/PL 迁移推进，课程版仍必须实际构建 RISC-V 内核。几何评分只能辅助裁剪/方向排错和缺角对照，其 8 张照片的暂定结果不是 EfficientAD 成绩。
