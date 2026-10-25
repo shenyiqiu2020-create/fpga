@@ -22,7 +22,7 @@
 
 `export_efficientad_components.py` 在隔离 Python 3.10 环境中读取候选实现与本机训练文件，重算教师特征标准化和验证图分位数，导出正常验证图及测试图的两类分图和融合图。脚本要求重算融合图与上次保存的图逐张误差不超过 `1e-4`，再用正常验证图最高图像分数设阈值，保存逐图判定与误检漏检统计；它不计算像素定位指标。阈值的逻辑及参考图误差检查由 `test_evaluate_efficientad_maps.py` 覆盖。
 
-`prepare_tie_mount_dataset.py` 读取 `file,object_group,split,label` 清单，禁止同一实物跨集合，调用 `src/tie_mount_crop.py` 裁剪并生成候选 EfficientAD 可读取的 `tie_mount/{train,validation,test}` 目录。`object_group` 只是拍摄记录，不要求在工件上写字。输入原图和生成目录放在 Git 忽略的 `build/work/`。`export_efficientad_components.py` 的 `--validation-root` 可读取独立的 `validation/good`，避免默认逐张随机切分。完整步骤见[采集方案](../data/capture_plan.md)。
+`prepare_tie_mount_dataset.py` 读取 `file,object_group,split,label` 清单，禁止同一实物跨集合，调用 `src/tie_mount_crop.py` 裁剪并生成候选 EfficientAD 可读取的 `tie_mount/{train,validation,test}` 目录。`object_group` 只是拍摄记录，不要求在工件上写字。可选 `--train-quarter-turns` 仅对训练正常图增加 90°/180°/270° 图片，并在输出清单标出旋转角；不会增加独立实物数，也不会增强验证/测试图。该选项在 2026-10-25 的小样本对照中使缺损漏判增多，**不应默认作为改进方案**。输入原图和生成目录放在 Git 忽略的 `build/work/`。`export_efficientad_components.py` 的 `--validation-root` 可读取独立的 `validation/good`，避免默认逐张随机切分。完整步骤见[采集方案](../data/capture_plan.md)和[本轮记录](../report/progress.md)。
 
 首版实物范围已改为外缘缺角/缺口。`sim/test_tie_mount_outline.py` 用合成方形检查几种非训练平面角度下的新几何基线，不代表真实工件识别准确率。`D03` 断肋照片退出首版数据清单，也不能改标为 `good`；现有 10 张本机照片的五件实物归属见 Git 忽略的 `build/work/data/tie_mount_20261025/inventory.csv`。
 

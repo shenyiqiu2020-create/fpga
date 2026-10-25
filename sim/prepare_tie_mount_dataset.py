@@ -16,6 +16,8 @@ import re
 import tempfile
 from pathlib import Path
 
+from PIL import Image
+
 from src.tie_mount_crop import crop_mount
 
 
@@ -62,7 +64,8 @@ def read_manifest(path: Path) -> list[dict[str, str]]:
     return rows
 
 
-def prepare(manifest: Path, output_dir: Path) -> dict:
+def prepare(manifest: Path, output_dir: Path,
+            train_quarter_turns: bool = False) -> dict:
     rows = read_manifest(manifest)
     if output_dir.exists():
         raise FileExistsError(f"choose a new output directory: {output_dir}")
@@ -71,22 +74,39 @@ def prepare(manifest: Path, output_dir: Path) -> dict:
         staging = Path(temporary) / "dataset"
         class_root = staging / "tie_mount"
         records = []
+        generated_images = 0
         for index, row in enumerate(rows, 1):
             source = Path(row["file"])
             image, crop = crop_mount(source)
             target = class_root / row["split"] / row["label"] / f"{index:04d}_{row['object_group']}.png"
             target.parent.mkdir(parents=True, exist_ok=True)
             image.save(target)
+            generated_images += 1
             digest = hashlib.sha256(source.read_bytes()).hexdigest()
             records.append({**row, "source_sha256": digest,
                             "output": str(target.relative_to(staging)),
                             "source_size": crop["source_size"],
-                            "crop_box": crop["crop_box"]})
+                            "crop_box": crop["crop_box"],
+                            "augmentation_degrees": 0})
+            if train_quarter_turns and row["split"] == "train":
+                for degrees, transpose in ((90, Image.Transpose.ROTATE_90),
+                                           (180, Image.Transpose.ROTATE_180),
+                                           (270, Image.Transpose.ROTATE_270)):
+                    augmented = target.with_name(f"{target.stem}_r{degrees}.png")
+                    image.transpose(transpose).save(augmented)
+                    records.append({**row, "source_sha256": digest,
+                                    "output": str(augmented.relative_to(staging)),
+                                    "source_size": crop["source_size"],
+                                    "crop_box": crop["crop_box"],
+                                    "augmentation_degrees": degrees})
+                    generated_images += 1
         (staging / "prepared_manifest.json").write_text(
             json.dumps(records, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
         staging.rename(output_dir)
-    return {"images": len(rows), "physical_parts": len({row["object_group"] for row in rows}),
+    return {"images": len(rows), "source_images": len(rows),
+            "generated_images": generated_images,
+            "physical_parts": len({row["object_group"] for row in rows}),
             "class_root": str(output_dir / "tie_mount")}
 
 
@@ -94,8 +114,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--train-quarter-turns", action="store_true",
+                        help="add 90, 180 and 270 degree copies of training images only")
     args = parser.parse_args()
-    print(json.dumps(prepare(args.manifest, args.output_dir), ensure_ascii=False, indent=2))
+    print(json.dumps(prepare(args.manifest, args.output_dir, args.train_quarter_turns),
+                     ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
