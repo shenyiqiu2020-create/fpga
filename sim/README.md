@@ -24,4 +24,6 @@
 
 `prepare_tie_mount_dataset.py` 读取 `file,object_group,split,label` 清单，禁止同一实物跨集合，调用 `src/tie_mount_crop.py` 裁剪并生成候选 EfficientAD 可读取的 `tie_mount/{train,validation,test}` 目录。`object_group` 只是拍摄记录，不要求在工件上写字。输入原图和生成目录放在 Git 忽略的 `build/work/`。`export_efficientad_components.py` 的 `--validation-root` 可读取独立的 `validation/good`，避免默认逐张随机切分。完整步骤见[采集方案](../data/capture_plan.md)。
 
+首版实物范围已改为外缘缺角/缺口。`sim/test_tie_mount_outline.py` 用合成方形检查几种非训练平面角度下的新几何基线，不代表真实工件识别准确率。`D03` 断肋照片退出首版数据清单，也不能改标为 `good`；现有 10 张本机照片的五件实物归属见 Git 忽略的 `build/work/data/tie_mount_20261025/inventory.csv`。
+
 `evaluate_efficientad_localization.py` 将每张异常测试图与 MVTec AD 的 `ground_truth/*/*_mask.png` 对齐，分别计算融合图、教师–学生图、自动编码器图的像素 ROC AUC，并对 63 张异常图取逐图平均。它保存逐图 CSV、按类别汇总 JSON，以及 8 张图像级误判的输入/标注/融合热图对照 PNG；热图按每张图单独拉伸，仅供肉眼复核。AUC 的并列分数处理和坏掩码拒绝由 `test_evaluate_efficientad_maps.py` 检查。运行结果和指标边界见 [迁移计划](../report/efficientad_plan.md)。

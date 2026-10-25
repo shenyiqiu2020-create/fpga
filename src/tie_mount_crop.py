@@ -16,6 +16,27 @@ import numpy as np
 from PIL import Image, ImageOps
 
 
+def white_foreground_mask(image: Image.Image) -> np.ndarray:
+    """Find the light, low-chroma part against a contrasting image border.
+
+    This is a candidate mask, not a universal background separator. The caller
+    must check that the full part is visible and that the mask follows it.
+    """
+    pixels = np.asarray(image.convert("RGB"), dtype=np.float32)
+    height, width = pixels.shape[:2]
+    edge = max(4, min(width, height) // 25)
+    border = np.concatenate((pixels[:edge].reshape(-1, 3),
+                             pixels[-edge:].reshape(-1, 3),
+                             pixels[:, :edge].reshape(-1, 3),
+                             pixels[:, -edge:].reshape(-1, 3)))
+    background = np.median(border, axis=0)
+    brightness = pixels.mean(axis=2)
+    chroma = pixels.max(axis=2) - pixels.min(axis=2)
+    distance = np.linalg.norm(pixels - background, axis=2)
+    return ((brightness > max(130.0, float(background.mean()) + 15.0))
+            & (chroma < 30.0) & (distance > 35.0))
+
+
 def _largest_component(mask: np.ndarray) -> tuple[int, int, int, int, int]:
     height, width = mask.shape
     visited = np.zeros_like(mask, dtype=bool)
@@ -50,19 +71,8 @@ def locate_mount(image: Image.Image) -> tuple[int, int, int, int]:
         raise ValueError("image is too small to locate the part")
     preview = image.copy()
     preview.thumbnail((512, 512), Image.Resampling.BILINEAR)
-    pixels = np.asarray(preview.convert("RGB"), dtype=np.float32)
-    height, width = pixels.shape[:2]
-    edge = max(4, min(width, height) // 25)
-    border = np.concatenate((pixels[:edge].reshape(-1, 3),
-                             pixels[-edge:].reshape(-1, 3),
-                             pixels[:, :edge].reshape(-1, 3),
-                             pixels[:, -edge:].reshape(-1, 3)))
-    background = np.median(border, axis=0)
-    brightness = pixels.mean(axis=2)
-    chroma = pixels.max(axis=2) - pixels.min(axis=2)
-    distance = np.linalg.norm(pixels - background, axis=2)
-    mask = ((brightness > max(130.0, float(background.mean()) + 15.0))
-            & (chroma < 30.0) & (distance > 35.0))
+    width, height = preview.size
+    mask = white_foreground_mask(preview)
     # A visible run of white at the frame edge means the contour may be cut off.
     # Check this before component search; otherwise a clipped close-up can pass.
     if any(np.count_nonzero(edge_pixels) >= 3 for edge_pixels in
