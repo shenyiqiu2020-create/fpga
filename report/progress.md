@@ -2,6 +2,24 @@
 
 本文件按时间保留开发记录。最新状态和任务接口见 [项目工作交接报告](team_outline.md)；历史条目只表示当时的认识，不能直接当作当前待办。每次提交记录改动、原因、运行方法、验证结果、限制和下一步；电脑端、仿真与板上结果分别注明。
 
+## 2026-10-25：统一灰底的受控失败对照
+
+**方法：** 在上述 19 张按实物划分的 `256×256` 裁剪图上，用 `sim/neutralize_tie_mount_background.py` 的白色候选掩膜把掩膜外统一为 RGB `(128,128,128)`。相同变换同时用于正常训练、正常验证和正常/缺损测试，实物划分、预训练教师、小模型、随机种子及 300 训练步与未增强版相同。完整保留教师–学生、自动编码器和融合图；并非仅在推理阶段改背景。变换图、训练权重、逐图分数与异常图只保存在 Git 忽略的 `build/work/`。
+
+**结果：** 用独立正常验证件的两张图设整图阈值 `0.068175`，灰底版对 9 张可见缺损测试照报异常 8 张、漏 1 张，对同一测试正常件的 2 张照片均误报；未增强版同样是缺损 8/9、正常误报 2/2。灰底版 11 张相关测试照的图像排序 AUROC 为 50%，未增强版为 66.67%，都不能解释为现场准确率。灰底版融合图整图最高点仅 **1/9** 落在人工粗缺口框内（未增强版 2/9）；教师–学生图 0/9、自动编码器图 1/9。独立重导出的融合图与此次训练程序保存的参考图最大绝对差为 `0.0`，不是导出偏差。
+
+**判断：** “正常件旁黑影”可能参与误报，但直接把背景涂灰未能改善误报或缺口定位；候选掩膜本身还可能吞掉断面/阴影等有用信号。不能把灰底脚本设为默认部署方案，更不能宣称已支持任意背景。当前三件正常训练实物、一件正常验证实物、一件正常测试实物及五件缺损实物不足以比较模型泛化。不要继续围绕这 11 张测试照片调阈值或挑最佳预处理；下一阶段应在新独立实物上盲测，优先核查裁剪/前景边界、缺口可见性和区域级证据。现在无需用户继续破坏或重拍工件；未来补样时保留相机原图与实物对应关系。
+
+**复现：** `build/work/efficientad-env/Scripts/python.exe -B -m sim.neutralize_tie_mount_background --class-root build/work/data/tie_mount_grouped_v1/prepared/tie_mount --output-root build/work/data/tie_mount_grouped_v1/prepared_neutral/tie_mount`。再用既定候选的 `--dataset mvtec_loco --subdataset tie_mount --mvtec_loco_path build/work/data/tie_mount_grouped_v1/prepared_neutral --weights build/work/external/efficientad/models/teacher_small.pth --output_dir build/work/results/tie_mount_grouped_neutral_300step --train_steps 300` 训练；用 `sim.export_efficientad_components` 的 `--validation-root .../prepared_neutral/tie_mount/validation` 导出三类异常图，最后用 `sim.evaluate_tie_mount_defect_rois` 对同一人工框复核。以上都是电脑端排错实验，未产生板端推理或课程 RISC-V 核验收结果。
+
+## 2026-10-25：人工缺口区域与 EfficientAD 热点对照
+
+**缺口区域：** 根据现有 `256×256` 测试裁剪图，人工为 `D01/D02/D04/D05/D06` 的 9 张可用缺损照各画一个保守矩形，坐标见[人工复核框](../data/tie_mount_visible_defect_rois.csv)。框覆盖肉眼可见的缺角/边缘缺口及其紧邻断面，坐标为左上含、右下不含。`D03` 不在首版，`D05` 那张缺口不可直观确认的正面照继续排除。这些框是**看过当前测试图后制作的粗区域**，不是精细像素掩码，也不是独立盲标数据；不能拿它们报告可信的像素定位准确率。
+
+**定位检查：** `sim/evaluate_tie_mount_defect_rois.py` 逐图检查融合图、教师–学生图、自动编码器图的整图最高点是否在缺口框内，并记录缺口框内最大分。未增强版融合图只有 **2/9 张**的整图最高点在缺口框内，分别是 `D02` 一张和 `D04` 一张；教师–学生图为 1/9，自动编码器图为 1/9。旋转增强版融合图也只有 2/9，但与未增强版并非相同的两张。未增强版已有 8/9 的**整图异常判定**，因此 8/9 绝不能解释成找到了缺口。用此前仅由正常验证件确定的整图阈值作参照，未增强版只有 4/9 张缺损照的**框内最大分**超过该阈值；框内分数并未重新定阈值，所以这只是排错对照，不是另一个正式判定指标。逐图 CSV、黄框与红点复核图留在 Git 忽略的 `build/work/results/tie_mount_grouped_v1_300step/` 下；黄框是人工区域，红点是融合图整图最高点。
+
+**结论与后续：** 首版仍做白色方形扎带座的可见外缘缺损，完整 EfficientAD、任意平面方向目标和课程 RISC-V 内核要求都不变。现有小样本训练更容易对背景、外缘阴影和正常高光产生强响应；`D05` 等缺口在模型高分图中甚至不明显。下一轮算法实验必须同时检查正常误报和**缺口定位**，不能靠修改整图阈值提高表面检出数。先保留当前两版模型作失败基线；若尝试背景归一化，须在训练、验证和推理三阶段一致处理并用独立实物复核，不能仅在这 9 张测试图上选参数。当前无需用户继续破坏或重拍。复现命令：`build/work/efficientad-env/Scripts/python.exe -B -m sim.evaluate_tie_mount_defect_rois --class-root build/work/data/tie_mount_grouped_v1/prepared/tie_mount --maps-root build/work/results/tie_mount_grouped_v1_300step/components/maps --annotations data/tie_mount_visible_defect_rois.csv --output build/work/results/tie_mount_grouped_v1_300step/components/defect_roi_audit.csv --overlay-dir build/work/results/tie_mount_grouped_v1_300step/defect_roi_overlays`。旋转版改用 `prepared_rot90` 及对应结果目录。
+
 ## 2026-10-25：检查边缘黑影与 EfficientAD 最高分点
 
 **用户问题与实测：** 正常工件旁的细黑影可能造成误判。新增 `sim/analyze_tie_mount_map_peaks.py`，从 `components/maps` 和同一批 `256×256` 裁剪图读数，逐图记录融合图最高点、该点 RGB、是否在白色工件候选掩膜内以及距掩膜距离。未增强版在 2 张正常验证和 11 张测试图上 **13/13 个整图最高点都位于白色掩膜外**。正常件 `N05` 的棕底图最高点距掩膜 2 像素，RGB `65/66/60`，确在暗影附近；它的绿底图最高点距掩膜约 11.66 像素，RGB `145/153/102`，位于背景而非黑影。缺损图中也有多张最高点落在背景或外缘阴影。旋转增强版则为 9/13 个最高点在掩膜外。故黑影是合理的误报来源之一，但不能解释全部错误，也不能凭此宣称唯一原因。

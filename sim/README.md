@@ -26,6 +26,10 @@
 
 `analyze_tie_mount_map_peaks.py` 将两版 EfficientAD 的融合图最高分点与白色工件候选掩膜对照，输出最高点坐标、像素颜色、距掩膜距离及掩膜内外最大分，供调查边缘阴影和背景误报。参数是 `--class-root`、`--maps-root`、`--output`，分别指向生成数据集的 `tie_mount`、导出结果的 `components/maps` 和 Git 忽略目录内的 CSV 路径。白色掩膜不是缺陷真值；缺角本来可能在掩膜外，因此“最高点在掩膜外”不能单独认定误判。当前实物诊断见[进度记录](../report/progress.md)。
 
+`evaluate_tie_mount_defect_rois.py` 用[可见缺口粗框](../data/tie_mount_visible_defect_rois.csv)逐图检查融合图及两类分图的整图最高点与缺口框内最大分；`--overlay-dir` 可生成黄框/红点复核图。输入分别由 `--class-root`、`--maps-root`、`--annotations` 指定，结果 CSV 由 `--output` 指定。此处框是事后排错区域，不能直接当作像素真值或正式定位准确率；本次只有 2/9 张缺损照的未增强版融合图最高点落在框内，详见[进度记录](../report/progress.md)。
+
+`neutralize_tie_mount_background.py` 为灰底受控对照脚本：`--class-root` 指向已裁剪的 `tie_mount`，`--output-root` 指向新的空目录，`--background` 默认 128；全部训练、验证、测试照片均应用同一候选白色掩膜与置灰规则，保留原尺寸和分组。脚本记录源图 SHA-256 与掩膜占比，但不保证任意背景都能分割准确。实际 300 步完整 EfficientAD 对照的正常误报未改善，缺口定位更差，**不可将此选项直接接入默认推理**；见[进度记录](../report/progress.md)。
+
 首版实物范围已改为外缘缺角/缺口。`sim/test_tie_mount_outline.py` 用合成方形检查几种非训练平面角度下的新几何基线，不代表真实工件识别准确率。`D03` 断肋照片退出首版数据清单，也不能改标为 `good`；现有 10 张本机照片的五件实物归属见 Git 忽略的 `build/work/data/tie_mount_20261025/inventory.csv`。
 
 `evaluate_efficientad_localization.py` 将每张异常测试图与 MVTec AD 的 `ground_truth/*/*_mask.png` 对齐，分别计算融合图、教师–学生图、自动编码器图的像素 ROC AUC，并对 63 张异常图取逐图平均。它保存逐图 CSV、按类别汇总 JSON，以及 8 张图像级误判的输入/标注/融合热图对照 PNG；热图按每张图单独拉伸，仅供肉眼复核。AUC 的并列分数处理和坏掩码拒绝由 `test_evaluate_efficientad_maps.py` 检查。运行结果和指标边界见 [迁移计划](../report/efficientad_plan.md)。
