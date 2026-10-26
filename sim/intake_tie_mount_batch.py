@@ -2,7 +2,8 @@
 
 Exact duplicate photos within one data role are kept only once; duplicates
 between distinct training parts are allowed only when both are normal. Holdout
-sources are indexed but kept out of training data.
+sources are indexed but kept out of training data. Empty placeholder folders
+are reported and ignored.
 """
 
 from __future__ import annotations
@@ -48,19 +49,23 @@ def group_plan(folder: str) -> tuple[str, str, str]:
 def snapshot(source_root: Path, output_root: Path) -> dict:
     if output_root.exists():
         raise FileExistsError(output_root)
-    folders = sorted((path for path in source_root.iterdir() if path.is_dir()),
-                     key=lambda path: (not path.name.startswith("do"),
-                                       int("".join(ch for ch in path.name if ch.isdigit()))))
+    candidates = sorted((path for path in source_root.iterdir() if path.is_dir()),
+                        key=lambda path: (not path.name.startswith("do"),
+                                          int("".join(ch for ch in path.name if ch.isdigit()))))
+    folder_images = {
+        folder: sorted(path for path in folder.iterdir() if path.is_file()
+                       and path.suffix.lower() in (".jpg", ".jpeg", ".png"))
+        for folder in candidates
+    }
+    folders = [folder for folder in candidates if folder_images[folder]]
+    ignored_empty_folders = [folder.name for folder in candidates if not folder_images[folder]]
     if len(folders) != 40:
         raise ValueError(f"expected 40 physical-part folders, found {len(folders)}")
     inventory: list[dict] = []
     hashes: dict[str, list[dict]] = defaultdict(list)
     for folder in folders:
         group, label, role = group_plan(folder.name)
-        images = sorted(path for path in folder.iterdir() if path.is_file()
-                        and path.suffix.lower() in (".jpg", ".jpeg", ".png"))
-        if not images:
-            raise ValueError(f"no photos in {folder}")
+        images = folder_images[folder]
         for path in images:
             digest = hashlib.sha256(path.read_bytes()).hexdigest()
             with Image.open(path) as image:
@@ -107,6 +112,7 @@ def snapshot(source_root: Path, output_root: Path) -> dict:
             writer.writeheader()
             writer.writerows(rows)
     result = {"source_root": str(source_root.resolve()), "photo_count": len(inventory),
+              "ignored_empty_folders": ignored_empty_folders,
               "development_photos": len(development), "holdout_photos": len(holdout),
               "duplicate_file_sets": duplicates,
               "skipped_duplicate_photos": sum(bool(row["duplicate_of"]) for row in inventory),
