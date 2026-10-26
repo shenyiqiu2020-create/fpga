@@ -2,6 +2,8 @@
 
 **当前首版：** 对单张正面工件照片判断“正常 / 有可见外缘缺损”；定位另作候选。旧 300 步冻结模型的[逐图分数表](../data/tie_mount_binary_baseline_20261025.csv)可用 `python -B -m sim.evaluate_tie_mount_binary data/tie_mount_binary_baseline_20261025.csv` 复核。2026-10-26 另有按实物分组的[开发分数](../data/tie_mount_20261026_development_scores.csv)和[新留出分数](../data/tie_mount_20261026_holdout_scores.csv)，必须分别列正常误报、缺损漏报及裁剪拒绝，不能在测试图上重新选择阈值。详情见[组员交接](../report/team_outline.md)。
 
+**扩批实验结果：** 用户新增照片并删除五张跨目录误复制照后，[扩批冻结脚本](freeze_tie_mount_expanded.py)登记 347 张原图，组内重复只取一张。`freeze` 只哈希与解码，`prepare` 才分别生成开发集和独立留出集及 `source_map.csv`。完整 EfficientAD 9000 步实验包 [tie_mount_expanded_20261026_9000step.json](model_bundles/tie_mount_expanded_20261026_9000step.json)仅供 A 复盘；[扩批留出分数](../data/tie_mount_expanded_20261026_holdout_scores.csv)显示损坏 32/32 报出但正常 0/16 判对，准确率 66.7%，因此**单张默认入口和 B/C 已发模型仍使用下述 3000 步包**。`summarize_tie_mount_round.py` 以源图与裁剪图哈希核对冻结预测，分别输出逐图与逐件混淆矩阵；留出结果不能用来追调阈值后再称独立准确率。复现步骤和限制见[扩批协议](../report/expanded_batch_protocol_20261026.md)、[进度记录](../report/progress.md)。
+
 截至 2026-10-26，本轮新模型入口和交接说明在 `codex/new-batch-efficientad` 分支；`main` 尚未合入。B/C 应先切到该分支，再按本页运行。
 
 ## 单张原始照片推理
@@ -26,7 +28,7 @@ build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_photo "D
 
 新模型对应的两份 float32 黄金张量也在[同一私有实验版 Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-batch-20261026-3000step)；A 本机副本为 `build/work/handoff/tie_mount_20261026_3000step_golden.zip`，SHA-256 为 `f33321cc38ce1ec65bf82f7683b4dfa7b80a7d01eedd9177108abc4b446d3eb6`。GitHub 回报 36,505,069 字节及相同 SHA-256。包内 `D19_01` 是缺损件，冻结分数 `0.3200802505016327`、判缺损；`N17_03` 是正常件，分数 `0.06585786491632462`、判正常。两者阈值均为 `0.11209306865930557`，模型包 ID 均为 `tie_mount_20261026_3000step_dedupval`；本机 ZIP CRC 与两次 `sim.verify_tie_mount_golden` 复核通过。接收后分别对解压的 `D19_01/`、`N17_03/` 运行 `python -B -m sim.verify_tie_mount_golden <目录>`，再与板上输出对比。这是新模型的数值参考，不是新盲测或定位正确率证明；旧 `golden_v3` 三份样本只适用于旧模型。
 
-自动裁剪只在已试拍的有对比背景上验证过；新批留出集有两张正常照因工件碰到画面边界被拒绝。拍摄方向无需预先转正，但不能据此宣称任意视角、光照和背景均可靠。新模型在成功裁剪的留出正常照中仍误报 1/13，开发集也有漏报；单张输出是实验结果，不能作为可靠的工业判废依据。
+自动裁剪当前在已收集的棕、绿背景及偏色光照下对 346 张有效照片全部成功；偏光回退只在原规则拒绝后尝试，并保留真实截边拒绝。先前两张拍摄截边照已由用户删除，下述 3000 步模型的旧留出分数仍保留当时 2 张拒绝的历史记录。拍摄方向无需预先转正，但不能据此宣称任意视角、光照和背景均可靠。3000 步模型在此前成功裁剪的留出正常照中仍误报 1/13；扩批实验模型又在新留出正常照中误报 16/16，单张输出不能作为可靠的工业判废依据。
 
 单独复核已有 `256×256` 裁剪图与对应融合 TIFF 的位置候选可运行 `python -B -m sim.localize_tie_mount_edge <crop.png> <combined.tiff> --output-dir <新目录>`。输出 `result.json`、`preview.png` 和 `expected_edge_band.png`，记录原始整图峰值、预期外轮廓带内候选峰值及输入哈希。固定外轮廓带可覆盖缺失角和边中部凹口的预期区域，但不等于缺口真值；新批次尚无人工缺口框定位评估。
 

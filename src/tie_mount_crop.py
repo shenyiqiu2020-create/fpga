@@ -37,6 +37,27 @@ def white_foreground_mask(image: Image.Image) -> np.ndarray:
             & (chroma < 30.0) & (distance > 35.0))
 
 
+def tinted_white_foreground_mask(image: Image.Image) -> np.ndarray:
+    """Fallback for a blue/pink cast on the white part over green/brown mats.
+
+    The photographed part retains more blue than the warm backgrounds even
+    when its absolute RGB chroma exceeds the first mask's limit. Requiring a
+    brighter darkest channel helps avoid selecting illuminated mat patches.
+    This is only a candidate mask; the contour checks below remain mandatory.
+    """
+    pixels = np.asarray(image.convert("RGB"), dtype=np.float32)
+    height, width = pixels.shape[:2]
+    edge = max(4, min(width, height) // 25)
+    border = np.concatenate((pixels[:edge].reshape(-1, 3),
+                             pixels[-edge:].reshape(-1, 3),
+                             pixels[:, :edge].reshape(-1, 3),
+                             pixels[:, -edge:].reshape(-1, 3)))
+    background = np.median(border, axis=0)
+    blue_minus_red = pixels[:, :, 2] - pixels[:, :, 0]
+    return ((blue_minus_red > background[2] - background[0] + 15.0)
+            & (pixels.min(axis=2) > max(90.0, float(background.min()) + 10.0)))
+
+
 def _largest_component(mask: np.ndarray) -> tuple[int, int, int, int, int]:
     height, width = mask.shape
     visited = np.zeros_like(mask, dtype=bool)
@@ -64,19 +85,15 @@ def _largest_component(mask: np.ndarray) -> tuple[int, int, int, int, int]:
     return best
 
 
-def locate_mount(image: Image.Image) -> tuple[int, int, int, int]:
-    """Return a square crop in original coordinates, or reject the image."""
-    original_width, original_height = image.size
-    if min(image.size) < 128:
-        raise ValueError("image is too small to locate the part")
-    preview = image.copy()
-    preview.thumbnail((512, 512), Image.Resampling.BILINEAR)
-    width, height = preview.size
-    mask = white_foreground_mask(preview)
+def _box_from_mask(image_size: tuple[int, int], preview_size: tuple[int, int],
+                   mask: np.ndarray, edge_gap: int = 0,
+                   require_compact: bool = False) -> tuple[int, int, int, int]:
+    original_width, original_height = image_size
+    width, height = preview_size
     area, left, top, right, bottom = _largest_component(mask)
     # Only the selected part touching the frame means its contour is clipped.
     # Separate white glare or clutter along an edge is not the part.
-    if left == 0 or top == 0 or right == width or bottom == height:
+    if left <= edge_gap or top <= edge_gap or right >= width - edge_gap or bottom >= height - edge_gap:
         raise ValueError("part touches the image boundary")
     fraction = area / (width * height)
     bbox_width, bbox_height = right - left, bottom - top
@@ -85,6 +102,8 @@ def locate_mount(image: Image.Image) -> tuple[int, int, int, int]:
     aspect = bbox_width / bbox_height
     if not 0.55 <= aspect <= 1.8:
         raise ValueError("detected region does not resemble the square part")
+    if require_compact and area < 0.35 * bbox_width * bbox_height:
+        raise ValueError("fallback mask is too sparse to locate the full part")
     # A little context preserves the external contour, including a missing corner.
     scale_x, scale_y = original_width / width, original_height / height
     cx = (left + right) * scale_x / 2
@@ -104,6 +123,26 @@ def locate_mount(image: Image.Image) -> tuple[int, int, int, int]:
             and bottom * scale_y <= crop_top + side - margin):
         raise ValueError("part is too close to the image boundary")
     return crop_left, crop_top, crop_left + side, crop_top + side
+
+
+def locate_mount(image: Image.Image) -> tuple[int, int, int, int]:
+    """Return a square crop in original coordinates, or reject the image."""
+    if min(image.size) < 128:
+        raise ValueError("image is too small to locate the part")
+    preview = image.copy()
+    preview.thumbnail((512, 512), Image.Resampling.BILINEAR)
+    try:
+        # Keep this first path unchanged so established crops remain identical.
+        return _box_from_mask(image.size, preview.size, white_foreground_mask(preview))
+    except ValueError as original_error:
+        try:
+            return _box_from_mask(
+                image.size, preview.size, tinted_white_foreground_mask(preview),
+                edge_gap=max(4, round(min(preview.size) * 0.01)),
+                require_compact=True,
+            )
+        except ValueError:
+            raise original_error from None
 
 
 def crop_mount(path: Path, size: int = 256) -> tuple[Image.Image, dict]:
