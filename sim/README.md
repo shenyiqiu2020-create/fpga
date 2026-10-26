@@ -1,5 +1,11 @@
 # 仿真与验证
 
+**2026-10-27 后续级联实验：** 严格分割失败时先从完整原 JPEG 补背景重新定位；仍失败再用独立的宽松边界随机森林给出带 `low_quality` 和 `review_recommended` 标记的二元判定。当前首版任务内 344 张照片为严格路径 343、二级路径 1，0 张不可用；同批按件分组回顾性验证三个种子均逐图判对 340/344。此结果不是新实物验收，实验级联没有替换下述默认完整 EfficientAD 或 B/C 数值包。方法、完整复现命令和旧 48 张已见诊断边界见[级联候选记录](../report/shape_cascade_candidate_20261027.md)；下方旧候选命令保留上一版 327 张结果的历史。新候选单张命令：
+
+```powershell
+python -B -m sim.train_tie_mount_shape_cascade infer-photo --photo "D:\工件照片\待测.jpg" --strict-model build/work/results/tie_mount_shape_cascade_full_current_v2/strict_model.json --relaxed-model build/work/results/tie_mount_shape_cascade_full_current_v2/relaxed_model.json --manifest build/work/results/tie_mount_shape_cascade_full_current_v2/manifest.json --used-crop-output build/work/results/shape_cascade_one_crop.png
+```
+
 **当前首版：** 对单张正面工件照片判断“正常 / 有可见外缘缺损”；定位另作候选。旧 300 步冻结模型的[逐图分数表](../data/tie_mount_binary_baseline_20261025.csv)可用 `python -B -m sim.evaluate_tie_mount_binary data/tie_mount_binary_baseline_20261025.csv` 复核。2026-10-26 另有按实物分组的[开发分数](../data/tie_mount_20261026_development_scores.csv)和[新留出分数](../data/tie_mount_20261026_holdout_scores.csv)，必须分别列正常误报、缺损漏报及裁剪拒绝，不能在测试图上重新选择阈值。详情见[组员交接](../report/team_outline.md)。
 
 **扩批实验结果：** 用户新增照片并删除五张跨目录误复制照后，[扩批冻结脚本](freeze_tie_mount_expanded.py)登记 347 张原图，组内重复只取一张。`freeze` 只哈希与解码，`prepare` 才分别生成开发集和独立留出集及 `source_map.csv`。完整 EfficientAD 9000 步实验包 [tie_mount_expanded_20261026_9000step.json](model_bundles/tie_mount_expanded_20261026_9000step.json)仅供 A 复盘；[扩批留出分数](../data/tie_mount_expanded_20261026_holdout_scores.csv)显示损坏 32/32 报出但正常 0/16 判对，准确率 66.7%，因此**单张默认入口和 B/C 已发模型仍使用下述 3000 步包**。`summarize_tie_mount_round.py` 以源图与裁剪图哈希核对冻结预测，分别输出逐图与逐件混淆矩阵；留出结果不能用来追调阈值后再称独立准确率。复现步骤和限制见[扩批协议](../report/expanded_batch_protocol_20261026.md)、[进度记录](../report/progress.md)。

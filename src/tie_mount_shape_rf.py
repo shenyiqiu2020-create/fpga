@@ -16,6 +16,7 @@ import numpy as np
 from PIL import Image, ImageOps
 
 from src.tie_mount_crop import crop_mount
+from src.tie_mount_relocate import relocate_photo
 
 MODEL_FORMAT = "tie_mount_shape_rf_grabcut_v1"
 SEGMENTATION_SPEC = {
@@ -83,7 +84,8 @@ def _grabcut_foreground(image: Image.Image) -> tuple[np.ndarray, float]:
     return (state == cv2.GC_FGD) | (state == cv2.GC_PR_FGD), contrast
 
 
-def extract_features(image: Image.Image) -> tuple[np.ndarray, dict[str, float | str]]:
+def extract_features(image: Image.Image,
+                     require_border_margin: bool = True) -> tuple[np.ndarray, dict[str, float | str]]:
     """Measure the largest white-part outer contour in a 256-pixel crop.
 
     The broad quality bounds were fixed before looking at the held-out photos.
@@ -105,7 +107,8 @@ def extract_features(image: Image.Image) -> tuple[np.ndarray, dict[str, float | 
     if area < 500 or not 0.02 <= area / 65536 <= 0.8:
         raise ShapeUnavailable("part contour area is implausible")
     x, y, w, h = cv2.boundingRect(contour)
-    if x <= 9 or y <= 9 or x + w >= 247 or y + h >= 247:
+    border_contact = x <= 9 or y <= 9 or x + w >= 247 or y + h >= 247
+    if require_border_margin and border_contact:
         raise ShapeUnavailable("part contour touches crop boundary")
     if cv2.pointPolygonTest(contour, (128, 128), False) < 0:
         raise ShapeUnavailable("foreground contour does not contain center seed")
@@ -137,7 +140,8 @@ def extract_features(image: Image.Image) -> tuple[np.ndarray, dict[str, float | 
     return result, {"mask": "grabcut_lab_center_border",
                     "center_border_lab_contrast": contrast,
                     "raw_mask_fraction": raw_fraction,
-                    "contour_area_fraction": area / 65536}
+                    "contour_area_fraction": area / 65536,
+                    "border_contact": bool(border_contact)}
 
 
 def wider_crop_with_box(photo_path: Path, original_box: tuple[int, int, int, int]) -> tuple[Image.Image, list[float]]:
@@ -180,6 +184,47 @@ def extract_with_fallback(crop: Image.Image, source_photo: Path,
             raise ShapeUnavailable(f"primary: {primary_error}; wider crop: {fallback_error}") from None
         return vector, {**quality, "crop_variant": "wider_original_photo",
                         "crop_box_original_xyxy": wider_box}
+
+
+def extract_relaxed_with_fallback(crop: Image.Image, source_photo: Path,
+                                  crop_box: tuple[int, int, int, int],
+                                  expected_source_sha256: str | None = None) -> tuple[np.ndarray, dict]:
+    """Second route after strict failure; flag the border-contact warning."""
+    try:
+        vector, quality = extract_features(crop, require_border_margin=False)
+        return vector, {**quality, "crop_variant": "frozen_primary_relaxed",
+                        "crop_box_original_xyxy": list(crop_box)}
+    except ShapeUnavailable as primary_error:
+        if expected_source_sha256 is not None:
+            digest = hashlib.sha256(source_photo.read_bytes()).hexdigest()
+            if digest != expected_source_sha256:
+                raise ShapeUnavailable("original source photo hash mismatch") from None
+        try:
+            wider, wider_box = wider_crop_with_box(source_photo, crop_box)
+            vector, quality = extract_features(wider, require_border_margin=False)
+        except (OSError, ShapeUnavailable) as fallback_error:
+            raise ShapeUnavailable(f"secondary primary: {primary_error}; secondary wider: {fallback_error}") from None
+        return vector, {**quality, "crop_variant": "wider_original_photo_relaxed",
+                        "crop_box_original_xyxy": wider_box}
+
+
+def extract_strict_with_relocation(crop: Image.Image, source_photo: Path,
+                                   crop_box: tuple[int, int, int, int],
+                                   expected_source_sha256: str | None = None) -> tuple[np.ndarray, dict]:
+    """Keep the established crop; relocate from source only if it fails."""
+    try:
+        return extract_with_fallback(crop, source_photo, crop_box, expected_source_sha256)
+    except (OSError, ShapeUnavailable) as first_error:
+        try:
+            relocated, record = relocate_photo(source_photo, padded=True,
+                                               expected_sha256=expected_source_sha256)
+            vector, quality = extract_features(relocated)
+        except (OSError, ValueError, ShapeUnavailable) as second_error:
+            raise ShapeUnavailable(f"primary and wider: {first_error}; original relocation: {second_error}") from None
+        return vector, {**quality, "crop_variant": "relocated_padded_original",
+                        "crop_box_original_xyxy": record["crop_box_original_xyxy"],
+                        "relocation_method": record["method"],
+                        "virtual_border_pixels": record["virtual_border_pixels"]}
 
 
 def export_forest(model: object) -> dict:
@@ -284,3 +329,47 @@ def classify_photo(path: Path, forest: dict, threshold: float = 0.5,
             "original_photo_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
             "source_size_exif_oriented": record["source_size"],
             "warning": "experimental outline classifier; requires new-part validation"}
+
+
+def classify_photo_cascade(path: Path, strict_forest: dict, relaxed_forest: dict,
+                           threshold: float = 0.5,
+                           low_confidence_interval: tuple[float, float] = (0.4, 0.6),
+                           used_crop_output: Path | None = None) -> dict:
+    """Always attempt a binary verdict, with a marked lower-quality second route."""
+    try:
+        crop, record = crop_mount(path, 256)
+        try:
+            vector, quality = extract_strict_with_relocation(crop, path, tuple(record["crop_box"]))
+            forest = strict_forest
+            route = "strict_relocated" if quality["crop_variant"] == "relocated_padded_original" else "strict"
+        except ShapeUnavailable:
+            vector, quality = extract_relaxed_with_fallback(crop, path, tuple(record["crop_box"]))
+            forest = relaxed_forest
+            route = "relaxed_border_contact"
+    except (OSError, ValueError, ShapeUnavailable) as exc:
+        return {"verdict": "unavailable", "reason": str(exc),
+                "review_recommended": True}
+    if quality["crop_variant"].startswith("frozen_primary"):
+        used = crop
+    elif quality["crop_variant"] == "relocated_padded_original":
+        used, _ = relocate_photo(path, padded=True)
+    else:
+        used = wider_crop(path, tuple(record["crop_box"]))
+    if used_crop_output is not None:
+        if used_crop_output.exists() or used_crop_output.suffix.lower() != ".png":
+            raise ValueError("choose a new .png path for the used crop")
+        used_crop_output.parent.mkdir(parents=True, exist_ok=True)
+        used.save(used_crop_output)
+    p = probability(vector, forest)
+    low_probability_confidence = low_confidence_interval[0] <= p <= low_confidence_interval[1]
+    low_quality = route != "strict" or low_probability_confidence
+    return {"verdict": "defect" if p >= threshold else "good",
+            "defect_probability": p, "route": route,
+            "low_quality": low_quality, "review_recommended": low_quality,
+            "quality": quality,
+            "used_crop_path": str(used_crop_output.resolve()) if used_crop_output is not None else None,
+            "used_crop_sha256": hashlib.sha256(used_crop_output.read_bytes()).hexdigest()
+                                if used_crop_output is not None else None,
+            "original_photo_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "source_size_exif_oriented": record["source_size"],
+            "warning": "experimental two-route outline classifier; requires new-part validation"}
