@@ -24,3 +24,5 @@
 `tie_mount_outline.py` 是 2026-10-25 新增的**首版外缘缺损几何基线**：调用上述裁剪器，用白色前景搜索方形在图像平面内的方向，再比较四角占用量。运行 `python -m src.tie_mount_outline <照片路径>` 可得到分数、临时判定及疑似缺损角的原图坐标。当前本机两件正常与 `D01`/`D02` 的 8 张棕色背景照片已作流程检查；默认阈值 `0.35` 从这批图试用，尚未在独立验证件上定标。它只针对缺角/边缘缺口，**不检测 `D03` 斜肋断损**；也不证明对任意背景、光照或透视有效。与 EfficientAD 候选模型的结果须分开报告。
 
 按原作品简介，EfficientAD 的教师–学生、自动编码器与异常图融合仍是主实现目标；`tie_mount_outline.py` 只提供独立辅助对照。当前没有把几何评分接入 EfficientAD 的训练或最终判定，也没有证明 EfficientAD 已适应任意平面方向。
+
+**2026-10-27 外缘辅助候选：** [`tie_mount_shape_rf.py`](tie_mount_shape_rf.py)在现有 `256×256` 工件裁剪图上，用图像边缘的背景色和中央工件种子初始化 GrabCut，再提取外轮廓、旋转矩形、凸包和凹陷的 19 项特征供小型随机森林分类。它另需 `requirements-shape.txt` 中的 OpenCV 和 scikit-learn 训练依赖，实验模型尚未作为默认模型或交付给 B/C。分割不可靠时返回 `unavailable`；概率接近分界可返回 `uncertain`，不能把两者记作正常。[`tie_mount_shape.py`](tie_mount_shape.py)是独立的纯 NumPy/Pillow 外缘凹陷位置候选，未获精确位置真值验证。`do3/D03` 为内部肋条断损，不进入首版外缘缺损训练与计分。分组验证和适用条件见[形状辅助候选记录](../report/shape_assisted_candidate_20261027.md)。
