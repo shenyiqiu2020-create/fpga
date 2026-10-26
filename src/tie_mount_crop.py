@@ -73,12 +73,11 @@ def locate_mount(image: Image.Image) -> tuple[int, int, int, int]:
     preview.thumbnail((512, 512), Image.Resampling.BILINEAR)
     width, height = preview.size
     mask = white_foreground_mask(preview)
-    # A visible run of white at the frame edge means the contour may be cut off.
-    # Check this before component search; otherwise a clipped close-up can pass.
-    if any(np.count_nonzero(edge_pixels) >= 3 for edge_pixels in
-           (mask[0], mask[-1], mask[:, 0], mask[:, -1])):
-        raise ValueError("part touches the image boundary")
     area, left, top, right, bottom = _largest_component(mask)
+    # Only the selected part touching the frame means its contour is clipped.
+    # Separate white glare or clutter along an edge is not the part.
+    if left == 0 or top == 0 or right == width or bottom == height:
+        raise ValueError("part touches the image boundary")
     fraction = area / (width * height)
     bbox_width, bbox_height = right - left, bottom - top
     if not (0.01 <= fraction <= 0.6 and bbox_width >= 20 and bbox_height >= 20):

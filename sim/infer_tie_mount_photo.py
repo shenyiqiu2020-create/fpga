@@ -13,9 +13,28 @@ import hashlib
 import json
 from pathlib import Path
 
+from PIL import Image, ImageDraw, ImageOps
+
 from src.tie_mount_crop import crop_mount
 from sim.infer_tie_mount_holdout import run as infer_crops
+from sim.localize_tie_mount_edge import localize
 from sim.model_bundle import DEFAULT_BUNDLE_MANIFEST, verify_model_bundle
+
+
+MODEL_PROFILES = {
+    "golden_v3": (
+        Path("build/work/results/tie_mount_grouped_v1_300step/trainings/mvtec_loco/tie_mount"),
+        Path("build/work/results/tie_mount_grouped_v1_300step/components/normalization.npz"),
+        Path("build/work/results/tie_mount_grouped_v1_300step/components/summary.json"),
+        DEFAULT_BUNDLE_MANIFEST,
+    ),
+    "batch_20261026": (
+        Path("build/work/results/tie_mount_20261026_3000step/trainings/mvtec_loco/tie_mount"),
+        Path("build/work/results/tie_mount_20261026_3000step/components_dedup_validation/normalization.npz"),
+        Path("build/work/results/tie_mount_20261026_3000step/components_dedup_validation/summary.json"),
+        Path("sim/model_bundles/tie_mount_20261026_3000step_dedupval.json"),
+    ),
+}
 
 
 def run(args: argparse.Namespace) -> dict:
@@ -70,6 +89,36 @@ def run(args: argparse.Namespace) -> dict:
         "model_bundle_manifest_sha256": manifest["model_bundle_manifest_sha256"],
         "device": manifest["device"],
     }
+    if getattr(args, "mark_edge_candidate", False) and predicted_defect:
+        try:
+            location = localize(crop_path, infer_dir / "maps" / "combined" / "input.tiff",
+                                args.output_dir / "edge_location")
+            point = location["expected_edge_peak_xy_score"]
+            box = crop_record["crop_box"]
+            side = box[2] - box[0]
+            source_x = box[0] + point["x"] * side / 256
+            source_y = box[1] + point["y"] * side / 256
+            with Image.open(args.photo) as source:
+                annotated = ImageOps.exif_transpose(source).convert("RGB")
+            draw = ImageDraw.Draw(annotated)
+            radius = max(12, round(min(annotated.size) * 0.01))
+            draw.ellipse((source_x - radius, source_y - radius,
+                          source_x + radius, source_y + radius),
+                         outline=(255, 0, 0), width=max(3, radius // 5))
+            annotated.save(args.output_dir / "edge_location" / "source_preview.jpg", quality=92)
+            result["defect_location_candidate"] = {
+                "status": "candidate",
+                "method": "EfficientAD fused-map peak in expected outer-edge band",
+                "crop_xy": [point["x"], point["y"]],
+                "source_xy_after_exif_orientation": [round(source_x, 1), round(source_y, 1)],
+                "source_preview": "edge_location/source_preview.jpg",
+                "crop_preview": "edge_location/preview.png",
+                "validated_location": False,
+            }
+        except ValueError as error:
+            result["defect_location_candidate"] = {
+                "status": "unavailable", "reason": str(error), "validated_location": False,
+            }
     (args.output_dir / "result.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
@@ -80,17 +129,21 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("photo", type=Path, help="original phone JPEG or PNG")
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--model-profile", choices=tuple(MODEL_PROFILES), default="golden_v3",
+                        help="explicit frozen model bundle; existing golden_v3 remains the default")
+    parser.add_argument("--mark-edge-candidate", action="store_true",
+                        help="mark a tentative outer-edge location when the model reports a defect")
     parser.add_argument("--external-repo", type=Path,
                         default=Path("build/work/external/efficientad"))
-    parser.add_argument("--trainings-dir", type=Path,
-                        default=Path("build/work/results/tie_mount_grouped_v1_300step/trainings/mvtec_loco/tie_mount"))
-    parser.add_argument("--normalization", type=Path,
-                        default=Path("build/work/results/tie_mount_grouped_v1_300step/components/normalization.npz"))
-    parser.add_argument("--summary", type=Path,
-                        default=Path("build/work/results/tie_mount_grouped_v1_300step/components/summary.json"))
-    parser.add_argument("--bundle-manifest", type=Path,
-                        default=DEFAULT_BUNDLE_MANIFEST)
+    parser.add_argument("--trainings-dir", type=Path)
+    parser.add_argument("--normalization", type=Path)
+    parser.add_argument("--summary", type=Path)
+    parser.add_argument("--bundle-manifest", type=Path)
     args = parser.parse_args()
+    defaults = MODEL_PROFILES[args.model_profile]
+    for name, value in zip(("trainings_dir", "normalization", "summary", "bundle_manifest"), defaults):
+        if getattr(args, name) is None:
+            setattr(args, name, value)
     print(json.dumps(run(args), ensure_ascii=False, indent=2))
 
 

@@ -2,6 +2,18 @@
 
 本文件按时间保留开发记录。最新状态和任务接口见 [项目工作交接报告](team_outline.md)；历史条目只表示当时的认识，不能直接当作当前待办。每次提交记录改动、原因、运行方法、验证结果、限制和下一步；电脑端、仿真与板上结果分别注明。
 
+## 2026-10-26：新批照片分组、完整 EfficientAD 更新与留出复核
+
+**输入与身份：** `D:\工件照片` 按用户目录登记 40 件、148 张，其中本次新增 15 件 `do6–do20` 缺损件的 60 张和 18 件正常件的 70 张。用户明确确认 `do6` 是缺去一块细长直角三角形的外缘缺角，放大照片后仍属于较难目视定位的样本。[逐图原图哈希和用途](../data/tie_mount_20261026_photo_inventory.csv)已记录。`N07/N08` 的两对跨目录完全相同照片和 `N14` 的一对组内重复，仅跳过重复照片，不整组排除；`N07/N08` 均放在训练侧，其是否为不同实物仍待实物核查。旧 `do1–do5` 的 14 张在本次划分中标为 `excluded_prior`。
+
+**划分与模型：** 按登记的实物组互斥分配，去重后训练正常 41 张（`N01–N04/N06–N13`），正常验证 7 张（`N14/N15`），已见开发集 48 张（`D09–D18` 40 张缺损、`N05/N16` 8 张正常），预留留出集 35 张（`D19–D23` 20 张缺损、`N17–N20` 15 张正常）。[`sim/intake_tie_mount_batch.py`](../sim/intake_tie_mount_batch.py)冻结分组、原图哈希及裁剪输入，本机快照在 Git 忽略的 `build/work/data/tie_mount_20261026_v2/`。新候选继续运行完整 EfficientAD 教师–学生、自动编码器、双分支归一化与异常图融合，训练 3000 步；只用 7 张正常验证照的最大分数设判定阈值 `0.11209306865930557`。[五文件模型包清单](../sim/model_bundles/tie_mount_20261026_3000step_dedupval.json)固定此次权重与校准身份，模型文件留在 Git 忽略的 `build/work/results/tie_mount_20261026_3000step/`。
+
+**电脑端判定实测：** [开发集逐图对照](../data/tie_mount_20261026_development_scores.csv)的 48 张已见照片中，新候选为 `TP=36、FN=4、TN=7、FP=1`，旧冻结 300 步模型为 `TP=40、FN=0、TN=1、FP=7`；新候选减少了正常误报，也在开发集漏掉 4 张缺损。留出集原有 35 张，其中 `N17_02`（`正常17/91963a1ce0aa93e26d5e973d8fa8fa63.jpg`）和 `N19_01`（`正常19/089e35c4df70a5669a30f63ae9d8819c.jpg`）被裁剪器报 `part touches the image boundary`，没有进入模型判定。[留出逐图记录](../data/tie_mount_20261026_holdout_scores.csv)对其余**接受的 33 张**给出新候选 `TP=20、TN=12、FP=1、FN=0`；旧 300 步模型在同一 33 张上为 `TP=20、TN=0、FP=13、FN=0`。按同件任一接受视角报缺损即报缺损，新候选为 5/5 件缺损判对、3/4 件正常判对，正常 `N20` 的一张仍误报。两张被拒照片不计入混淆矩阵，也不能算判对。
+
+**位置与限制：** [`sim/localize_tie_mount_edge.py`](../sim/localize_tie_mount_edge.py)只在现有融合异常图的预期外缘带中选候选点，不参与正常/缺损判定。作为离线几何诊断，33 张已接受留出照片中 29 张可生成候选位置；其中缺损照为 16/20 张，`D21`（源目录 `do18`）4 张大面积缺损因方形外缘假设不成立而拒绝定位。单张推理入口仅在模型报缺损时尝试标点。`do13` 有连在工件上的外翻破片，`do6` 缺角较隐蔽；目前没有逐图精细缺陷真值，不能声称位置准确。留出只有 5 件缺损和 4 件正常，同件多张照片相关，裁剪仍有拒绝，且新候选在开发集存在 4 张漏判，**不能由本批结果宣称模型可靠或保证识别正确率**。这些全是电脑端结果，没有新增 PL/板上性能证据。现有供 B/C 接收的 GitHub Release 黄金 ZIP 对应旧 300 步模型；使用新候选前必须另冻结并交付同版数值样本，不能混用阈值、权重和黄金数组。
+
+**复现与数值交接：** 外部候选源码仍固定在 `fcab5146f84ae17597044ad5ddf1656ccf805401`。本机用 `build/work/efficientad-env/Scripts/python.exe build/work/external/efficientad/efficientad.py --dataset mvtec_loco --subdataset tie_mount --mvtec_loco_path build/work/data/tie_mount_20261026_v1/development_prepared --weights build/work/external/efficientad/models/teacher_small.pth --output_dir build/work/results/tie_mount_20261026_3000step --train_steps 3000` 训练。`v1` 与去重后的 `v2` 训练图哈希完全相同；`v1` 正常验证有一张 `N14` 重复副本，最终冻结归一化和阈值改从 `v2/development_prepared/tie_mount/validation` 的 7 张唯一照片独立重算。此前按原验证目录重导出的融合图与训练脚本保存图逐像素最大差为 0；新校准的 48 张开发图经冻结推理再回放，融合图最大差也为 0。新模型五文件 ZIP 在本机 `build/work/handoff/tie_mount_20261026_3000step_model.zip`（SHA-256 `c43674f11a81d1bb3c06994b18847e8647360ea632e42414cb08d0e67c956245`）；同版 `D19_01/N17_03` 两份数值黄金样本在 `build/work/handoff/tie_mount_20261026_3000step_golden.zip`（SHA-256 `f33321cc38ce1ec65bf82f7683b4dfa7b80a7d01eedd9177108abc4b446d3eb6`）。五文件哈希、两份黄金复算、两个 ZIP CRC 及 26 项软件测试均通过。两份新 ZIP 当前未上传，B/C 也未回执。
+
 ## 2026-10-26：同步 A 的黄金样本提交并准备 B/C 接收
 
 **做了什么与原因：** 核对本地 `main` 干净、远端仍在 `efb45b1`，将上次未推送的 `0cfcfff` 快进推到 GitHub `main`；将三份黄金张量的 ZIP 上传到[私有 GitHub Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-golden-v3)；新增 [B/C 数值接口交接](bc_handoff_20261026.md)，记录 ZIP 身份、接收复核命令、首个 PL 算子建议和 B/C 各自应返回的证据。没有变更完整 EfficientAD 模型、阈值和黄金数组。

@@ -47,8 +47,12 @@ def save_maps(output_root: Path, split: str, category: str, stem: str,
 def export(args: argparse.Namespace) -> dict:
     if args.output_dir.exists():
         raise FileExistsError(f"choose a new output directory: {args.output_dir}")
-    if not args.class_root.is_dir() or not args.reference_maps_root.is_dir():
-        raise FileNotFoundError("dataset or reference anomaly maps are missing")
+    if not args.class_root.is_dir():
+        raise FileNotFoundError("dataset is missing")
+    if args.reference_maps_root is None and args.validation_root is None:
+        raise ValueError("omitting reference maps requires an explicit validation directory")
+    if args.reference_maps_root is not None and not args.reference_maps_root.is_dir():
+        raise FileNotFoundError("reference anomaly maps are missing")
     training_files = ("teacher_final.pth", "student_final.pth", "autoencoder_final.pth")
     for name in training_files:
         if not (args.trainings_dir / name).is_file():
@@ -130,22 +134,25 @@ def export(args: argparse.Namespace) -> dict:
     test_rows = []
     max_reference_difference = 0.0
     test_files = sorted((args.class_root / "test").glob("*/*.png"))
-    reference_files = set(args.reference_maps_root.glob("*/*.tiff"))
-    if len(test_files) != len(reference_files):
+    reference_files = (set(args.reference_maps_root.glob("*/*.tiff"))
+                       if args.reference_maps_root is not None else None)
+    if reference_files is not None and len(test_files) != len(reference_files):
         raise ValueError("reference map count differs from test image count")
     for path in test_files:
         maps = predict_image(path)
-        reference_path = args.reference_maps_root / path.parent.name / f"{path.stem}.tiff"
-        if reference_path not in reference_files:
-            raise FileNotFoundError(reference_path)
-        reference = tifffile.imread(reference_path)
-        difference = checked_reference_difference(reference, maps[0])
-        max_reference_difference = max(max_reference_difference, difference)
+        difference = None
+        if reference_files is not None:
+            reference_path = args.reference_maps_root / path.parent.name / f"{path.stem}.tiff"
+            if reference_path not in reference_files:
+                raise FileNotFoundError(reference_path)
+            reference = tifffile.imread(reference_path)
+            difference = checked_reference_difference(reference, maps[0])
+            max_reference_difference = max(max_reference_difference, difference)
         save_maps(args.output_dir, "test", path.parent.name, path.stem, maps)
         test_rows.append({"class": path.parent.name, "image": path.name,
                           "label": int(path.parent.name != "good"),
                           "score_max": float(maps[0].max()),
-                          "reference_max_abs_diff": difference})
+                          "reference_max_abs_diff": difference if difference is not None else ""})
 
     threshold, confusion = classify_with_normal_validation(
         [row["score_max"] for row in validation_rows], test_rows
@@ -167,7 +174,10 @@ def export(args: argparse.Namespace) -> dict:
             [row["score_max"] for row in test_rows],
         ),
         "test_confusion": confusion,
-        "max_abs_difference_from_prior_fused_map": max_reference_difference,
+        "max_abs_difference_from_prior_fused_map": (
+            max_reference_difference if reference_files is not None else None),
+        "reference_map_comparison": ("checked" if reference_files is not None
+                                     else "not_run_explicit_recalibration"),
         "device": str(device),
         "input_size": [candidate.image_size, candidate.image_size],
         "pixel_localization_metric": None,
@@ -183,9 +193,10 @@ def main() -> None:
     parser.add_argument("--external-repo", type=Path, required=True)
     parser.add_argument("--class-root", type=Path, required=True)
     parser.add_argument("--validation-root", type=Path,
-                        help="Separate validation/good folder; avoids per-image random split")
+                        help="Separate validation directory containing good/; avoids per-image random split")
     parser.add_argument("--trainings-dir", type=Path, required=True)
-    parser.add_argument("--reference-maps-root", type=Path, required=True)
+    parser.add_argument("--reference-maps-root", type=Path,
+                        help="Candidate test maps for exact comparison; omit only when explicitly recalibrating")
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     print(json.dumps(export(args), ensure_ascii=False, indent=2))

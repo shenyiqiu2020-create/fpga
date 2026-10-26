@@ -31,6 +31,18 @@ class TieMountCropTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "touches the image boundary"):
             locate_mount(image)
 
+    def test_separate_white_edge_glare_does_not_reject_centered_part(self) -> None:
+        image = Image.new("RGB", (300, 400), (100, 150, 100))
+        draw = ImageDraw.Draw(image)
+        draw.rectangle((70, 100, 230, 260), fill=(230, 230, 230))
+        draw.rectangle((0, 20, 3, 80), fill=(230, 230, 230))
+
+        left, top, right, bottom = locate_mount(image)
+        self.assertLess(left, 70)
+        self.assertLess(top, 100)
+        self.assertGreater(right, 230)
+        self.assertGreater(bottom, 260)
+
 
 if __name__ == "__main__":
     unittest.main()
