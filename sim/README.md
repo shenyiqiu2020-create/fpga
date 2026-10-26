@@ -25,7 +25,7 @@ build/work/efficientad-env/Scripts/python.exe -B -m sim.export_tie_mount_golden 
 build/work/efficientad-env/Scripts/python.exe -B -m sim.verify_tie_mount_golden build/work/results/tie_mount_golden_v3/N02_01
 ```
 
-本机还导出了 `N05_01`（正常件，模型误报缺陷）和 `D07_01`（缺损件，模型报缺陷），分别来自 `build/work/data/tie_mount_grouped_v1/prepared/tie_mount/test/good/0013_N05.png` 与 `build/work/data/tie_mount_holdout_20261025/crops/D07_01.png`；复现时仅替换输入、`--object-group`、`--reference-label` 与输出目录即可。`verify_tie_mount_golden.py` 只依赖 NumPy，会核验数组身份并从特征重算两分支异常图、融合图、分数与判定。黄金样本仅证明电脑端的数值一致性；它不是盲测成绩、量化误差结果或 FPGA 板上验证。数组约 20 MB/份，模型权重与样本仍在 Git 忽略的 `build/work/`，组员须通过单独交接取得同版文件。硬件方可先选定某个算子和张量边界，再用这些数据比较其输出；课程版实际 RISC-V 内核和竞赛版 PS/PL 仍需分别实现与验证。
+本机还导出了 `N05_01`（正常件，模型误报缺陷）和 `D07_01`（缺损件，模型报缺陷），分别来自 `build/work/data/tie_mount_grouped_v1/prepared/tie_mount/test/good/0013_N05.png` 与 `build/work/data/tie_mount_holdout_20261025/crops/D07_01.png`；复现时仅替换输入、`--object-group`、`--reference-label` 与输出目录即可。`verify_tie_mount_golden.py` 只依赖 NumPy，会核验数组身份并从特征重算两分支异常图、融合图、分数与判定。黄金样本仅证明电脑端的数值一致性；它不是盲测成绩、量化误差结果或 FPGA 板上验证。数组约 20 MB/份，模型权重仍在本机 Git 忽略的 `build/work/`；三份数组压缩包已上传私有 Release，下载地址、哈希、接收复核命令与 B/C 工作接口见 [B/C 数值接口交接](../report/bc_handoff_20261026.md)。硬件方可先选定某个算子和张量边界，再用这些数据比较其输出；课程版实际 RISC-V 内核和竞赛版 PS/PL 仍需分别实现与验证。
 
 对应比赛规则第 3.3.5.1 和 3.3.5.4 节，保存仿真或验证脚本、测试配置及结果。
 
