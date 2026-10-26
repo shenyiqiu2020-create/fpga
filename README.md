@@ -18,7 +18,7 @@
 
 **2026-10-26 新批次：** 按 `D:\工件照片` 中每个文件夹一件实物清点，剔除跨文件夹重复照片后，A 用增加的正常件训练了另一套 **3000 步完整 EfficientAD**。它只在显式指定 `--model-profile batch_20261026` 时使用；单张照片入口默认仍为旧 `golden_v3`。在预先按实物留出的新批次中，成功裁剪的照片里，新旧模型均报出缺损 **20/20 张（5/5 件）**；新模型正常 **12/13 张（3/4 件无误报）**判对，旧模型正常 **0/13 张**判对。另有两张正常照因工件碰到画面边界被裁剪器拒绝，不计入二分类分母。新模型在开发测试图上也漏报 4/40 张缺损照，仍有正常误报，不能保证今后照片都识别正确或宣称工业可靠性。[新留出分数](data/tie_mount_20261026_holdout_scores.csv)、[开发分数](data/tie_mount_20261026_development_scores.csv)和[逐图来源](data/tie_mount_20261026_photo_inventory.csv)保留了核对依据。
 
-**当前推进点：** 用户接受演示阶段少量误报，A 保留旧 `golden_v3` 数值黄金样本供 B/C 对齐硬件；三份旧数组 ZIP 已上传[私有 GitHub Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-golden-v3)。新模型权重及校准文件、两份同版黄金张量分别打包于本机 Git 忽略的 `build/work/handoff/tie_mount_20261026_3000step_model.zip` 与 `tie_mount_20261026_3000step_golden.zip`，尚未上传或取得 B/C 接收回执。新旧模型 ID、阈值和黄金样本不可混用。`--mark-edge-candidate` 可在模型报缺损时标出融合异常图在预期外轮廓带内的候选点；此位置尚未在新批次用人工缺口框验证。接口见[仿真说明](sim/README.md)及[组员交接](report/team_outline.md)，板端实测和跨条件泛化仍待验证。
+**当前推进点：** 用户接受演示阶段少量误报，A 保留旧 `golden_v3` 数值黄金样本供 B/C 对齐硬件；三份旧数组 ZIP 已上传[旧版私有 GitHub Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-golden-v3)。经用户授权，新模型权重及校准文件、两份同版黄金张量分别上传[新实验版私有 Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-batch-20261026-3000step)，B/C 接收回执尚未取得。新旧模型 ID、阈值和黄金样本不可混用。`--mark-edge-candidate` 可在模型报缺损时标出融合异常图在预期外轮廓带内的候选点；此位置尚未在新批次用人工缺口框验证。接口见[仿真说明](sim/README.md)及[组员交接](report/team_outline.md)，板端实测和跨条件泛化仍待验证。
 
 本作品面向小批量规则工件的外观质量检测需求，拟基于 Zynq-7020 构建桌面式视觉检测系统。实物演示希望在工件正面方向、背景和光照变化时仍能检测局部破损、缺角等异常，输出异常区域、合格判定和检测统计，并支持结果显示与记录保存。第一轮试验暂保持俯拍视角和相机不变，用多条件样本测出可用范围；方向、背景和光照适应均待实现和验证，不能宣称任意现场条件下有效。早期提出的“缺孔”仍是总体设想；当前实物的圆形特征并非贯通孔，不能把这批工件的实心圆当作漏孔缺陷。
 
