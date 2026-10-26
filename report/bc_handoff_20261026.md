@@ -2,7 +2,7 @@
 
 ## 新实验版完整 EfficientAD：模型包与数值样本
 
-用户授权后，A 将两份新 ZIP 上传到[私有实验版 Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-batch-20261026-3000step)，标签指向提交 `062792d`。**Release 标签只固定资产来源；本轮推理入口及交接文档在 `codex/new-batch-efficientad` 分支，尚未合入 `main`。** B/C 先切到该分支，再登录有权访问私有仓库的 GitHub 账号下载。`tie_mount_20261026_3000step_model.zip` 含教师、学生、自动编码器权重、`normalization.npz`、`summary.json` 和 `bundle_manifest.json`，为 30,107,886 字节，SHA-256 `c43674f11a81d1bb3c06994b18847e8647360ea632e42414cb08d0e67c956245`；`tie_mount_20261026_3000step_golden.zip` 含同版 `D19_01` 缺损件、`N17_03` 正常件的输入、特征和异常图数组，为 36,505,069 字节，SHA-256 `f33321cc38ce1ec65bf82f7683b4dfa7b80a7d01eedd9177108abc4b446d3eb6`。GitHub 资产回报两份大小和 SHA-256 均与本机一致；B/C 下载及板端结果回执尚未取得。
+用户授权后，A 将两份新 ZIP 上传到[私有实验版 Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-batch-20261026-3000step)，标签指向提交 `062792d`。**Release 标签只固定资产来源；推理入口、模型清单和交接文档须从配套代码版本取得。** B/C 使用有权访问私有仓库的 GitHub 账号下载，再核对模型包 ID 与代码提交。`tie_mount_20261026_3000step_model.zip` 含教师、学生、自动编码器权重、`normalization.npz`、`summary.json` 和 `bundle_manifest.json`，为 30,107,886 字节，SHA-256 `c43674f11a81d1bb3c06994b18847e8647360ea632e42414cb08d0e67c956245`；`tie_mount_20261026_3000step_golden.zip` 含同版 `D19_01` 缺损件、`N17_03` 正常件的输入、特征和异常图数组，为 36,505,069 字节，SHA-256 `f33321cc38ce1ec65bf82f7683b4dfa7b80a7d01eedd9177108abc4b446d3eb6`。GitHub 资产回报两份大小和 SHA-256 均与本机一致；B/C 下载及板端结果回执尚未取得。
 
 下载 [模型 ZIP](https://github.com/shenyiqiu2020-create/fpga/releases/download/tie-mount-batch-20261026-3000step/tie_mount_20261026_3000step_model.zip)与[数值黄金 ZIP](https://github.com/shenyiqiu2020-create/fpga/releases/download/tie-mount-batch-20261026-3000step/tie_mount_20261026_3000step_golden.zip)到仓库的 Git 忽略目录 `build/work/handoff/`，核对上述 SHA-256，再执行：
 

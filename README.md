@@ -20,7 +20,7 @@
 
 **现有照片上的证据：** 347 张原图中一张组内重复照在数据准备时跳过，346 张唯一照再排除 `D03` 两张，首版范围为 **344 张**。新级联对 344 张均给出正常或缺损判断；按实物及误复制关系分组的回顾性五折验证，三次划分各判对 **340/344 张**，仍各错 4 张。旧 48 张照片已经参与方法排查，这不是新工件、新背景或新灯光的独立准确率。完整 EfficientAD 的 9000 步扩批实验在当时 48 张留出照片中虽然报出 32/32 张缺损，却把 16/16 张正常照误报；因此没有替换默认 3000 步版本。缺口位置输出目前也只是候选，尚无定位准确率。[逐图数据](data/tie_mount_expanded_20261026_inventory.csv)和[进度记录](report/progress.md)保留证据。
 
-**交接与下一步：** B/C 已可从[私有 Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-batch-20261026-3000step)取得同版 3000 步完整 EfficientAD 权重及黄金张量；旧 `golden_v3` Release 已退役。外缘级联的代码和报告位于 `codex/new-batch-efficientad` 分支及 [PR #3](https://github.com/shenyiqiu2020-create/fpga/pull/3)，尚未合并进 `main`；训练后的模型 JSON 留在 Git 忽略的本机目录，尚未交给 B/C。A 仍需用**未参与开发的新实物**在新纯色背景、新灯光和新破坏形态下盲测并冻结最终方案。B 负责板卡和系统，C 负责 PL 加速；板端完整推理与实测尚未完成。先跑通板上预存图片，再按确认的板卡接口加入实时摄像头；模型训练仍在电脑端进行。课程版 RISC-V SoC 单独构建与验收。[交接报告](report/team_outline.md)、[采集方案](data/capture_plan.md)和[板卡现状](board/README.md)列出责任与验收条件。
+**交接与下一步：** B/C 已可从[私有 Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-batch-20261026-3000step)取得同版 3000 步完整 EfficientAD 权重及黄金张量；旧 `golden_v3` Release 已退役。外缘级联的[代码](sim/train_tie_mount_shape_cascade.py)和[报告](report/shape_cascade_candidate_20261027.md)已随当前版本提供；训练后的模型 JSON 留在 Git 忽略的本机目录，尚未交给 B/C。A 仍需用**未参与开发的新实物**在新纯色背景、新灯光和新破坏形态下盲测并冻结最终方案。B 负责板卡和系统，C 负责 PL 加速；板端完整推理与实测尚未完成。先跑通板上预存图片，再按确认的板卡接口加入实时摄像头；模型训练仍在电脑端进行。课程版 RISC-V SoC 单独构建与验收。[交接报告](report/team_outline.md)、[采集方案](data/capture_plan.md)和[板卡现状](board/README.md)列出责任与验收条件。
 
 ## 历史实验记录
 
@@ -107,10 +107,9 @@ python src/score_map.py teacher.npy student.npy --output score.npy
 ```sh
 git clone https://github.com/shenyiqiu2020-create/fpga.git
 cd fpga
-git switch --track origin/codex/new-batch-efficientad
 ```
 
-当前 `main` 尚未合入 PR #3；上述切换命令用于读取本文所述最新代码和报告。训练权重与照片仍需从相应私有 Release 或本机受控目录另行取得。
+运行前应核对代码提交、模型包 ID 与黄金张量是否同版。训练权重与照片仍需从相应私有 Release 或本机受控目录另行取得。
 
 板级系统后续按以下顺序补齐可执行命令、输入文件、预期输出和验证结果：
 

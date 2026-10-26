@@ -21,7 +21,7 @@ python -B -m sim.train_tie_mount_shape_rf infer-photo --photo "D:\工件照片\�
 
 模型 JSON、原图和所有训练资料在 Git 忽略的 `build/work/` 或 `D:\工件照片`，不随仓库交付；其他电脑需按[完整复现命令](../report/shape_assisted_candidate_20261027.md)自行重训。不能把实验候选概率视为已校准的真实破损概率，也不能把辅助分类结果冒充完整 EfficientAD 或板端识别成绩。
 
-截至 2026-10-26，本轮新模型入口和交接说明在 `codex/new-batch-efficientad` 分支；`main` 尚未合入。B/C 应先切到该分支，再按本页运行。
+本轮新模型入口和交接说明见当前代码版本。B/C 运行前应核对 Git 提交、模型包 ID 与黄金样本是否同版。
 
 ## 单张原始照片推理
 
