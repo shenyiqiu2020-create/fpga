@@ -1,4 +1,4 @@
-"""Classify one original tie-mount photo with the frozen EfficientAD baseline.
+"""Classify one original tie-mount photo with a frozen EfficientAD model.
 
 The locator supplies the same 256x256 crop used by the grouped dataset.
 The model, calibration, and threshold are loaded without retraining or tuning.
@@ -129,8 +129,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("photo", type=Path, help="original phone JPEG or PNG")
     parser.add_argument("--output-dir", required=True, type=Path)
-    parser.add_argument("--model-profile", choices=tuple(MODEL_PROFILES), default="golden_v3",
-                        help="explicit frozen model bundle; existing golden_v3 remains the default")
+    parser.add_argument("--model-profile", choices=tuple(MODEL_PROFILES),
+                        default="batch_20261026",
+                        help="frozen model bundle; default is batch_20261026, golden_v3 is historical")
     parser.add_argument("--mark-edge-candidate", action="store_true",
                         help="mark a tentative outer-edge location when the model reports a defect")
     parser.add_argument("--external-repo", type=Path,

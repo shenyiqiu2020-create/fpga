@@ -2,6 +2,8 @@
 
 **当前首版：** 对单张正面工件照片判断“正常 / 有可见外缘缺损”；定位另作候选。旧 300 步冻结模型的[逐图分数表](../data/tie_mount_binary_baseline_20261025.csv)可用 `python -B -m sim.evaluate_tie_mount_binary data/tie_mount_binary_baseline_20261025.csv` 复核。2026-10-26 另有按实物分组的[开发分数](../data/tie_mount_20261026_development_scores.csv)和[新留出分数](../data/tie_mount_20261026_holdout_scores.csv)，必须分别列正常误报、缺损漏报及裁剪拒绝，不能在测试图上重新选择阈值。详情见[组员交接](../report/team_outline.md)。
 
+截至 2026-10-26，本轮新模型入口和交接说明在 `codex/new-batch-efficientad` 分支；`main` 尚未合入。B/C 应先切到该分支，再按本页运行。
+
 ## 单张原始照片推理
 
 在仓库根目录用隔离的 EfficientAD 环境运行：
@@ -10,7 +12,7 @@
 build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_photo "D:\工件照片\待测.jpg" --output-dir build/work/results/tie_mount_one_photo
 ```
 
-此命令默认使用旧 `golden_v3` 模型包。要显式试用 2026-10-26 的另一套冻结模型，并在模型报缺损时给出可视化候选位置，运行：
+此命令默认使用 `batch_20261026` 冻结模型。需要在模型报缺损时给出可视化候选位置，可显式写出模型配置并加 `--mark-edge-candidate`：
 
 ```powershell
 build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_photo "D:\工件照片\待测.jpg" --output-dir build/work/results/tie_mount_one_photo_batch_20261026 --model-profile batch_20261026 --mark-edge-candidate
@@ -18,9 +20,9 @@ build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_photo "D
 
 输出目录必须尚不存在。脚本先核对所选模型包，再用 `src/tie_mount_crop.py` 从原始 JPEG/PNG 定位白色方形工件并生成 `256×256` 裁剪图，加载冻结的教师、学生、自动编码器权重及**同版**正常验证件确定的归一化与阈值。`result.json` 中的 `predicted_defect`/`verdict` 是整件二分类结论，`score` 与 `threshold` 可供软件接口读取；`inference/maps/` 保存三类异常图。`--mark-edge-candidate` 只在报缺损时尝试输出 `edge_location/preview.png`、原图 `source_preview.jpg` 和 `defect_location_candidate` 坐标；失败会写 `status=unavailable`，不会改变模型判定。这个点是融合图的固定几何后处理建议，并非已验证的缺口位置。原图和输出不会自动提交 Git。
 
-默认模型包清单是 `sim/model_bundles/tie_mount_grouped_v1_300step.json`；显式 `batch_20261026` 使用 `sim/model_bundles/tie_mount_20261026_3000step_dedupval.json`（ID `tie_mount_20261026_3000step_dedupval`，阈值 `0.11209306865930557`）。推理前逐文件校验三个权重、`normalization.npz` 和 `summary.json` 的 SHA-256，避免不同轮次的权重、归一化或阈值混用；`result.json` 记录模型包 ID 和清单哈希。手工更换任一文件时，必须同时用 `--bundle-manifest` 指向匹配清单，校验失败会拒绝推理。1000 步清单仅供旧对照；旧 `golden_v3` 数值张量不能用来验证新模型。由同轮文件生成新清单可用 `python -B -m sim.model_bundle --bundle-id <id> --trainings-dir <dir> --normalization <file> --summary <file> --output <new.json>`。
+默认模型包清单是 `sim/model_bundles/tie_mount_20261026_3000step_dedupval.json`（ID `tie_mount_20261026_3000step_dedupval`，阈值 `0.11209306865930557`）。推理前逐文件校验三个权重、`normalization.npz` 和 `summary.json` 的 SHA-256，避免不同轮次的权重、归一化或阈值混用；`result.json` 记录模型包 ID 和清单哈希。手工更换任一文件时，必须同时用 `--bundle-manifest` 指向匹配清单，校验失败会拒绝推理。旧 `golden_v3` 配置仅供 A 本机回顾性对照，其 GitHub Release 与标签已删除；旧数值张量不能用来验证新模型。由同轮文件生成新清单可用 `python -B -m sim.model_bundle --bundle-id <id> --trainings-dir <dir> --normalization <file> --summary <file> --output <new.json>`。
 
-新模型的五文件 ZIP 可从[私有实验版 Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-batch-20261026-3000step)取得；A 本机副本为 `build/work/handoff/tie_mount_20261026_3000step_model.zip`，SHA-256 为 `c43674f11a81d1bb3c06994b18847e8647360ea632e42414cb08d0e67c956245`。GitHub 回报 30,107,886 字节及相同 SHA-256；包内 `bundle_manifest.json` 与仓库独立清单一致，五文件哈希逐项通过。B/C 收到后应放在自己的 Git 忽略目录并核对 ZIP 与五文件哈希。若从 ZIP 解压为 `build/work/handoff/received_20261026/tie_mount_20261026_model/`，应显式传 `--model-profile batch_20261026 --trainings-dir build/work/handoff/received_20261026/tie_mount_20261026_model --normalization build/work/handoff/received_20261026/tie_mount_20261026_model/normalization.npz --summary build/work/handoff/received_20261026/tie_mount_20261026_model/summary.json --bundle-manifest build/work/handoff/received_20261026/tie_mount_20261026_model/bundle_manifest.json`。仍须另有固定提交 `fcab5146f84ae17597044ad5ddf1656ccf805401` 的候选 EfficientAD 源码；ZIP 不含原始照片或新版黄金张量。旧黄金张量 Release 只绑定旧 `golden_v3`。
+新模型的五文件 ZIP 可从[私有实验版 Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-batch-20261026-3000step)取得；A 本机副本为 `build/work/handoff/tie_mount_20261026_3000step_model.zip`，SHA-256 为 `c43674f11a81d1bb3c06994b18847e8647360ea632e42414cb08d0e67c956245`。GitHub 回报 30,107,886 字节及相同 SHA-256；包内 `bundle_manifest.json` 与仓库独立清单一致，五文件哈希逐项通过。B/C 收到后应放在自己的 Git 忽略目录并核对 ZIP 与五文件哈希。若从 ZIP 解压为 `build/work/handoff/received_20261026/tie_mount_20261026_model/`，应显式传 `--model-profile batch_20261026 --trainings-dir build/work/handoff/received_20261026/tie_mount_20261026_model --normalization build/work/handoff/received_20261026/tie_mount_20261026_model/normalization.npz --summary build/work/handoff/received_20261026/tie_mount_20261026_model/summary.json --bundle-manifest build/work/handoff/received_20261026/tie_mount_20261026_model/bundle_manifest.json`。仍须另有固定提交 `fcab5146f84ae17597044ad5ddf1656ccf805401` 的候选 EfficientAD 源码；ZIP 不含原始照片或新版黄金张量。
 
 新模型对应的两份 float32 黄金张量也在[同一私有实验版 Release](https://github.com/shenyiqiu2020-create/fpga/releases/tag/tie-mount-batch-20261026-3000step)；A 本机副本为 `build/work/handoff/tie_mount_20261026_3000step_golden.zip`，SHA-256 为 `f33321cc38ce1ec65bf82f7683b4dfa7b80a7d01eedd9177108abc4b446d3eb6`。GitHub 回报 36,505,069 字节及相同 SHA-256。包内 `D19_01` 是缺损件，冻结分数 `0.3200802505016327`、判缺损；`N17_03` 是正常件，分数 `0.06585786491632462`、判正常。两者阈值均为 `0.11209306865930557`，模型包 ID 均为 `tie_mount_20261026_3000step_dedupval`；本机 ZIP CRC 与两次 `sim.verify_tie_mount_golden` 复核通过。接收后分别对解压的 `D19_01/`、`N17_03/` 运行 `python -B -m sim.verify_tie_mount_golden <目录>`，再与板上输出对比。这是新模型的数值参考，不是新盲测或定位正确率证明；旧 `golden_v3` 三份样本只适用于旧模型。
 
@@ -28,7 +30,7 @@ build/work/efficientad-env/Scripts/python.exe -B -m sim.infer_tie_mount_photo "D
 
 单独复核已有 `256×256` 裁剪图与对应融合 TIFF 的位置候选可运行 `python -B -m sim.localize_tie_mount_edge <crop.png> <combined.tiff> --output-dir <新目录>`。输出 `result.json`、`preview.png` 和 `expected_edge_band.png`，记录原始整图峰值、预期外轮廓带内候选峰值及输入哈希。固定外轮廓带可覆盖缺失角和边中部凹口的预期区域，但不等于缺口真值；新批次尚无人工缺口框定位评估。
 
-## EfficientAD 黄金样本交接
+## 历史 EfficientAD 黄金样本（已停止交接）
 
 `export_tie_mount_golden.py` 使用同一个冻结的 300 步模型包，把已有 `256×256` 裁剪图导出为输入张量、归一化教师特征、学生两半特征、自动编码器特征、教师–学生与自动编码器异常图、融合图、最高分及二分类结论。每份 `metadata.json` 记录模型包、源图及数组 SHA-256、实物组号和人工标签。导出时会与原推理函数逐项比对。可在仓库根目录复现一份：
 
@@ -37,7 +39,7 @@ build/work/efficientad-env/Scripts/python.exe -B -m sim.export_tie_mount_golden 
 build/work/efficientad-env/Scripts/python.exe -B -m sim.verify_tie_mount_golden build/work/results/tie_mount_golden_v3/N02_01
 ```
 
-本机还导出了 `N05_01`（正常件，模型误报缺陷）和 `D07_01`（缺损件，模型报缺陷），分别来自 `build/work/data/tie_mount_grouped_v1/prepared/tie_mount/test/good/0013_N05.png` 与 `build/work/data/tie_mount_holdout_20261025/crops/D07_01.png`；复现时仅替换输入、`--object-group`、`--reference-label` 与输出目录即可。`verify_tie_mount_golden.py` 只依赖 NumPy，会核验数组身份并从特征重算两分支异常图、融合图、分数与判定。黄金样本仅证明电脑端的数值一致性；它不是盲测成绩、量化误差结果或 FPGA 板上验证。数组约 20 MB/份，模型权重仍在本机 Git 忽略的 `build/work/`；三份数组压缩包已上传私有 Release，下载地址、哈希、接收复核命令与 B/C 工作接口见 [B/C 数值接口交接](../report/bc_handoff_20261026.md)。硬件方可先选定某个算子和张量边界，再用这些数据比较其输出；课程版实际 RISC-V 内核和竞赛版 PS/PL 仍需分别实现与验证。
+本机还导出了 `N05_01`（正常件，旧模型误报缺陷）和 `D07_01`（缺损件，旧模型报缺陷），分别来自 `build/work/data/tie_mount_grouped_v1/prepared/tie_mount/test/good/0013_N05.png` 与 `build/work/data/tie_mount_holdout_20261025/crops/D07_01.png`；它们只用于 A 的历史回归。`verify_tie_mount_golden.py` 只依赖 NumPy，会核验数组身份并从特征重算两分支异常图、融合图、分数与判定。旧三份数组 ZIP 的 GitHub Release 与标签已按用户要求删除；B/C 当前只接收本页上方新模型的两份同版黄金样本。硬件方可先选定某个算子和张量边界，再用新样本比较其输出；课程版实际 RISC-V 内核和竞赛版 PS/PL 仍需分别实现与验证。
 
 对应比赛规则第 3.3.5.1 和 3.3.5.4 节，保存仿真或验证脚本、测试配置及结果。
 
