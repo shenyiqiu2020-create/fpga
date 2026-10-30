@@ -1,5 +1,11 @@
 # 仿真与验证
 
+**2026-10-30 完整 EfficientAD 轻量化实验：** [逐层算量](profile_efficientad_macs.py)显示 384 通道模型为 37.947 GMac/图；三网络末层 320 通道正交投影候选为 35.365 GMac/图，理论少 6.8%。已见照片 251/251 与原模型逐张判定相同，仍有明显正常误报；没有板端计时或新实物准确率。此候选有独立模型包和阈值，**未替换下方默认 384 通道 EfficientAD，也未交给 B/C**。[实验记录](../report/efficientad_lightweight_trial_20261030.md)列明分母与失败的更激进方案。本机重建命令：
+
+```powershell
+build/work/efficientad-env/Scripts/python.exe -B -m sim.efficientad_projected_candidate build --validation-dir build/work/data/tie_mount_20261026_v2/development_prepared/tie_mount/validation/good --output-dir build/work/results/tie_mount_projection320_seed20261030
+```
+
 **2026-10-27 后续级联实验：** 严格分割失败时先从完整原 JPEG 补背景重新定位；仍失败再用独立的宽松边界随机森林给出带 `low_quality` 和 `review_recommended` 标记的二元判定。当前首版任务内 344 张照片为严格路径 343、二级路径 1，0 张不可用；同批按件分组回顾性验证三个种子均逐图判对 340/344。此结果不是新实物验收，实验级联没有替换下述默认完整 EfficientAD 或 B/C 数值包。方法、完整复现命令和旧 48 张已见诊断边界见[级联候选记录](../report/shape_cascade_candidate_20261027.md)；下方旧候选命令保留上一版 327 张结果的历史。新候选单张命令：
 
 ```powershell
