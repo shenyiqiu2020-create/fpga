@@ -2,6 +2,23 @@
 
 对应比赛规则第 3.3.5.1 和 3.3.5.4 节，保存板卡配置、上板工程、运行脚本、实测输出与参考比对。
 
+## 最新交付（2026-11-01）
+
+完整EfficientAD的教师、学生和自动编码器已在两张预存的256×256输入上运行。
+PL执行22层卷积、ReLU/AvgPool及7层Resize；ARM负责调度、归一化、异常图融合和最终分数。
+最新PE32/Q4核的计算耗时约4.507秒，总耗时约5.04秒/图，均保留逐层CRC自检。
+两张图共58个阶段CRC与最终INT8参考分数通过，详见[实测报告](../report/efficientad_pl_kernel_20261101.md)。
+
+- [最新部署ZIP](efficientad_pl/efficientad_full_pl_packed.zip)及[SHA-256清单](efficientad_pl/bundle_manifest.json)：单份冻结交付，约39 MB，包含bit/ELF/XSA、INT8参数和两张预处理调试输入。
+- [HLS/ARM源码与重建入口](../src/efficientad_pl/README.md)：保留三个版本及实际验证记录；工具缓存留在本机。
+- 原始训练`.pth`与照片继续使用现有私有Release或本机受控目录；本次有意跟踪已验证固件ZIP，便于队友直接运行。
+
+在仓库根目录执行`python build/prepare_efficientad_pl.py`，再进入
+`build/work/efficientad_pl/efficientad_full_pl_packed`。接好原电源和JTAG，打开串口助手115200 8N1，运行`RUN_PACKED.cmd`；
+两张图完成后运行`READ_PROFILE.cmd`。本机串口是COM11、JTAG序列号为210512180081，换机器/电缆时按实际值调整。
+脚本临时加载FPGA和DDR，不写Flash；断电后需重新加载。工具默认安装于`D:/amd/2025.2`，其他安装位置须修改启动路径。
+**输入是预存调试图片；实时摄像头、持久启动、独立INT8精度及新实物泛化仍待验证。**
+
 ## 硬件信息
 
 | 项目 | 当前状态 |
@@ -12,7 +29,7 @@
 | 器件完整订货料号 | 照片确认 `XC7Z020` 和 `CLG484` 封装字样；速度等级、温度等级仍须对照板卡资料或器件清单核对 |
 | 相机型号与接口 | 待确认 |
 | 照明与工件定位方案 | 按固定照明与定位条件设计，具体配置待确认 |
-| 板端系统与 PS 软件环境 | 待确认 |
+| 板端系统与 PS 软件环境 | Cortex-A9核0、standalone；Vivado/Vitis 2025.2；当前工程目标xc7z020clg484-2，PL时钟50 MHz |
 
 照片来源：2026-10-11 团队提供的板卡正面图。网口金属壳上的 `AX911130A1` 是接口外壳标记，**不是整板型号**。ALINX [AX7021 产品页](https://www.en.alinx.com/Product/SoC-development-Boards/Zynq-7000-SoC/AX7021.html)和 [AX7021 用户手册](https://www.alinx.com/public/upload/file/AX7021_User_Manual.pdf)列出 5 路以太网、2 个 40 针扩展口及 KSZ9031RNX PHY；[AX7021B 用户手册](https://www.alinx.com/public/upload/file/AX7021B_User_Manual.pdf)也列出 5 路以太网，但采用 JL2121 PHY。因此先按“AX7021 系列候选”检索资料，**在确认版本前不要直接使用某版引脚约束、设备树或启动镜像**。
 
@@ -24,7 +41,7 @@
 - 与 `data/` 黄金参考的比对结果。
 - 延迟、吞吐量等实测数据及采集条件，区分推理耗时与端到端耗时。
 
-当前未进行上板测试，尚无部署产物或实测数据。
+两张预存图的完整模型部署产物与实测数据已提交；后续补充实时输入和独立图片验收。
 
 ## 图像输入与算法部署顺序（2026-10-27）
 

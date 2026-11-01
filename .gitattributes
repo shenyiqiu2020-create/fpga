@@ -1,0 +1,7 @@
+# Keep the tested delivery snapshots byte-stable across Windows/Linux checkouts.
+board/efficientad_pl/*.zip binary
+src/efficientad_pl/** -text whitespace=cr-at-eol
+# Original vendor output contains alignment/trailing spaces; preserve its evidence.
+src/efficientad_pl/**/generated/** -whitespace
+src/efficientad_pl/**/hls/vendor/** -whitespace
+src/efficientad_pl/**/runtime/lscript.ld -whitespace

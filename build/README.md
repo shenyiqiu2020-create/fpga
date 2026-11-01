@@ -14,4 +14,10 @@
 
 本目录参与 Git 跟踪，不整体忽略。`work/`、`tmp/` 和工具缓存供临时生成文件使用；构建脚本与最终报告应提交。
 
-当前未提供可执行构建入口，尚无综合、实现或时序结果。
+## 已验证板端构建入口（2026-11-01）
+
+执行`python build/prepare_efficientad_pl.py`，校验固件包并准备忽略目录中的完整工作树；它不会下载程序到硬件。
+源码和Vivado/Vitis构建脚本见[板端实现](../src/efficientad_pl/README.md)，最终资源、时序与完整模型板测见[计算核报告](../report/efficientad_pl_kernel_20261101.md)。
+Windows + Vivado/Vitis 2025.2，目标xc7z020clg484-2，50 MHz；208 DSP、22429 LUT、49 BRAM36。
+固件仅在准备命令解压后位于`build/work/efficientad_pl/efficientad_full_pl_packed/generated`；原始包在`board/efficientad_pl`。
+BSP构建的`include/`与`lib/`路径可通过`EA_BSP`指定，交叉编译器通过`EA_ARM_GCC`指定。

@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "host_timing_only": true,
+  "cases": [
+    {
+      "bytes": 0,
+      "crc": "0x0",
+      "slow_host_seconds": 3.229999856557697e-05,
+      "table_host_seconds": 2.0000006770715117e-06
+    },
+    {
+      "bytes": 9,
+      "crc": "0xcbf43926",
+      "slow_host_seconds": 1.2999953469261527e-06,
+      "table_host_seconds": 9.00006853044033e-07
+    },
+    {
+      "bytes": 256,
+      "crc": "0x29058c73",
+      "slow_host_seconds": 1.5400000847876072e-05,
+      "table_host_seconds": 3.6999990697950125e-06
+    },
+    {
+      "bytes": 16777216,
+      "crc": "0x2a223dad",
+      "slow_host_seconds": 0.07851949999167118,
+      "table_host_seconds": 0.023978999990504235
+    }
+  ]
+}

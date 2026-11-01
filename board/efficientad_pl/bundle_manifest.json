@@ -1,0 +1,12 @@
+{
+  "bundle_id": "tie_mount_20261026_3000step_dedupval",
+  "kernel": "PE32 SIMD8 dual INT8 DSP packing; Q4 requantization",
+  "filename": "efficientad_full_pl_packed.zip",
+  "bytes": 39263568,
+  "sha256": "5ae736af51dc191a3aef36046d89d0cc9fea5ffe9719432ab2b6bb0cae0831aa",
+  "board_date": "2026-11-01",
+  "clock_MHz": 50,
+  "validation": "two complete-model inputs, 58 stage CRC checks and both final scores passed",
+  "contains": "tested bitstream, ELF with INT8 parameters/two preprocessed inputs, XSA, source, IP, vectors, logs, reports",
+  "scope": "preloaded 256x256 crops; no live camera or independent INT8 accuracy claim"
+}

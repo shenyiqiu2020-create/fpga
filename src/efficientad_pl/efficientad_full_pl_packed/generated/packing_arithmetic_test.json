@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "signed_int8_triples_checked": 16777216,
+  "formula": "P=((w1<<16)+w0)*x; low=signed16(P); high=(P>>16)+(low<0)",
+  "host_seconds": 0.2538523000000623,
+  "not_RTL_validation": true
+}

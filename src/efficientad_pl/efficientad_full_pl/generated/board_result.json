@@ -1,0 +1,86 @@
+{
+  "status": "BOARD_SELF_TEST_PASSED",
+  "timestamp": "2026-10-29T20:16:56.741495+08:00",
+  "cable_serial": "210512180081",
+  "device": "xc7z020",
+  "bundle_id": "tie_mount_20261026_3000step_dedupval",
+  "evidence": "flushed DDR mailbox read through JTAG after complete model execution",
+  "mailbox_address": "0x009D0080",
+  "mailbox_words": [
+    1161905713,
+    4,
+    1,
+    28,
+    2211465631,
+    0,
+    1051768946,
+    1033243548,
+    1,
+    0,
+    23564,
+    23567,
+    29,
+    29,
+    0,
+    0
+  ],
+  "compute_placement": {
+    "PL": "all 22 convolutions, ReLU/AvgPool, all 7 bilinear resize operations",
+    "PS": "layer dispatch and normalization/anomaly-map calibration/fusion/score"
+  },
+  "images": [
+    {
+      "fixture": "D19_01",
+      "score": 0.3451572060585022,
+      "threshold": 0.11209306865930557,
+      "predicted_defect": true,
+      "elapsed_ms": 23564,
+      "completed_operations": 29,
+      "stage_crc_checks": "29/29 passed by the board runtime"
+    },
+    {
+      "fixture": "N17_03",
+      "score": 0.07326433062553406,
+      "threshold": 0.11209306865930557,
+      "predicted_defect": false,
+      "elapsed_ms": 23567,
+      "completed_operations": 29,
+      "stage_crc_checks": "29/29 passed by the board runtime"
+    }
+  ],
+  "clock_MHz": 50,
+  "wns_ns": 2.879,
+  "whs_ns": 0.022,
+  "DSP_used": 206,
+  "DSP_available": 220,
+  "LUT_used": 15720,
+  "BRAM36_used": 18,
+  "artifacts": {
+    "efficientad_full.bit": {
+      "bytes": 4045695,
+      "sha256": "c8bc10b92e130ab4a243501d574f821659efad6d131010887524b15ed6ca803e"
+    },
+    "efficientad_full.elf": {
+      "bytes": 9415468,
+      "sha256": "dfdbeb1219a5b9cba0c037b6c5966e23c9f385be1dd04864c3bf3112afb1852b"
+    },
+    "ax7021_efficientad_full.xsa": {
+      "bytes": 926432,
+      "sha256": "6803e83afe02c6b09b5acf97d9954cbc90b2174331c095849a3311e2536c227d"
+    },
+    "ps7_init.tcl": {
+      "bytes": 26573,
+      "sha256": "ef2f6eba185aa6201d46746d08e28fe0477918e7018d7cb8eb0aa01b6a8d124f"
+    },
+    "ea_model_data.h": {
+      "bytes": 25856708,
+      "sha256": "44123b2fd95bdf7d4852741007e51933ffcb9c2e68585cf89439d8bde3d1e27f"
+    }
+  },
+  "limits": [
+    "Same two inputs supply activation ranges; not independent accuracy evaluation.",
+    "Timings include data movement, CRC validation and ARM scoring, not kernel-only latency.",
+    "Temporary JTAG load; not a persistent Flash/SD boot image.",
+    "Preloaded normalized 256x256 crops; live camera capture/cropping not integrated."
+  ]
+}

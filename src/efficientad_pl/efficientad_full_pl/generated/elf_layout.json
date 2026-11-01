@@ -1,0 +1,30 @@
+{
+  "ea_blob": {
+    "address": 2122240,
+    "bytes": 8139584
+  },
+  "ea_inputs": {
+    "address": 1073664,
+    "bytes": 1048576
+  },
+  "buffers": {
+    "address": 15118976,
+    "bytes": 5242880
+  },
+  "ae_features": {
+    "address": 10302080,
+    "bytes": 1204224
+  },
+  "student_features": {
+    "address": 11506304,
+    "bytes": 2408448
+  },
+  "teacher_features": {
+    "address": 13914752,
+    "bytes": 1204224
+  },
+  "EaStatus": {
+    "address": 10289280,
+    "bytes": 256
+  }
+}

@@ -16,6 +16,18 @@ venv/
 /vivado_*.log
 /build/work/
 /build/tmp/
+# Frozen board delivery sources are tracked; regenerated project databases stay local.
+/src/efficientad_pl/**/_build/
+/src/efficientad_pl/**/engine_project/
+/src/efficientad_pl/**/full_model_csim/
+/src/efficientad_pl/**/compare_hls/
+/src/efficientad_pl/**/baseline_hls/
+/src/efficientad_pl/**/app_sources/
+/src/efficientad_pl/**/generated/*.bit
+/src/efficientad_pl/**/generated/*.elf
+/src/efficientad_pl/**/generated/*.xsa
+/src/efficientad_pl/**/generated/*.bin
+/src/efficientad_pl/**/generated/ea_model_data.h
 
 # Local editor and operating-system temporary files
 .idea/
