@@ -1,5 +1,5 @@
 {
-  "created": "2026-11-03T17:37:05+0800",
+  "created": "2026-11-03T18:41:29+0800",
   "scope": "public contest artifacts; local archives, registration screenshot and caches excluded",
   "artifacts": [
     {
@@ -14,8 +14,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8277,
-      "sha256": "fd3c5efcf1a24e940856e66fd7ab50664492fa3a75348c4756ab17940ae920e0"
+      "bytes": 12380,
+      "sha256": "acf9a53fba891ab828342a4ae3306001ce552fc9e97de75e9ea940b0b0948110"
     },
     {
       "path": "license.txt",
@@ -1809,8 +1809,8 @@
     },
     {
       "path": "report/contest_compliance.md",
-      "bytes": 3316,
-      "sha256": "aab6ddb6d97d81369dbea5722188224a22285a2f8982b8bb96942029040d17f3"
+      "bytes": 3370,
+      "sha256": "1f12d0e9211e3d16b49978ac5143eb3ee6f2627497b22257c2dca9944fa3417f"
     },
     {
       "path": "report/design_report_draft.docx",
