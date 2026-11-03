@@ -1,0 +1,756 @@
+{
+  "status": "BOARD_SELF_TEST_AND_PROFILE_PASSED",
+  "timestamp": "2026-11-01T15:46:14.678203+08:00",
+  "clock_MHz": 50,
+  "wns_ns": 2.366,
+  "whs_ns": 0.049,
+  "resources": {
+    "Slice LUTs": 12882,
+    "Slice Registers": 15417,
+    "Block RAM Tile": 33,
+    "DSPs": 196
+  },
+  "rtl_matched_cache_cases": [
+    {
+      "shape": {
+        "ih": 19,
+        "iw": 17,
+        "cin": 8,
+        "cout": 32,
+        "kernel": 3,
+        "stride": 1,
+        "pad": 1,
+        "pool": 0
+      },
+      "baseline_cycles": 57564,
+      "optimized_cycles": 45977,
+      "speedup": 1.2520173130043282
+    },
+    {
+      "shape": {
+        "ih": 21,
+        "iw": 19,
+        "cin": 16,
+        "cout": 32,
+        "kernel": 4,
+        "stride": 2,
+        "pad": 1,
+        "pool": 0
+      },
+      "baseline_cycles": 26588,
+      "optimized_cycles": 22145,
+      "speedup": 1.2006321968841724
+    },
+    {
+      "shape": {
+        "ih": 19,
+        "iw": 17,
+        "cin": 8,
+        "cout": 32,
+        "kernel": 4,
+        "stride": 1,
+        "pad": 0,
+        "pool": 1
+      },
+      "baseline_cycles": 41256,
+      "optimized_cycles": 30637,
+      "speedup": 1.3466070437706041
+    },
+    {
+      "shape": {
+        "ih": 10,
+        "iw": 126,
+        "cin": 128,
+        "cout": 16,
+        "kernel": 4,
+        "stride": 1,
+        "pad": 0,
+        "pool": 1
+      },
+      "baseline_cycles": 524572,
+      "optimized_cycles": 276429,
+      "speedup": 1.8976735436585885
+    },
+    {
+      "shape": {
+        "ih": 12,
+        "iw": 61,
+        "cin": 256,
+        "cout": 16,
+        "kernel": 3,
+        "stride": 1,
+        "pad": 0,
+        "pool": 0
+      },
+      "baseline_cycles": 396904,
+      "optimized_cycles": 230457,
+      "speedup": 1.7222475342471697
+    },
+    {
+      "shape": {
+        "ih": 20,
+        "iw": 13,
+        "cin": 64,
+        "cout": 16,
+        "kernel": 8,
+        "stride": 1,
+        "pad": 0,
+        "pool": 0
+      },
+      "baseline_cycles": 108340,
+      "optimized_cycles": 58989,
+      "speedup": 1.8366136059265288
+    }
+  ],
+  "rtl_test_scope": "18 original plus 6 cache-boundary cases, C and RTL agreement",
+  "rtl_cache_cases_total_cycle_speedup": 1.738135575369301,
+  "input_read_bytes": {
+    "baseline": 2451736384,
+    "optimized": 182129664,
+    "reduction_ratio": 13.461488535991588,
+    "scope": "convolution input reads only, counted from scheduled accesses; excludes weights/output/protocol/CPU"
+  },
+  "physical_mac_count": 39300136960,
+  "mac_only_ideal_floor_seconds_at_50MHz": 6.1406464,
+  "per_layer_reads": [
+    {
+      "name": "teacher.conv0",
+      "old_input_read_bytes": 65545216,
+      "new_input_read_bytes": 4194304,
+      "cache_words": 1024
+    },
+    {
+      "name": "teacher.conv3",
+      "old_input_read_bytes": 495747072,
+      "new_input_read_bytes": 32514048,
+      "cache_words": 8064
+    },
+    {
+      "name": "teacher.conv6",
+      "old_input_read_bytes": 128323584,
+      "new_input_read_bytes": 15241216,
+      "cache_words": 5856
+    },
+    {
+      "name": "teacher.conv8",
+      "old_input_read_bytes": 308281344,
+      "new_input_read_bytes": 21387264,
+      "cache_words": 7552
+    },
+    {
+      "name": "student.conv0",
+      "old_input_read_bytes": 65545216,
+      "new_input_read_bytes": 4194304,
+      "cache_words": 1024
+    },
+    {
+      "name": "student.conv3",
+      "old_input_read_bytes": 495747072,
+      "new_input_read_bytes": 32514048,
+      "cache_words": 8064
+    },
+    {
+      "name": "student.conv6",
+      "old_input_read_bytes": 128323584,
+      "new_input_read_bytes": 15241216,
+      "cache_words": 5856
+    },
+    {
+      "name": "student.conv8",
+      "old_input_read_bytes": 616562688,
+      "new_input_read_bytes": 42774528,
+      "cache_words": 7552
+    },
+    {
+      "name": "autoencoder.conv0",
+      "old_input_read_bytes": 4161600,
+      "new_input_read_bytes": 1048576,
+      "cache_words": 1024
+    },
+    {
+      "name": "autoencoder.conv2",
+      "old_input_read_bytes": 4129024,
+      "new_input_read_bytes": 1048576,
+      "cache_words": 2048
+    },
+    {
+      "name": "autoencoder.conv4",
+      "old_input_read_bytes": 2032128,
+      "new_input_read_bytes": 524288,
+      "cache_words": 1024
+    },
+    {
+      "name": "autoencoder.conv6",
+      "old_input_read_bytes": 984064,
+      "new_input_read_bytes": 262144,
+      "cache_words": 1024
+    },
+    {
+      "name": "autoencoder.conv8",
+      "old_input_read_bytes": 230400,
+      "new_input_read_bytes": 65536,
+      "cache_words": 512
+    },
+    {
+      "name": "autoencoder.conv10",
+      "old_input_read_bytes": 16384,
+      "new_input_read_bytes": 16384,
+      "cache_words": 512
+    },
+    {
+      "name": "autoencoder.conv12",
+      "old_input_read_bytes": 25600,
+      "new_input_read_bytes": 2304,
+      "cache_words": 96
+    },
+    {
+      "name": "autoencoder.conv16",
+      "old_input_read_bytes": 230400,
+      "new_input_read_bytes": 16384,
+      "cache_words": 256
+    },
+    {
+      "name": "autoencoder.conv20",
+      "old_input_read_bytes": 861184,
+      "new_input_read_bytes": 57600,
+      "cache_words": 480
+    },
+    {
+      "name": "autoencoder.conv24",
+      "old_input_read_bytes": 4064256,
+      "new_input_read_bytes": 262144,
+      "cache_words": 1024
+    },
+    {
+      "name": "autoencoder.conv28",
+      "old_input_read_bytes": 16000000,
+      "new_input_read_bytes": 1016064,
+      "cache_words": 2016
+    },
+    {
+      "name": "autoencoder.conv32",
+      "old_input_read_bytes": 65545216,
+      "new_input_read_bytes": 4129024,
+      "cache_words": 4064
+    },
+    {
+      "name": "autoencoder.conv36",
+      "old_input_read_bytes": 7054336,
+      "new_input_read_bytes": 802816,
+      "cache_words": 1344
+    },
+    {
+      "name": "autoencoder.conv38",
+      "old_input_read_bytes": 42326016,
+      "new_input_read_bytes": 4816896,
+      "cache_words": 1344
+    }
+  ],
+  "artifacts": {
+    "efficientad_full.bit": {
+      "bytes": 4045695,
+      "sha256": "a1abb4078832ee905f7357daf97237895c131e021ee9f2085974411a4f617397"
+    },
+    "efficientad_full.elf": {
+      "bytes": 9324172,
+      "sha256": "f51c3b6671cd8381bb2bd3150908b71ac4cd1529e57bccf8b523a0d8bc99c4cb"
+    },
+    "ax7021_efficientad_full.xsa": {
+      "bytes": 901373,
+      "sha256": "9530f3dfc274e89787a52719d69ec857584e44e9c1ead9a770b2952b399f39d1"
+    },
+    "ps7_init.tcl": {
+      "bytes": 26573,
+      "sha256": "ef2f6eba185aa6201d46746d08e28fe0477918e7018d7cb8eb0aa01b6a8d124f"
+    },
+    "baseline.bit": {
+      "bytes": 4045695,
+      "sha256": "c8bc10b92e130ab4a243501d574f821659efad6d131010887524b15ed6ca803e"
+    },
+    "baseline_profile.elf": {
+      "bytes": 9324172,
+      "sha256": "f75b316ca145fc61cacece6ddd22d2de31a4c26b7e48b85cd9c0290f0f7bc7f4"
+    },
+    "ea_model_data.h": {
+      "bytes": 25856708,
+      "sha256": "44123b2fd95bdf7d4852741007e51933ffcb9c2e68585cf89439d8bde3d1e27f"
+    }
+  },
+  "board_test": "two full-model inputs, all 58 stage CRCs and both final scores passed; corrected timing rerun",
+  "full_model_C_simulation": "optional long-running test stopped before completion; no full-model C pass claimed",
+  "quantization": "unchanged weights, inputs, per-layer scales and expected CRCs",
+  "baseline_board_seconds": [
+    23.564,
+    23.567
+  ],
+  "new_board_seconds": [
+    9.43894,
+    9.446455
+  ],
+  "board_profile": {
+    "status": "BOARD_PROFILE_PASSED",
+    "application": "efficientad_full",
+    "timestamp": "2026-11-01T15:45:32.447630+08:00",
+    "evidence": "completed test mailbox and per-stage timing read from DDR over JTAG",
+    "timer_conversion_revision": 2,
+    "mailbox_words": [
+      1161905713,
+      4,
+      1,
+      28,
+      2211465631,
+      0,
+      1051768946,
+      1033243548,
+      1,
+      0,
+      9438,
+      9446,
+      29,
+      29,
+      0,
+      0
+    ],
+    "host_elf_sha256": "f51c3b6671cd8381bb2bd3150908b71ac4cd1529e57bccf8b523a0d8bc99c4cb",
+    "runs": [
+      {
+        "image": "D19_01",
+        "crc_mode": "table",
+        "total_us": 9438940,
+        "engine_us": 8914410,
+        "cache_us": 70318,
+        "crc_us": 257250,
+        "score_us": 147743,
+        "copy_us": 13521,
+        "score": 0.3451572060585022,
+        "predicted_defect": true,
+        "stages": [
+          {
+            "name": "teacher.conv0",
+            "engine_us": 583205,
+            "cache_us": 6987,
+            "crc_us": 31547,
+            "crc": 3237218885
+          },
+          {
+            "name": "teacher.conv3",
+            "engine_us": 1518776,
+            "cache_us": 5930,
+            "crc_us": 14787,
+            "crc": 249140991
+          },
+          {
+            "name": "teacher.conv6",
+            "engine_us": 436955,
+            "cache_us": 4142,
+            "crc_us": 13832,
+            "crc": 678997613
+          },
+          {
+            "name": "teacher.conv8",
+            "engine_us": 932860,
+            "cache_us": 5000,
+            "crc_us": 18691,
+            "crc": 1122203732
+          },
+          {
+            "name": "student.conv0",
+            "engine_us": 583205,
+            "cache_us": 6882,
+            "crc_us": 31555,
+            "crc": 2197978013
+          },
+          {
+            "name": "student.conv3",
+            "engine_us": 1518778,
+            "cache_us": 6001,
+            "crc_us": 14789,
+            "crc": 923423740
+          },
+          {
+            "name": "student.conv6",
+            "engine_us": 436955,
+            "cache_us": 4200,
+            "crc_us": 13833,
+            "crc": 1901149630
+          },
+          {
+            "name": "student.conv8",
+            "engine_us": 1865722,
+            "cache_us": 8660,
+            "crc_us": 37396,
+            "crc": 137591826
+          },
+          {
+            "name": "autoencoder.conv0",
+            "engine_us": 57479,
+            "cache_us": 2359,
+            "crc_us": 9323,
+            "crc": 1158410371
+          },
+          {
+            "name": "autoencoder.conv2",
+            "engine_us": 24538,
+            "cache_us": 1248,
+            "crc_us": 2033,
+            "crc": 14316409
+          },
+          {
+            "name": "autoencoder.conv4",
+            "engine_us": 12650,
+            "cache_us": 417,
+            "crc_us": 1164,
+            "crc": 1553325805
+          },
+          {
+            "name": "autoencoder.conv6",
+            "engine_us": 5132,
+            "cache_us": 159,
+            "crc_us": 254,
+            "crc": 3550792148
+          },
+          {
+            "name": "autoencoder.conv8",
+            "engine_us": 1529,
+            "cache_us": 39,
+            "crc_us": 63,
+            "crc": 2687971399
+          },
+          {
+            "name": "autoencoder.conv10",
+            "engine_us": 864,
+            "cache_us": 7,
+            "crc_us": 1,
+            "crc": 640638061
+          },
+          {
+            "name": "autoencoder.resize11",
+            "engine_us": 117,
+            "cache_us": 2,
+            "crc_us": 10,
+            "crc": 2306179280
+          },
+          {
+            "name": "autoencoder.conv12",
+            "engine_us": 537,
+            "cache_us": 3,
+            "crc_us": 16,
+            "crc": 1327082413
+          },
+          {
+            "name": "autoencoder.resize15",
+            "engine_us": 832,
+            "cache_us": 14,
+            "crc_us": 63,
+            "crc": 1199892720
+          },
+          {
+            "name": "autoencoder.conv16",
+            "engine_us": 1655,
+            "cache_us": 22,
+            "crc_us": 80,
+            "crc": 2996987316
+          },
+          {
+            "name": "autoencoder.resize19",
+            "engine_us": 2891,
+            "cache_us": 51,
+            "crc_us": 223,
+            "crc": 1778614032
+          },
+          {
+            "name": "autoencoder.conv20",
+            "engine_us": 4574,
+            "cache_us": 73,
+            "crc_us": 253,
+            "crc": 2251084361
+          },
+          {
+            "name": "autoencoder.resize23",
+            "engine_us": 13117,
+            "cache_us": 224,
+            "crc_us": 1016,
+            "crc": 998685013
+          },
+          {
+            "name": "autoencoder.conv24",
+            "engine_us": 18263,
+            "cache_us": 319,
+            "crc_us": 1081,
+            "crc": 81077367
+          },
+          {
+            "name": "autoencoder.resize27",
+            "engine_us": 50823,
+            "cache_us": 879,
+            "crc_us": 3943,
+            "crc": 1034991506
+          },
+          {
+            "name": "autoencoder.conv28",
+            "engine_us": 67275,
+            "cache_us": 1214,
+            "crc_us": 4068,
+            "crc": 3577628352
+          },
+          {
+            "name": "autoencoder.resize31",
+            "engine_us": 206705,
+            "cache_us": 3538,
+            "crc_us": 16025,
+            "crc": 1372646880
+          },
+          {
+            "name": "autoencoder.conv32",
+            "engine_us": 266715,
+            "cache_us": 4788,
+            "crc_us": 16278,
+            "crc": 892481684
+          },
+          {
+            "name": "autoencoder.resize35",
+            "engine_us": 40199,
+            "cache_us": 2269,
+            "crc_us": 3115,
+            "crc": 3547709569
+          },
+          {
+            "name": "autoencoder.conv36",
+            "engine_us": 37438,
+            "cache_us": 940,
+            "crc_us": 3115,
+            "crc": 2009939175
+          },
+          {
+            "name": "autoencoder.conv38",
+            "engine_us": 224621,
+            "cache_us": 3951,
+            "crc_us": 18696,
+            "crc": 3682285041
+          }
+        ]
+      },
+      {
+        "image": "N17_03",
+        "crc_mode": "table",
+        "total_us": 9446455,
+        "engine_us": 8914428,
+        "cache_us": 70285,
+        "crc_us": 261010,
+        "score_us": 147747,
+        "copy_us": 13502,
+        "score": 0.07326433062553406,
+        "predicted_defect": false,
+        "stages": [
+          {
+            "name": "teacher.conv0",
+            "engine_us": 583204,
+            "cache_us": 6882,
+            "crc_us": 31547,
+            "crc": 458085110
+          },
+          {
+            "name": "teacher.conv3",
+            "engine_us": 1518776,
+            "cache_us": 5945,
+            "crc_us": 16929,
+            "crc": 4133183051
+          },
+          {
+            "name": "teacher.conv6",
+            "engine_us": 436955,
+            "cache_us": 4191,
+            "crc_us": 13834,
+            "crc": 3459967659
+          },
+          {
+            "name": "teacher.conv8",
+            "engine_us": 932859,
+            "cache_us": 5046,
+            "crc_us": 18692,
+            "crc": 906195341
+          },
+          {
+            "name": "student.conv0",
+            "engine_us": 583205,
+            "cache_us": 6882,
+            "crc_us": 31551,
+            "crc": 2691561136
+          },
+          {
+            "name": "student.conv3",
+            "engine_us": 1518777,
+            "cache_us": 5990,
+            "crc_us": 14792,
+            "crc": 797413010
+          },
+          {
+            "name": "student.conv6",
+            "engine_us": 436955,
+            "cache_us": 4197,
+            "crc_us": 13834,
+            "crc": 4252094697
+          },
+          {
+            "name": "student.conv8",
+            "engine_us": 1865724,
+            "cache_us": 8660,
+            "crc_us": 37392,
+            "crc": 1437167153
+          },
+          {
+            "name": "autoencoder.conv0",
+            "engine_us": 57480,
+            "cache_us": 2359,
+            "crc_us": 8143,
+            "crc": 2806310309
+          },
+          {
+            "name": "autoencoder.conv2",
+            "engine_us": 24536,
+            "cache_us": 1236,
+            "crc_us": 2033,
+            "crc": 2432219737
+          },
+          {
+            "name": "autoencoder.conv4",
+            "engine_us": 12649,
+            "cache_us": 417,
+            "crc_us": 1016,
+            "crc": 1047048994
+          },
+          {
+            "name": "autoencoder.conv6",
+            "engine_us": 5134,
+            "cache_us": 159,
+            "crc_us": 253,
+            "crc": 243467040
+          },
+          {
+            "name": "autoencoder.conv8",
+            "engine_us": 1531,
+            "cache_us": 39,
+            "crc_us": 63,
+            "crc": 1036519529
+          },
+          {
+            "name": "autoencoder.conv10",
+            "engine_us": 863,
+            "cache_us": 7,
+            "crc_us": 1,
+            "crc": 235879100
+          },
+          {
+            "name": "autoencoder.resize11",
+            "engine_us": 118,
+            "cache_us": 2,
+            "crc_us": 10,
+            "crc": 946196529
+          },
+          {
+            "name": "autoencoder.conv12",
+            "engine_us": 537,
+            "cache_us": 3,
+            "crc_us": 16,
+            "crc": 1653483367
+          },
+          {
+            "name": "autoencoder.resize15",
+            "engine_us": 832,
+            "cache_us": 14,
+            "crc_us": 72,
+            "crc": 3349547583
+          },
+          {
+            "name": "autoencoder.conv16",
+            "engine_us": 1654,
+            "cache_us": 22,
+            "crc_us": 80,
+            "crc": 1771791276
+          },
+          {
+            "name": "autoencoder.resize19",
+            "engine_us": 2892,
+            "cache_us": 51,
+            "crc_us": 223,
+            "crc": 3431773161
+          },
+          {
+            "name": "autoencoder.conv20",
+            "engine_us": 4576,
+            "cache_us": 73,
+            "crc_us": 253,
+            "crc": 4257252530
+          },
+          {
+            "name": "autoencoder.resize23",
+            "engine_us": 13117,
+            "cache_us": 224,
+            "crc_us": 1016,
+            "crc": 4047719218
+          },
+          {
+            "name": "autoencoder.conv24",
+            "engine_us": 18262,
+            "cache_us": 319,
+            "crc_us": 1081,
+            "crc": 4219181763
+          },
+          {
+            "name": "autoencoder.resize27",
+            "engine_us": 50829,
+            "cache_us": 879,
+            "crc_us": 3941,
+            "crc": 1109677054
+          },
+          {
+            "name": "autoencoder.conv28",
+            "engine_us": 67271,
+            "cache_us": 1214,
+            "crc_us": 4658,
+            "crc": 4237746590
+          },
+          {
+            "name": "autoencoder.resize31",
+            "engine_us": 206715,
+            "cache_us": 3538,
+            "crc_us": 16024,
+            "crc": 2383405797
+          },
+          {
+            "name": "autoencoder.conv32",
+            "engine_us": 266714,
+            "cache_us": 4773,
+            "crc_us": 18635,
+            "crc": 446478220
+          },
+          {
+            "name": "autoencoder.resize35",
+            "engine_us": 40202,
+            "cache_us": 2272,
+            "crc_us": 3114,
+            "crc": 2309192629
+          },
+          {
+            "name": "autoencoder.conv36",
+            "engine_us": 37439,
+            "cache_us": 940,
+            "crc_us": 3115,
+            "crc": 3453409474
+          },
+          {
+            "name": "autoencoder.conv38",
+            "engine_us": 224622,
+            "cache_us": 3951,
+            "crc_us": 18692,
+            "crc": 2211465631
+          }
+        ]
+      }
+    ]
+  },
+  "end_to_end_test_speedups": [
+    2.496466764276497,
+    2.494798313229672
+  ]
+}

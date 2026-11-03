@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "exact_RTL_modules": 47,
+  "simulation_log": "logs/hls_packed_q4_cosim.log"
+}

@@ -1,0 +1,13 @@
+# Preserve validated model, firmware, reports and manifest bytes on every OS.
+* -text
+# Vendor and tool evidence retains its original whitespace.
+*.rpt -whitespace
+*.log -whitespace
+board/ps7_init.tcl -whitespace
+src/accelerator/generated/** -whitespace
+src/accelerator/hls/vendor/** -whitespace
+src/accelerator/runtime/lscript.ld -whitespace
+src/model/upstream/** -whitespace
+src/efficientad_pl/**/generated/** -whitespace
+src/efficientad_pl/**/hls/vendor/** -whitespace
+src/efficientad_pl/**/runtime/lscript.ld -whitespace
