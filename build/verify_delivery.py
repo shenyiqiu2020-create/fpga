@@ -2,7 +2,7 @@
 from pathlib import Path
 import hashlib,json,re,sys,os
 r=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(r/'skill/golden_checks'))
+sys.path.insert(0,str(r/'skill/fpga-accelerator-validation/scripts'))
 from check_manifest import verify
 from read_timing import parse
 ignored=('build/work/','src/accelerator/_build/','src/accelerator/hls/engine_project/','.git/')
@@ -12,7 +12,8 @@ for base,dirs,files in os.walk(r):
  for n in files:
   p=Path(base)/n;rel=p.relative_to(r).as_posix()
   for name in p.relative_to(r).parts:
-   if name not in ('README.md','.gitignore','.gitattributes') and not re.fullmatch(r'[a-z0-9_-]+(?:\.[a-z0-9_-]+)*',name):bad.append(rel);break
+   standard_skill_entry=name=='SKILL.md' and rel.startswith('skill/')
+   if name not in ('README.md','.gitignore','.gitattributes') and not standard_skill_entry and not re.fullmatch(r'[a-z0-9_-]+(?:\.[a-z0-9_-]+)*',name):bad.append(rel);break
 assert not bad,('Invalid submission names',bad[:30])
 assert all((r/d).is_dir() for d in ('src','sim','build','board','data','skill','report'))
 hw=json.loads((r/'board/evidence/hardware_validation.json').read_text())

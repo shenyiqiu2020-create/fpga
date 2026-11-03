@@ -1,0 +1,16 @@
+{
+  "record_kind": "FORMAT_EXAMPLE_NOT_A_MEASUREMENT",
+  "workload": "replace_with_operator_and_shape",
+  "precision": "signed_int8_accumulate_int32",
+  "input_manifest": "replace_with_manifest_path",
+  "backend": "replace_with_actual_backend",
+  "device": "replace_with_actual_device",
+  "clock_mhz": null,
+  "timing_scope": "kernel_call_excluding_transfer_and_scoring",
+  "warmup_runs": 0,
+  "measured_runs": 0,
+  "cache_condition": "record_actual_condition",
+  "samples_ms": [],
+  "status": "NOT_RUN",
+  "evidence_paths": []
+}

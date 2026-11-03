@@ -59,7 +59,7 @@
 
 ## 提炼为可复用技能
 
-以上观察形成 `skill/golden_checks/` 的通用哈希和时序检查、提示词工作流和失败案例。五个正反例验证结果保存在 `sim/results/delivery_tools_validation.json`；方法的适用范围与失效条件在 `skill/README.md` 中逐项列明。
+以上观察整理为 `skill/fpga-accelerator-validation/`，按 Agent Skills 约定提供 YAML 元数据、`SKILL.md`、按需加载的参考文件、三个通用校验脚本及记录模板。流程不固定模型、器件或地址；本项目映射单独放在 `references/project_example.md`。五个原有正反例结果位于 `sim/results/delivery_tools_validation.json`，新增清单、格式、整数/浮点张量及异常输入检查位于 `sim/results/skill_tools_validation.json`。详细用法、来源与边界见 `skill/README.md`。
 
 ## 补图后的评估与版本纠错
 

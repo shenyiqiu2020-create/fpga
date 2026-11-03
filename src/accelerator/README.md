@@ -2,9 +2,9 @@
 
 状态：31 组 C 测试、31 组 C/RTL 对照、125 MHz 时序和两张图完整模型板测均已通过。58 个阶段 CRC 与最终分数全部一致。
 
-板测核耗时由 1.787 秒降至 1.484 秒/图，减少 17.0%；含自检总耗时约 2.028 秒/图。DSP 203、BRAM36 57 与原版相同，LUT 25,750、FF 33,207。当前板上运行本版；原 PE40 版本仍保留。详细证据见 results.md 和 generated/overlap_results.json。
+板测核耗时约 1.484 秒/图；含自检总耗时约 2.028 秒/图。DSP 203、BRAM36 57、LUT 25,750、FF 33,207。此目录是唯一交付的计算核版本；早期版本只留下说明当前结论所需的测量数据，未保留旧工程。详细证据见 results.md 和 generated/overlap_results.json。
 
-本目录是独立实验版本，不编辑原 PE40、PE32 或 D: Vivado/Vitis 项目。模型、INT8/Q30 参数和测试 golden 保持不变。
+本目录可独立重建当前 PE40/SIMD8、125 MHz 后处理重叠版。模型、INT8/Q30 参数和测试 golden 保持已验证身份；不依赖交付目录中的旧 PE40/PE32 工程。
 
 ## 修改
 
@@ -19,7 +19,7 @@ Resize、权重加载顺序、PS 评分和时钟不变。
 - Vivado 工程：_build/vivado/ea_full.xpr（完整构建成功后生成）。
 - HLS 源码：hls/efficientad_engine.cpp、efficientad_engine.h；构建脚本 scripts/build_hls.tcl。
 - 新硬件平台：generated/ax7021_efficientad_full.xsa。
-- Vitis 应用源文件：app_sources/；匹配的预编译程序 generated/efficientad_full.elf。
+- Vitis 应用源文件：runtime/；匹配的预编译程序 generated/efficientad_full.elf。
 - build_overlap.cmd：从源码重新做 C 测试、综合、打包、31 组 C/RTL 联合仿真、Vivado 实现和应用编译；不会自动下载开发板。
 - run_overlap.cmd：验证完成后，通过指定 Digilent JTAG 临时下载 bit 和 ELF；不写 Flash。
 - read_profile.cmd：通过 JTAG 读取运行状态、频率和逐层计时，不占用 COM11。

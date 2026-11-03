@@ -9,6 +9,7 @@ AMDYES 团队的 AMD 自主选题赛道工程整理稿，依据提供的 2026 �
 3. 选择样例或上传工件图片，保持“FPGA 板端推理”，点击“开始检测”。界面显示异常响应、分数、固定阈值、真实 PL 核调用耗时、板端总耗时和本次处理耗时。
 4. 需要摄像头时手动开启并授权，拍摄后再检测。拍摄模式隐藏侧栏与历史；录制画面由浏览器要求选择窗口，停止后保存本地 WebM，不上传外部服务。
 5. 可切换为电脑 FP32 或 INT8 参考，界面和 CSV 会明确标出计算后端。电脑模式不伪装为 FPGA 结果。
+6. 点击输入图像下方的“测试图片库”，可浏览四组全部 284 张记录（224 幅独立图像），按数据组、正常/缺陷标注或工件编号筛选。点击缩略图选择，再点“开始检测”；也可用“上一张／下一张”连续切换。图片标注仅供对照，检测仍执行所选计算后端。
 
 ## 已有实测
 
@@ -52,12 +53,14 @@ JTAG 下载、图片传输、图像预处理不计入上述核耗时；前端显
 | `build/` | 重建入口、工程恢复、交付检查及资源/时序/优化历史报告 |
 | `board/` | bit、ELF、XSA、已布线 checkpoint、IP 归档、上板/演示服务、实测证据 |
 | `data/` | 固定原模型、样例、划分与评分表、竞赛指南、文件身份清单 |
-| `skill/` | 通用黄金参考校验、时序读取、提示词工作流与失败案例 |
+| `skill/` | 标准 Agent Skill：通用 FPGA 数值/产物/时序/板测验证、优化决策、脚本和模板 |
 | `report/` | 可编辑报告初稿、PDF、协作记录、复现手册和拍摄脚本 |
 
-`src/accelerator/` 保留已验证版本的独立包布局，避免整理时改变计算源码和量化数据；重复放置的板端产物和分类证据由 SHA256 核验。工具自动生成的原生 RTL/IP 文件名保留在小写归档内或 Git 忽略的工具工作目录中；手工维护的提交文件名使用小写英文，按指南保留 `README.md` 标准例外。
+`src/accelerator/` 是当前唯一的 PE40/SIMD8、125 MHz 后处理重叠版工程。计算源码与模型/量化数据保持已验证身份；构建和部署入口需要的同版产物仍放在各自规定路径，并用 SHA256 核对。工具原生文件名保存在归档或忽略的工作目录内；说明文件采用小写英文，标准入口 `README.md` 与 Agent Skills 的 `SKILL.md` 保留规定大小写。
 
-桌面目录原有的手工资料保存在 `data/legacy_original/`，仅供历史追溯；原报名截图单独保存在 `data/private_archive/`。这两个目录与原有 `build/work/` 缓存均保留在本机，不放入公开交付压缩包，也不作为当前验证证据。
+目录只交付当前版本：旧 `src/efficientad_pl/` 工程树、旧硬件交接 ZIP、旧算法入口、历史备份、私有归档及此前工具缓存已清除。回归输入、当前模型、图库数据与解释最新结论所需的性能/正确性证据继续保留；它们不构成另一版可运行工程。`.git` 保留正常提交历史。
+
+通用 Skill 的详细用法见 [skill/README.md](skill/README.md)，AI 入口为 [SKILL.md](skill/fpga-accelerator-validation/SKILL.md)。包含三个可直接运行的校验脚本、验证流程、HLS 优化分支、失败模式和可填写的记录模板，可整目录复制到其他工程。
 
 ## 复现与检查
 
@@ -66,6 +69,8 @@ JTAG 下载、图片传输、图像预处理不计入上述核耗时；前端显
 ```powershell
 python build/verify_delivery.py
 python sim/test_delivery_tools.py
+python sim/test_skill_tools.py
+python sim/test_image_library.py
 python build/restore_prebuilt.py
 python sim/evaluate_accuracy.py
 ```
@@ -74,10 +79,10 @@ python sim/evaluate_accuracy.py
 
 双击 `board/view_implemented.cmd` 可在 Vivado 查看交付的已实现设计。新生成的可编辑 XPR 位于 `src/accelerator/_build/vivado/ea_full.xpr`。原 D: 工程和本工作区此前版本未被改写。
 
-本地交付压缩包为 `build/efficientad_submission.zip`，配套 `build/submission_archive.sha256` 与 `data/submission_manifest.json`。修改文件后可执行 `python build/package_submission.py` 重新审计并打包；私人报名截图、旧资料和工具缓存被排除。
+本地交付压缩包为 `build/efficientad_submission.zip`，配套 `build/submission_archive.sha256` 与 `data/submission_manifest.json`。修改文件后可执行 `python build/package_submission.py` 重新审计并打包；工具缓存被排除。演示服务运行时会重新产生 `build/work/demo/`，其中只存当前会话的临时文件。
 
 ## 提交状态
 
-报告是初稿。新实物盲测、扩批正常误报改进、官方海报模板、报名信息/板卡修订核验、现场相机与录屏实际拍摄仍待补齐；详见 `report/contest_compliance.md`。这次只整理本地工程，没有替团队向赛事或 Git 远端提交。
+报告是初稿。新实物盲测、扩批正常误报改进、官方海报模板、报名信息/板卡修订核验、现场相机与录屏实际拍摄仍待补齐；详见 `report/contest_compliance.md`。工程同步到团队 GitHub 仓库，未向赛事上传。最新整理与 Skill 更新使用仓库所有者的 GitHub 身份提交；历史提交保留原作者。
 
 自有代码沿用 `license.txt` 的 MIT 协议；EfficientAD 候选代码来源与 Apache 2.0 许可、FINN 辅助库的 BSD 3 Clause 许可在 `report/sources.md` 中单独登记。没有把完整 FINN 编译器、现成 DPU 或 PYNQ Overlay 当作已实现成果。

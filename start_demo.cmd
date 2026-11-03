@@ -8,7 +8,6 @@ if not exist "%EA_PYTHON%" (
   exit /b 1
 )
 if not exist build\work\demo mkdir build\work\demo
-set "TEMP=%CD%\build\work\demo"
-set "TMP=%TEMP%"
+rem Keep the OS temporary directory: the browser inherits TEMP/TMP when opened.
 "%EA_PYTHON%" src\demo\server.py --port 8765 --open
 pause

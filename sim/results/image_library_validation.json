@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "served_images_sha256_verified": 284,
+  "unique_image_hashes": 224,
+  "unlisted_image_paths": "rejected",
+  "unlisted_job_input": "rejected",
+  "browser_ui": {
+    "four_group_filters": "PASS",
+    "combined_normal_N42_search": "4 images",
+    "last_page": "12 / 12, 20 cards",
+    "empty_search": "PASS",
+    "next_image_clears_old_output": "PASS",
+    "javascript_errors": []
+  },
+  "fpga_selected_image": {
+    "name": "0033_N42.png",
+    "dataset": "expanded_holdout_48",
+    "ground_truth": "good",
+    "input_sha256": "2f28a5210d1323fd7b212ddf3153fd3f58cbfad98385abd7588b580b76319a83",
+    "backend": "fpga",
+    "score": 0.17961634695529938,
+    "kernel_ms": 1483.546,
+    "board_ms": 1713.251
+  },
+  "fpga_score_matches_existing_int8_reference": true,
+  "timestamp": "2026-11-03T16:57:13+0800"
+}

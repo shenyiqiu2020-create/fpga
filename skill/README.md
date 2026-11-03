@@ -1,29 +1,79 @@
-# 可复用技能包
+# 可复用 FPGA 验证与优化 Skill
 
-本目录提交的是从本工程中提炼并实际验证的工程方法，不是仅含标题的占位文件。当前不声明 PYNQ Skill 加分，板端采用 standalone ARM 程序。
+本目录包含一套可独立复制到其他工程的 Agent Skill：**`fpga-accelerator-validation`**。它把数值参考、源码与 RTL/IP 的身份、布线时序、板端内存一致性和性能口径连成可核对的流程。适用于卷积、点积、图像处理、信号处理等计算核，不要求使用本项目的模型、开发板、地址或并行度。
 
-## 黄金参考与工件身份校验
+## 文件结构
 
-适用场景：任何需要固定输入、权重、固件、参考输出的 FPGA 或软件工程。
+```text
+skill/
+├─ README.md
+└─ fpga-accelerator-validation/
+   ├─ SKILL.md
+   ├─ agents/openai.yaml
+   ├─ scripts/
+   │  ├─ check_manifest.py
+   │  ├─ read_timing.py
+   │  └─ compare_tensors.py
+   ├─ references/
+   │  ├─ validation_workflow.md
+   │  ├─ hls_optimization.md
+   │  ├─ failure_patterns.md
+   │  ├─ project_example.md
+   │  └─ sources.md
+   └─ assets/
+      ├─ validation_record.md
+      └─ measurement_example.json
+```
 
-用法：执行 `python skill/golden_checks/check_manifest.py data/submission_manifest.json --root .`。清单中的每项仅含相对路径和 SHA256，可换成另一工程的文件清单。退出码 0 表示身份一致，退出码 1 表示文件缺失或内容变化。
+入口遵循 Agent Skills 的 `SKILL.md` + YAML 元数据约定。执行路径和核心约束放在入口；更细的数值、HLS、失败处理和项目案例按需读取。没有安装其他网上 Skill，也没有自动引入其权限或依赖。
 
-来源：IP 修改后 Vivado 可能继续使用旧导出或旧综合缓存；只看版本号和“Build succeeded”不足以确认使用了新 RTL。本队对综合、打包、通过仿真的 RTL 与 Vivado 实际导入文件逐项比对。
+## 给 AI 使用
 
-验证：`python sim/test_delivery_tools.py` 覆盖正确哈希、故意修改文件、越界路径、有效时序及负 slack 五种情况；原始结果在 `sim/results/delivery_tools_validation.json`。完整项目的模型和固件还由 `build/verify_delivery.py` 复核。
+将整个 `fpga-accelerator-validation/` 文件夹复制到目标工具支持的 Skill 目录；保留文件夹名及 `SKILL.md` 大小写。例如支持 Codex 仓库级技能的环境可使用 `.agents/skills/fpga-accelerator-validation/`。本仓库按比赛目录要求把可提交源文件放在 `skill/` 中，未额外复制一份隐藏版本。
 
-失效条件：哈希只能证明字节身份，不能证明模型有效或参考答案正确；清单本身不可信时也不能作为信任根。模型、接口、工具版本或量化规则改变后必须重新建立独立参考。
+也可以不安装，直接让 AI 读取这里的 `SKILL.md`：
 
-## 资源和时序核验
+> 使用 $fpga-accelerator-validation，按 skill/fpga-accelerator-validation/SKILL.md 检查这个 HLS 核。用户报告源码已改但板端输出没变。先核对参考、实际导入 RTL 和 bit/ELF 身份，再决定要重跑哪一步。
 
-适用场景：使用 Vivado 标准 timing summary 格式的单时钟或多时钟 FPGA 工程。
+> 使用这个 Skill 优化现有算子，保持算法和定点规则不变。先看逐阶段计时和时序关键路径，选择一次可归因的改动，交付数值、RTL、时序与板测证据以及资源代价。
 
-用法：`python skill/golden_checks/read_timing.py build/reports/vivado_timing.rpt`。解析 setup/hold slack 和时钟列表，任一负 slack 返回失败；报告格式不匹配时直接报错，不猜测数值。
+> 使用这个 Skill 整理交付证据。板卡当前不在身边：完成可执行检查，将尚未执行的板测写清楚，不使用旧截图证明新版本。
 
-来源：HLS 时钟估计与实际布线时序不同；提高配置频率也不能证明板上按该频率工作。本队将 HLS 调度、布线后时序、SLCR 时钟寄存器和板上计时分开核验。
+## 不依赖 AI 也能使用
 
-失效条件：该脚本不核验约束是否完整，不检查跨时钟协议，也不能替代硬件时钟读回或板测。新报告格式须重新验证解析器。
+Python 3.9+ 可运行清单和 Vivado 时序检查；张量比较另外需要 NumPy。所有脚本提供 `--help`，以参数取得路径，默认不修改输入。
 
-## 基于证据的优化工作流
+从当前项目根目录运行：
 
-提示词模板与适用范围见 `optimization_workflow.md`；失败案例及边界见 `failure_cases.md`。它们适合其他 HLS 运算核，但不保证换模型或换板后仍获得同样收益。
+```text
+python skill/fpga-accelerator-validation/scripts/check_manifest.py data/submission_manifest.json --root .
+python skill/fpga-accelerator-validation/scripts/read_timing.py build/reports/vivado_timing.rpt
+python skill/fpga-accelerator-validation/scripts/compare_tensors.py expected.npy actual.npy
+python skill/fpga-accelerator-validation/scripts/compare_tensors.py expected.bin actual.bin --dtype int32
+python sim/test_delivery_tools.py
+python sim/test_skill_tools.py
+```
+
+换工程时只替换根目录、清单、报告与待比较文件。`.npy` 自带 shape/dtype；原始二进制必须明确元素类型，使用小端。脚本支持 INT8/16/32、对应无符号类型和 FP32/64；64-bit 整数暂不支持，以避免误差统计中的精度歧义。
+
+| 脚本 | 输入与输出 | 通过条件 | 能力边界 |
+|---|---|---|---|
+| `check_manifest.py` | 相对路径/SHA256/可选 bytes；JSON 结果 | 非空清单所有记录有效，文件身份一致 | 不证明 golden 独立或来源可信 |
+| `read_timing.py` | Vivado timing summary；slack 与时钟 JSON | WNS/WHS 非负，格式和时钟表可解析 | 不检查时序约束完整性、CDC、板上频率 |
+| `compare_tensors.py` | 两个同 shape/dtype 张量；误差/索引/哈希 JSON | 整数精确；浮点满足显式容差；无非有限值 | 不替代测试覆盖或识别准确率 |
+
+统一返回码：0 通过、1 对照失败、2 输入/格式/读取错误。张量比较的整数默认精确；浮点容差必须由算法要求指定，不为让测试通过而调宽。
+
+## 通用方法与本项目效果
+
+- 通用部分：先建立数据契约，再追踪产物身份，按改动范围选择 C/RTL、时序和真实板测，使用同口径性能数据。
+- 案例部分：`references/project_example.md` 单独登记本项目的 PE40/125 MHz、31 组回归和 75 张板端完整响应对照，避免这些参数污染通用流程。
+- 工程效果：后处理与乘加重叠后，本项目核调用由约 1.787 s/图降为 1.484 s/图，DSP/BRAM 不增；这不是技能对其他模型或板卡的性能承诺。
+- 验证证据：`sim/results/delivery_tools_validation.json`、`sim/results/skill_tools_validation.json` 和主项目原始报告。新脚本包含异常输入与故意不一致的负例检查，不能只验证“成功路径”。
+- 精度边界：当前扩批正常件误报问题仍在；与 INT8 参考一致不能当作现场识别可靠性已解决。
+
+## 来源、维护与失效条件
+
+目录和写作方式参考 [Agent Skills 规范](https://agentskills.io/specification)、[OpenAI skill-creator](https://github.com/openai/skills/blob/main/skills/.system/skill-creator/SKILL.md) 与 [Anthropic webapp-testing](https://github.com/anthropics/skills/blob/main/skills/webapp-testing/SKILL.md)。流程正文与三个脚本由本项目经验重写；参考范围、访问日期和许可边界记录在 `references/sources.md`。
+
+工具报告格式变化、目标板更换、量化/接口改变、参考来源不清或数据集泄漏时，应重新核实契约及相应证据。技能不会自动重训、重标定、写 Flash 或发布仓库；这些动作只在用户任务范围内执行。本包没有 PYNQ Overlay，也不声明已取得 PYNQ Skill 加分。

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checks": 12,
+  "coverage": [
+    "manifest_identity_paths_sizes_and_format",
+    "Vivado_setup_hold_and_rejection",
+    "integer_float_tensor_comparison",
+    "binary_shape_dtype_contract",
+    "CLI_exit_codes_0_1_2"
+  ]
+}

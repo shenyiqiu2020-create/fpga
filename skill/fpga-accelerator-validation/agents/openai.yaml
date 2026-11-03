@@ -1,0 +1,4 @@
+interface:
+  display_name: "FPGA 加速器验证与优化"
+  short_description: "Validate FPGA kernels with RTL, timing and board evidence"
+  default_prompt: "使用 $fpga-accelerator-validation 核对当前计算核的数值、产物身份、时序和板测证据，再选择可归因的优化。"

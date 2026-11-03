@@ -8,6 +8,8 @@ ROOT=Path(__file__).resolve().parents[2];STATIC=Path(__file__).parent/'static'
 sys.path.insert(0,str(ROOT/'src/model'))
 from quantized_model import FrozenModel,preprocess,full_map
 import board_backend
+from image_library import ImageLibrary
+LIBRARY=ImageLibrary(ROOT)
 WORK=ROOT/'build/work/demo';WORK.mkdir(parents=True,exist_ok=True)
 STATE={'connected':False,'busy':False,'jobs':{},'history':[]};LOCK=threading.Lock();MODEL=None
 
@@ -29,7 +31,14 @@ def process(jid,payload):
     start=time.perf_counter()
     try:
         j.update(status='running',message='准备图像',stage=0)
-        if payload.get('sample') in ('d19_01','n17_03'):
+        provenance={}
+        if payload.get('test_image'):
+            key=payload['test_image'];src=LIBRARY.source(key)
+            if src is None:raise ValueError('测试图片不存在，请刷新图片库')
+            item=LIBRARY.by_id[key];label=item['name']
+            provenance={'test_image_id':key,'dataset':item['set'],
+                        'ground_truth':item['label'],'object_group':item['object_group']}
+        elif payload.get('sample') in ('d19_01','n17_03'):
             src=ROOT/'data/samples'/(payload['sample']+'.png');label=payload['sample']
         else:
             raw=base64.b64decode(payload['image'].split(',')[-1],validate=True)
@@ -57,7 +66,7 @@ def process(jid,payload):
         result={'id':jid,'name':label,'score':score,'threshold':threshold,'defect':bool(score>threshold),
                 'timestamp':time.strftime('%Y-%m-%d %H:%M:%S'),'request_ms':(time.perf_counter()-start)*1000,
                 'input_sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'crop':crop,
-                'bundle_id':m.manifest['bundle_id'],**details}
+                'bundle_id':m.manifest['bundle_id'],**details,**provenance}
         (work/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
         STATE['history'].insert(0,result);j.update(status='done',stage=29,message='检测完成',result=result)
     except Exception as e:
@@ -73,6 +82,11 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path=self.path.split('?',1)[0]
         if path=='/api/status':return self.reply({'connected':STATE['connected'],'busy':STATE['busy'],'history':STATE['history'][:30]})
+        if path=='/api/test-images':return self.reply(LIBRARY.public)
+        m=re.fullmatch(r'/test-images/([a-f0-9]{20})\.png',path)
+        if m:
+            p=LIBRARY.source(m[1])
+            return self.reply(p.read_bytes(),ctype='image/png') if p else self.reply({'error':'Not found'},404)
         if path=='/api/evidence':
             return self.reply({'hardware':json.loads((ROOT/'board/evidence/overlap_results.json').read_text()),
                               'historical_accuracy':json.loads((ROOT/'sim/results/historical_metrics.json').read_text()),
@@ -80,7 +94,7 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith('/api/jobs/'):
             v=STATE['jobs'].get(path.rsplit('/',1)[-1]);return self.reply(v or {'error':'Not found'},200 if v else 404)
         if path=='/api/export':
-            out=io.StringIO();fields=['timestamp','name','backend','score','threshold','defect','kernel_ms','board_ms','request_ms','input_sha256'];w=csv.DictWriter(out,fieldnames=fields,extrasaction='ignore');w.writeheader();w.writerows(STATE['history']);return self.reply(('\ufeff'+out.getvalue()).encode('utf-8'),ctype='text/csv; charset=utf-8')
+            out=io.StringIO();fields=['timestamp','name','backend','score','threshold','defect','kernel_ms','board_ms','request_ms','input_sha256','dataset','ground_truth','object_group','test_image_id'];w=csv.DictWriter(out,fieldnames=fields,extrasaction='ignore');w.writeheader();w.writerows(STATE['history']);return self.reply(('\ufeff'+out.getvalue()).encode('utf-8'),ctype='text/csv; charset=utf-8')
         m=re.fullmatch(r'/results/([a-f0-9]{32})/(input|heatmap|overlay)\.png',path)
         if m:
             p=WORK/m[1]/(m[2]+'.png')
@@ -108,6 +122,8 @@ class Handler(BaseHTTPRequestHandler):
             except Exception as e:STATE['connected']=False;return self.reply({'error':str(e)},503)
             finally:STATE['busy']=False;LOCK.release()
         if self.path=='/api/jobs':
+            if 'test_image' in payload and (not isinstance(payload['test_image'],str) or payload['test_image'] not in LIBRARY.by_id):
+                return self.reply({'error':'测试图片不存在，请刷新图片库'},400)
             if not LOCK.acquire(False):return self.reply({'error':'请等待当前任务完成'},409)
             STATE['busy']=True;jid=uuid.uuid4().hex
             STATE['jobs'][jid]={'id':jid,'status':'queued','message':'排队中','stage':0}

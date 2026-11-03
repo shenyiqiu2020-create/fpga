@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys,json,hashlib,tempfile
 ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'skill/golden_checks'))
+sys.path.insert(0,str(ROOT/'skill/fpga-accelerator-validation/scripts'))
 from check_manifest import verify
 from read_timing import parse
 r=ROOT/'build/work/tool_tests';r.mkdir(parents=True,exist_ok=True)

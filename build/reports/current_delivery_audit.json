@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "scope": "Only the current delivery; historical project trees, private archives and prior runtime caches removed",
+  "removed_files": 1946,
+  "removed_bytes": 2201928205,
+  "git_history_preserved": true,
+  "current_kernel": "PE40 SIMD8 125MHz overlapped EfficientAD",
+  "required_regression_inputs_and_measurement_evidence": "retained",
+  "pending_runtime_files": []
+}

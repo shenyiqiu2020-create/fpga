@@ -74,4 +74,6 @@ python sim/evaluate_accuracy.py --images data/independent_test/images --labels d
 
 网页测试入口为 `sim/test_frontend.cjs`，需要 Node.js、Playwright 和本机 Edge；可用环境变量 `EA_PLAYWRIGHT` 指定已有 Playwright 模块路径。先启动本地演示服务，再运行 `node sim/test_frontend.cjs`；测试会临时初始化指定 FPGA，验证两张样例、上传、导出、最新精度卡片和窄屏，并保存截图与 JSON。摄像头和屏幕选择仍需本人授权。
 
-执行 `python build/package_submission.py` 生成清洁压缩包、SHA256 与逐文件清单，排除本机缓存、旧资料、报名隐私截图；压缩完成后逐项核对 ZIP 中的实际字节哈希。
+执行 `python build/package_submission.py` 生成当前唯一版本的清洁压缩包、SHA256 与逐文件清单，排除本机运行缓存；压缩完成后逐项核对 ZIP 中的实际字节哈希。旧工程、历史备份和私有归档已从本目录删除。
+
+通用验证工具与说明在 `skill/fpga-accelerator-validation/`；入口是 `SKILL.md`。可运行 `python sim/test_skill_tools.py` 检查脚本行为，使用 `skill/README.md` 中的示例迁移到其他工程。标准 `SKILL.md` 文件名保留大小写。
