@@ -1,5 +1,5 @@
 # Preserve validated model, firmware, reports and manifest bytes on every OS.
-* -text
+* -text whitespace=cr-at-eol
 # Vendor and tool evidence retains its original whitespace.
 *.rpt -whitespace
 *.log -whitespace
