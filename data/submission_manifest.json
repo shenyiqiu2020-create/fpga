@@ -1,5 +1,5 @@
 {
-  "created": "2026-11-03T18:41:29+0800",
+  "created": "2026-11-03T18:51:37+0800",
   "scope": "public contest artifacts; local archives, registration screenshot and caches excluded",
   "artifacts": [
     {
@@ -14,8 +14,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 12380,
-      "sha256": "acf9a53fba891ab828342a4ae3306001ce552fc9e97de75e9ea940b0b0948110"
+      "bytes": 11601,
+      "sha256": "b2623e33c4a3fdec5dea6531d0b43a66da27e55a831b5c0f5b9f4367397ffa4f"
     },
     {
       "path": "license.txt",
@@ -144,8 +144,8 @@
     },
     {
       "path": "build/make_accuracy_report.py",
-      "bytes": 4683,
-      "sha256": "ceb0fd5e527d8f88e17c3f81a0f2bfe1c04bd14f7455d0f6a9c4bba3d98c04b7"
+      "bytes": 4503,
+      "sha256": "03200c70c314e8892bb0dab75d29ee42f067c53d44106150b565c04a0f2aefcc"
     },
     {
       "path": "build/make_report.py",
@@ -1799,8 +1799,8 @@
     },
     {
       "path": "report/accuracy_evaluation.md",
-      "bytes": 3833,
-      "sha256": "aee1ddb9b1087f0e169cad4a97f410525af8125875a6771c5f867bce6f1f5368"
+      "bytes": 3223,
+      "sha256": "5a1a6d3137c8fc24ad6f718cb4fc68012fda9fbe5095fb3ce397ee076b4fa16b"
     },
     {
       "path": "report/ai_collaboration.md",
