@@ -1,0 +1,6 @@
+{
+  "repository": "https://github.com/nelson1425/EfficientAD",
+  "commit": "fcab5146f84ae17597044ad5ddf1656ccf805401",
+  "license": "Apache-2.0",
+  "scope": "Original candidate source snapshot; frozen model inference in src/model/quantized_model.py does not execute its training entrypoint"
+}

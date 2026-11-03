@@ -1,0 +1,468 @@
+{
+  "status": "BOARD_PROFILE_PASSED",
+  "application": "efficientad_full",
+  "board_clock_MHz": 100.00000000000001,
+  "SLCR_clock_registers": [
+    221192,
+    3147264
+  ],
+  "timestamp": "2026-11-01T20:27:43.318805+08:00",
+  "evidence": "completed test mailbox and per-stage timing read from DDR over JTAG",
+  "timer_conversion_revision": 2,
+  "mailbox_words": [
+    1161905713,
+    4,
+    1,
+    28,
+    2211465631,
+    0,
+    1051768946,
+    1033243548,
+    1,
+    0,
+    2859,
+    2858,
+    29,
+    29,
+    0,
+    0,
+    1129591088
+  ],
+  "host_elf_sha256": "ffa4f9bc5015e111c920601369e6eac53b58d4233e3abf66364c6c6c2a3099ab",
+  "runs": [
+    {
+      "image": "D19_01",
+      "crc_mode": "table",
+      "total_us": 2859514,
+      "engine_us": 2319322,
+      "cache_us": 70251,
+      "crc_us": 260481,
+      "score_us": 147764,
+      "copy_us": 13421,
+      "score": 0.3451572060585022,
+      "predicted_defect": true,
+      "stages": [
+        {
+          "name": "teacher.conv0",
+          "engine_us": 139039,
+          "cache_us": 6985,
+          "crc_us": 36116,
+          "crc": 3237218885
+        },
+        {
+          "name": "teacher.conv3",
+          "engine_us": 377286,
+          "cache_us": 5932,
+          "crc_us": 14787,
+          "crc": 249140991
+        },
+        {
+          "name": "teacher.conv6",
+          "engine_us": 110024,
+          "cache_us": 4133,
+          "crc_us": 13833,
+          "crc": 678997613
+        },
+        {
+          "name": "teacher.conv8",
+          "engine_us": 234827,
+          "cache_us": 5000,
+          "crc_us": 18699,
+          "crc": 1122203732
+        },
+        {
+          "name": "student.conv0",
+          "engine_us": 139039,
+          "cache_us": 6882,
+          "crc_us": 31548,
+          "crc": 2197978013
+        },
+        {
+          "name": "student.conv3",
+          "engine_us": 377286,
+          "cache_us": 5953,
+          "crc_us": 14787,
+          "crc": 923423740
+        },
+        {
+          "name": "student.conv6",
+          "engine_us": 110022,
+          "cache_us": 4188,
+          "crc_us": 13835,
+          "crc": 1901149630
+        },
+        {
+          "name": "student.conv8",
+          "engine_us": 469654,
+          "cache_us": 8657,
+          "crc_us": 37386,
+          "crc": 137591826
+        },
+        {
+          "name": "autoencoder.conv0",
+          "engine_us": 14433,
+          "cache_us": 2359,
+          "crc_us": 8144,
+          "crc": 1158410371
+        },
+        {
+          "name": "autoencoder.conv2",
+          "engine_us": 6188,
+          "cache_us": 1248,
+          "crc_us": 2034,
+          "crc": 14316409
+        },
+        {
+          "name": "autoencoder.conv4",
+          "engine_us": 3252,
+          "cache_us": 417,
+          "crc_us": 1016,
+          "crc": 1553325805
+        },
+        {
+          "name": "autoencoder.conv6",
+          "engine_us": 1383,
+          "cache_us": 159,
+          "crc_us": 254,
+          "crc": 3550792148
+        },
+        {
+          "name": "autoencoder.conv8",
+          "engine_us": 477,
+          "cache_us": 39,
+          "crc_us": 63,
+          "crc": 2687971399
+        },
+        {
+          "name": "autoencoder.conv10",
+          "engine_us": 434,
+          "cache_us": 7,
+          "crc_us": 1,
+          "crc": 640638061
+        },
+        {
+          "name": "autoencoder.resize11",
+          "engine_us": 67,
+          "cache_us": 2,
+          "crc_us": 9,
+          "crc": 2306179280
+        },
+        {
+          "name": "autoencoder.conv12",
+          "engine_us": 226,
+          "cache_us": 3,
+          "crc_us": 16,
+          "crc": 1327082413
+        },
+        {
+          "name": "autoencoder.resize15",
+          "engine_us": 475,
+          "cache_us": 14,
+          "crc_us": 63,
+          "crc": 1199892720
+        },
+        {
+          "name": "autoencoder.conv16",
+          "engine_us": 507,
+          "cache_us": 22,
+          "crc_us": 80,
+          "crc": 2996987316
+        },
+        {
+          "name": "autoencoder.resize19",
+          "engine_us": 1645,
+          "cache_us": 51,
+          "crc_us": 223,
+          "crc": 1778614032
+        },
+        {
+          "name": "autoencoder.conv20",
+          "engine_us": 1240,
+          "cache_us": 73,
+          "crc_us": 253,
+          "crc": 2251084361
+        },
+        {
+          "name": "autoencoder.resize23",
+          "engine_us": 7483,
+          "cache_us": 224,
+          "crc_us": 1016,
+          "crc": 998685013
+        },
+        {
+          "name": "autoencoder.conv24",
+          "engine_us": 4670,
+          "cache_us": 319,
+          "crc_us": 1081,
+          "crc": 81077367
+        },
+        {
+          "name": "autoencoder.resize27",
+          "engine_us": 28942,
+          "cache_us": 879,
+          "crc_us": 3943,
+          "crc": 1034991506
+        },
+        {
+          "name": "autoencoder.conv28",
+          "engine_us": 16938,
+          "cache_us": 1215,
+          "crc_us": 4068,
+          "crc": 3577628352
+        },
+        {
+          "name": "autoencoder.resize31",
+          "engine_us": 117846,
+          "cache_us": 3538,
+          "crc_us": 16026,
+          "crc": 1372646880
+        },
+        {
+          "name": "autoencoder.conv32",
+          "engine_us": 66831,
+          "cache_us": 4790,
+          "crc_us": 16278,
+          "crc": 892481684
+        },
+        {
+          "name": "autoencoder.resize35",
+          "engine_us": 22926,
+          "cache_us": 2271,
+          "crc_us": 3114,
+          "crc": 3547709569
+        },
+        {
+          "name": "autoencoder.conv36",
+          "engine_us": 9455,
+          "cache_us": 940,
+          "crc_us": 3115,
+          "crc": 2009939175
+        },
+        {
+          "name": "autoencoder.conv38",
+          "engine_us": 56727,
+          "cache_us": 3951,
+          "crc_us": 18693,
+          "crc": 3682285041
+        }
+      ]
+    },
+    {
+      "image": "N17_03",
+      "crc_mode": "table",
+      "total_us": 2858926,
+      "engine_us": 2319317,
+      "cache_us": 70309,
+      "crc_us": 255925,
+      "score_us": 147750,
+      "copy_us": 13572,
+      "score": 0.07326433062553406,
+      "predicted_defect": false,
+      "stages": [
+        {
+          "name": "teacher.conv0",
+          "engine_us": 139039,
+          "cache_us": 6882,
+          "crc_us": 31553,
+          "crc": 458085110
+        },
+        {
+          "name": "teacher.conv3",
+          "engine_us": 377287,
+          "cache_us": 5989,
+          "crc_us": 14786,
+          "crc": 4133183051
+        },
+        {
+          "name": "teacher.conv6",
+          "engine_us": 110022,
+          "cache_us": 4189,
+          "crc_us": 13833,
+          "crc": 3459967659
+        },
+        {
+          "name": "teacher.conv8",
+          "engine_us": 234827,
+          "cache_us": 5039,
+          "crc_us": 18698,
+          "crc": 906195341
+        },
+        {
+          "name": "student.conv0",
+          "engine_us": 139039,
+          "cache_us": 6882,
+          "crc_us": 31549,
+          "crc": 2691561136
+        },
+        {
+          "name": "student.conv3",
+          "engine_us": 377286,
+          "cache_us": 5972,
+          "crc_us": 14787,
+          "crc": 797413010
+        },
+        {
+          "name": "student.conv6",
+          "engine_us": 110021,
+          "cache_us": 4187,
+          "crc_us": 13833,
+          "crc": 4252094697
+        },
+        {
+          "name": "student.conv8",
+          "engine_us": 469654,
+          "cache_us": 8655,
+          "crc_us": 37392,
+          "crc": 1437167153
+        },
+        {
+          "name": "autoencoder.conv0",
+          "engine_us": 14433,
+          "cache_us": 2359,
+          "crc_us": 8144,
+          "crc": 2806310309
+        },
+        {
+          "name": "autoencoder.conv2",
+          "engine_us": 6188,
+          "cache_us": 1251,
+          "crc_us": 2033,
+          "crc": 2432219737
+        },
+        {
+          "name": "autoencoder.conv4",
+          "engine_us": 3251,
+          "cache_us": 417,
+          "crc_us": 1016,
+          "crc": 1047048994
+        },
+        {
+          "name": "autoencoder.conv6",
+          "engine_us": 1383,
+          "cache_us": 159,
+          "crc_us": 253,
+          "crc": 243467040
+        },
+        {
+          "name": "autoencoder.conv8",
+          "engine_us": 476,
+          "cache_us": 39,
+          "crc_us": 63,
+          "crc": 1036519529
+        },
+        {
+          "name": "autoencoder.conv10",
+          "engine_us": 434,
+          "cache_us": 7,
+          "crc_us": 1,
+          "crc": 235879100
+        },
+        {
+          "name": "autoencoder.resize11",
+          "engine_us": 68,
+          "cache_us": 2,
+          "crc_us": 9,
+          "crc": 946196529
+        },
+        {
+          "name": "autoencoder.conv12",
+          "engine_us": 226,
+          "cache_us": 3,
+          "crc_us": 16,
+          "crc": 1653483367
+        },
+        {
+          "name": "autoencoder.resize15",
+          "engine_us": 475,
+          "cache_us": 14,
+          "crc_us": 63,
+          "crc": 3349547583
+        },
+        {
+          "name": "autoencoder.conv16",
+          "engine_us": 507,
+          "cache_us": 22,
+          "crc_us": 80,
+          "crc": 1771791276
+        },
+        {
+          "name": "autoencoder.resize19",
+          "engine_us": 1646,
+          "cache_us": 51,
+          "crc_us": 223,
+          "crc": 3431773161
+        },
+        {
+          "name": "autoencoder.conv20",
+          "engine_us": 1240,
+          "cache_us": 73,
+          "crc_us": 254,
+          "crc": 4257252530
+        },
+        {
+          "name": "autoencoder.resize23",
+          "engine_us": 7483,
+          "cache_us": 224,
+          "crc_us": 1017,
+          "crc": 4047719218
+        },
+        {
+          "name": "autoencoder.conv24",
+          "engine_us": 4669,
+          "cache_us": 319,
+          "crc_us": 1081,
+          "crc": 4219181763
+        },
+        {
+          "name": "autoencoder.resize27",
+          "engine_us": 28940,
+          "cache_us": 879,
+          "crc_us": 3944,
+          "crc": 1109677054
+        },
+        {
+          "name": "autoencoder.conv28",
+          "engine_us": 16939,
+          "cache_us": 1215,
+          "crc_us": 4069,
+          "crc": 4237746590
+        },
+        {
+          "name": "autoencoder.resize31",
+          "engine_us": 117847,
+          "cache_us": 3538,
+          "crc_us": 16025,
+          "crc": 2383405797
+        },
+        {
+          "name": "autoencoder.conv32",
+          "engine_us": 66830,
+          "cache_us": 4783,
+          "crc_us": 16279,
+          "crc": 446478220
+        },
+        {
+          "name": "autoencoder.resize35",
+          "engine_us": 22927,
+          "cache_us": 2268,
+          "crc_us": 3115,
+          "crc": 2309192629
+        },
+        {
+          "name": "autoencoder.conv36",
+          "engine_us": 9455,
+          "cache_us": 940,
+          "crc_us": 3114,
+          "crc": 3453409474
+        },
+        {
+          "name": "autoencoder.conv38",
+          "engine_us": 56725,
+          "cache_us": 3951,
+          "crc_us": 18695,
+          "crc": 2211465631
+        }
+      ]
+    }
+  ]
+}

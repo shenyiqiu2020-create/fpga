@@ -1,0 +1,80 @@
+{
+  "status": "ROUTED_TIMING_AND_RTL_VALIDATED",
+  "clock_MHz": 125,
+  "wns_ns": 0.386,
+  "whs_ns": 0.027,
+  "control_replication": [
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state25",
+      "original_loads": 202,
+      "replicas_added": 9
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state25_repN",
+      "original_loads": 182,
+      "replicas_added": 7
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state25_repN_1",
+      "original_loads": 194,
+      "replicas_added": 9
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state25_repN_2",
+      "original_loads": 219,
+      "replicas_added": 8
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state25_repN_5",
+      "original_loads": 171,
+      "replicas_added": 8
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state25_repN_7",
+      "original_loads": 132,
+      "replicas_added": 7
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state5_repN_1",
+      "original_loads": 243,
+      "replicas_added": 9
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state5_repN_2",
+      "original_loads": 208,
+      "replicas_added": 9
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state5_repN_3",
+      "original_loads": 182,
+      "replicas_added": 7
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state5_repN_4",
+      "original_loads": 240,
+      "replicas_added": 9
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_6905/ap_CS_fsm_state5_repN_5",
+      "original_loads": 150,
+      "replicas_added": 7
+    }
+  ],
+  "ps_changes": "PS initialization identical to PE32 125 MHz; ARM, DDR, UART and PL frequencies unchanged",
+  "ps_clock_parameters": {
+    "PCW_ACT_FPGA0_PERIPHERAL_FREQMHZ": "125.000000",
+    "PCW_ACT_UART_PERIPHERAL_FREQMHZ": "100.000000",
+    "PCW_CPU_CPU_PLL_FREQMHZ": "1333.333",
+    "PCW_DDR_DDR_PLL_FREQMHZ": "1066.667",
+    "PCW_FPGA0_PERIPHERAL_FREQMHZ": "125",
+    "PCW_IO_IO_PLL_FREQMHZ": "1000.000",
+    "PCW_UART_PERIPHERAL_FREQMHZ": "100",
+    "PCW_UIPARAM_ACT_DDR_FREQ_MHZ": "533.333374",
+    "PCW_UIPARAM_DDR_FREQ_MHZ": "533.333333"
+  },
+  "artifacts": {
+    "efficientad_full.bit": "3d15bc53f8e6563a26cdc74edcde364061d5db87724a6a654d54a2d8b216d6cd",
+    "ax7021_efficientad_full.xsa": "2d919a4e00cdd6534de232d769de669ae2175e0293f87d54e9ad7263a4babfaa",
+    "ps7_init.tcl": "a5b95b661318dc1e60d3cf5486e0434e075afa4ec888b1b95045fe536b5021c5"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "BOARD_FULL_MODEL_OVERLAP125_PROFILE_PASSED",
+  "resources": {
+    "Slice LUTs": 25750,
+    "Slice Registers": 33207,
+    "Block RAM Tile": 57,
+    "DSPs": 203
+  },
+  "engine_time_reduction": 0.16994523274196327,
+  "runs": [
+    {
+      "image": "D19_01",
+      "old_engine_us": 1787291,
+      "new_engine_us": 1483552,
+      "old_total_us": 2333464,
+      "new_total_us": 2027909
+    },
+    {
+      "image": "N17_03",
+      "old_engine_us": 1787290,
+      "new_engine_us": 1483546,
+      "old_total_us": 2329985,
+      "new_total_us": 2027261
+    }
+  ]
+}

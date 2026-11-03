@@ -1,0 +1,68 @@
+{
+  "scope": "two_bringup_calibration_images_NOT_accuracy_estimate",
+  "bundle_id": "tie_mount_20261026_3000step_dedupval",
+  "model_hashes": {
+    "teacher_final.pth": "976fda79aef1db98a108b4922dfa6fb904cae86f9e81700ed75c470d2a72fdab",
+    "student_final.pth": "f37a94bbb6fa9c400e25d8f6e8b81ac0c402bd4da56f1d11d177776df5e9119b",
+    "autoencoder_final.pth": "6e556dc18878c48ecc9577c9bef3f9c077213a84809e3eb5bcb9142dac185bde",
+    "normalization.npz": "71ebc3c70e4ad7ce35495fd0e0e285cec5bf0fba56466d6d1f84e3b3f7709b04",
+    "summary.json": "e1fab63cb32df645ef2e74502b5475858e1a10ad61172afff4370b7415fe22b5"
+  },
+  "threshold_fixed": 0.11209306865930557,
+  "device": "cuda",
+  "fp32": {
+    "count": 2,
+    "accuracy": 1.0,
+    "auroc": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "specificity": 1.0,
+    "f1": 1.0,
+    "tn": 1,
+    "fp": 0,
+    "fn": 0,
+    "tp": 1
+  },
+  "deployed_int8_reference": {
+    "count": 2,
+    "accuracy": 1.0,
+    "auroc": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "specificity": 1.0,
+    "f1": 1.0,
+    "tn": 1,
+    "fp": 0,
+    "fn": 0,
+    "tp": 1
+  },
+  "rows": [
+    {
+      "image": "d19_01.png",
+      "label": "defect",
+      "object_group": "D19",
+      "role": "bringup_calibration",
+      "input_sha256": "6cfcba59a55607fcedcb824907277a769d41480a076344a384441b3b33e04c2a",
+      "threshold": 0.11209306865930557,
+      "fp32_score": 0.32008031010627747,
+      "int8_score": 0.3451572060585022,
+      "fp32_seconds": 0.7140795000000253,
+      "int8_reference_seconds": 0.4903796000000966,
+      "verified_stage_crcs": 29
+    },
+    {
+      "image": "n17_03.png",
+      "label": "good",
+      "object_group": "N17",
+      "role": "bringup_calibration",
+      "input_sha256": "88b1ad57268791a26178a226c7510ae377647a3b9947fb3c46a8357f5d5ecb35",
+      "threshold": 0.11209306865930557,
+      "fp32_score": 0.06585785001516342,
+      "int8_score": 0.07326433062553406,
+      "fp32_seconds": 0.013141900000164242,
+      "int8_reference_seconds": 0.3411823999999797,
+      "verified_stage_crcs": 29
+    }
+  ],
+  "timestamp": "2026-11-02T21:52:51+0800"
+}

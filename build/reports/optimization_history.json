@@ -1,0 +1,93 @@
+[
+  {
+    "version": "packed50",
+    "clock_mhz": 50.0,
+    "engine_us": 4506609.5,
+    "total_us": 5041014.5,
+    "resources": {
+      "Slice LUTs": 22429,
+      "Slice Registers": 22310,
+      "Block RAM Tile": 49,
+      "DSPs": 208
+    },
+    "wns_ns": 1.862,
+    "whs_ns": 0.039,
+    "source": "efficientad_full_pl_packed/generated/efficientad_full_board_profile.json",
+    "frequency_evidence": "routed clock constraint; historical profile lacks SLCR clock fields"
+  },
+  {
+    "version": "addr75",
+    "clock_mhz": 75.00000000000001,
+    "engine_us": 3068406.0,
+    "total_us": 3607583.5,
+    "resources": {
+      "Slice LUTs": 20455,
+      "Slice Registers": 19888,
+      "Block RAM Tile": 49,
+      "DSPs": 175
+    },
+    "wns_ns": 1.1,
+    "whs_ns": 0.012,
+    "source": "efficientad_full_pl_addr75/generated/efficientad_full_board_profile.json"
+  },
+  {
+    "version": "ctrl100",
+    "clock_mhz": 100.00000000000001,
+    "engine_us": 2319319.5,
+    "total_us": 2859220.0,
+    "resources": {
+      "Slice LUTs": 20475,
+      "Slice Registers": 19936,
+      "Block RAM Tile": 49,
+      "DSPs": 175
+    },
+    "wns_ns": 0.127,
+    "whs_ns": 0.035,
+    "source": "efficientad_full_pl_ctrl100/generated/efficientad_full_board_profile.json"
+  },
+  {
+    "version": "pipe125",
+    "clock_mhz": 125.00000000000001,
+    "engine_us": 1897537.0,
+    "total_us": 2441561.0,
+    "resources": {
+      "Slice LUTs": 20332,
+      "Slice Registers": 23397,
+      "Block RAM Tile": 49,
+      "DSPs": 171
+    },
+    "wns_ns": 0.616,
+    "whs_ns": 0.013,
+    "source": "efficientad_full_pl_pipe125/generated/efficientad_full_board_profile.json"
+  },
+  {
+    "version": "pe40",
+    "clock_mhz": 125.00000000000001,
+    "engine_us": 1787290.5,
+    "total_us": 2331724.5,
+    "resources": {
+      "Slice LUTs": 23599,
+      "Slice Registers": 27105,
+      "Block RAM Tile": 57,
+      "DSPs": 203
+    },
+    "wns_ns": 0.386,
+    "whs_ns": 0.027,
+    "source": "efficientad_full_pl_pe40/generated/efficientad_full_board_profile.json"
+  },
+  {
+    "version": "overlap125",
+    "clock_mhz": 125.00000000000001,
+    "engine_us": 1483549.0,
+    "total_us": 2027585.0,
+    "resources": {
+      "Slice LUTs": 25750,
+      "Slice Registers": 33207,
+      "Block RAM Tile": 57,
+      "DSPs": 203
+    },
+    "wns_ns": 0.175,
+    "whs_ns": 0.038,
+    "source": "efficientad_full_pl_overlap125/generated/efficientad_full_board_profile.json"
+  }
+]

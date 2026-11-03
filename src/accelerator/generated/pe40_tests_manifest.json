@@ -1,0 +1,49 @@
+{
+  "cases": 31,
+  "original_cases": 27,
+  "added_shapes": [
+    {
+      "ih": 5,
+      "iw": 7,
+      "cin": 8,
+      "cout": 48,
+      "kernel": 3,
+      "stride": 1,
+      "pad": 1,
+      "pool": 0
+    },
+    {
+      "ih": 7,
+      "iw": 7,
+      "cin": 8,
+      "cout": 80,
+      "kernel": 3,
+      "stride": 1,
+      "pad": 0,
+      "pool": 0
+    },
+    {
+      "ih": 7,
+      "iw": 9,
+      "cin": 8,
+      "cout": 128,
+      "kernel": 3,
+      "stride": 1,
+      "pad": 1,
+      "pool": 1
+    },
+    {
+      "ih": 3,
+      "iw": 3,
+      "cin": 8,
+      "cout": 256,
+      "kernel": 3,
+      "stride": 1,
+      "pad": 0,
+      "pool": 0
+    }
+  ],
+  "sha256": "a90133709f066f6514f1467e0d5f8c6cb0710681520957ffbc06c72cd6d53366",
+  "source_original_sha256": "063bfcb21cf41d43d544b354ed3e8b20da50040062e27e72fd1f8e59010a521f",
+  "golden": "Torch FP64 convolution over exact integer inputs followed by original INT64 Q30 and pool rounding"
+}

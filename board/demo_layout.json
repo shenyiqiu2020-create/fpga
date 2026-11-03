@@ -1,0 +1,26 @@
+{
+  "symbols": {
+    "ea_blob": {
+      "address": 1070528,
+      "bytes": 8139584
+    },
+    "DemoControl": {
+      "address": 9240704,
+      "bytes": 256
+    },
+    "DemoFused": {
+      "address": 19300864,
+      "bytes": 12544
+    },
+    "DemoInput": {
+      "address": 19313408,
+      "bytes": 524288
+    },
+    "DemoTimes": {
+      "address": 9240960,
+      "bytes": 116
+    }
+  },
+  "elf_sha256": "e94b429615cd835b61bfe9c9271aef7e1a158131ac59c9d7e0070120d080dbb7",
+  "kernel_bit_sha256": "d7c76fc83e275d8e18bd0eed07632ad3958f3f31761ecca8f4ad7359ab76be1d"
+}

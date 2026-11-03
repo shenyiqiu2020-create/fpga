@@ -1,0 +1,485 @@
+{
+  "status": "SAME_MODEL_CPU_AND_PL_COMPARISON_PASSED",
+  "timestamp": "2026-11-01T20:50:15.568454+08:00",
+  "scope": "same frozen INT8/Q30 model, two identical preprocessed 256x256 inputs, all three networks and scoring",
+  "CPU": {
+    "processor": "Cortex-A9 core 0",
+    "clock_MHz": 666.6666666666667,
+    "cores": 1,
+    "NEON": true,
+    "compiler_optimization": "-O3 -mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard",
+    "method": "four spatial positions x two output channels, packed INT8 dot products using vmull.s8/vpadal.s16",
+    "I_cache": true,
+    "D_cache": true,
+    "PL_inference_calls": 0,
+    "functional_fixture_tests_passed": 27
+  },
+  "PL": {
+    "clock_MHz": 100.00000000000001,
+    "PE": 32,
+    "SIMD": 8,
+    "MAC_per_cycle": 256,
+    "ARM_scoring": true
+  },
+  "verification": {
+    "images": 2,
+    "matching_stage_CRCs": 58,
+    "matching_final_scores": true,
+    "FPGA_100MHz_restored": true
+  },
+  "average": {
+    "CPU_ops_us": 32157151.5,
+    "PL_ops_us": 2319386.0,
+    "CPU_total_us": 32607445.0,
+    "PL_total_us": 2861569.0,
+    "ops_speedup": 13.864510478204146,
+    "total_speedup": 11.394953258160122
+  },
+  "comparisons": [
+    {
+      "image": "D19_01",
+      "CPU_ops_us": 32157129,
+      "PL_ops_us": 2319380,
+      "CPU_total_us": 32607428,
+      "PL_total_us": 2859188,
+      "ops_speedup": 13.864536643413325,
+      "total_speedup": 11.404436504350187,
+      "score": 0.3451572060585022,
+      "stages": [
+        {
+          "name": "teacher.conv0",
+          "CPU_us": 1247930,
+          "PL_us": 139036,
+          "PL_speedup": 8.975589056071808,
+          "crc": 3237218885
+        },
+        {
+          "name": "teacher.conv3",
+          "CPU_us": 6107680,
+          "PL_us": 377287,
+          "PL_speedup": 16.18841889595984,
+          "crc": 249140991
+        },
+        {
+          "name": "teacher.conv6",
+          "CPU_us": 1593797,
+          "PL_us": 110024,
+          "PL_speedup": 14.485903075692576,
+          "crc": 678997613
+        },
+        {
+          "name": "teacher.conv8",
+          "CPU_us": 4067410,
+          "PL_us": 234829,
+          "PL_speedup": 17.32073125550933,
+          "crc": 1122203732
+        },
+        {
+          "name": "student.conv0",
+          "CPU_us": 1218807,
+          "PL_us": 139036,
+          "PL_speedup": 8.766125320060992,
+          "crc": 2197978013
+        },
+        {
+          "name": "student.conv3",
+          "CPU_us": 6099846,
+          "PL_us": 377287,
+          "PL_speedup": 16.167654862213645,
+          "crc": 923423740
+        },
+        {
+          "name": "student.conv6",
+          "CPU_us": 1593262,
+          "PL_us": 110023,
+          "PL_speedup": 14.481172118557028,
+          "crc": 1901149630
+        },
+        {
+          "name": "student.conv8",
+          "CPU_us": 8136535,
+          "PL_us": 469657,
+          "PL_speedup": 17.324419736105284,
+          "crc": 137591826
+        },
+        {
+          "name": "autoencoder.conv0",
+          "CPU_us": 77184,
+          "PL_us": 14433,
+          "PL_speedup": 5.347744751610891,
+          "crc": 1158410371
+        },
+        {
+          "name": "autoencoder.conv2",
+          "CPU_us": 52685,
+          "PL_us": 6189,
+          "PL_speedup": 8.512683793827758,
+          "crc": 14316409
+        },
+        {
+          "name": "autoencoder.conv4",
+          "CPU_us": 26586,
+          "PL_us": 3251,
+          "PL_speedup": 8.177791448784989,
+          "crc": 1553325805
+        },
+        {
+          "name": "autoencoder.conv6",
+          "CPU_us": 13346,
+          "PL_us": 1382,
+          "PL_speedup": 9.657018813314037,
+          "crc": 3550792148
+        },
+        {
+          "name": "autoencoder.conv8",
+          "CPU_us": 3362,
+          "PL_us": 476,
+          "PL_speedup": 7.063025210084033,
+          "crc": 2687971399
+        },
+        {
+          "name": "autoencoder.conv10",
+          "CPU_us": 880,
+          "PL_us": 433,
+          "PL_speedup": 2.032332563510393,
+          "crc": 640638061
+        },
+        {
+          "name": "autoencoder.resize11",
+          "CPU_us": 47,
+          "PL_us": 67,
+          "PL_speedup": 0.7014925373134329,
+          "crc": 2306179280
+        },
+        {
+          "name": "autoencoder.conv12",
+          "CPU_us": 846,
+          "PL_us": 227,
+          "PL_speedup": 3.7268722466960353,
+          "crc": 1327082413
+        },
+        {
+          "name": "autoencoder.resize15",
+          "CPU_us": 319,
+          "PL_us": 475,
+          "PL_speedup": 0.671578947368421,
+          "crc": 1199892720
+        },
+        {
+          "name": "autoencoder.conv16",
+          "CPU_us": 4353,
+          "PL_us": 507,
+          "PL_speedup": 8.585798816568047,
+          "crc": 2996987316
+        },
+        {
+          "name": "autoencoder.resize19",
+          "CPU_us": 1120,
+          "PL_us": 1648,
+          "PL_speedup": 0.6796116504854369,
+          "crc": 1778614032
+        },
+        {
+          "name": "autoencoder.conv20",
+          "CPU_us": 13222,
+          "PL_us": 1240,
+          "PL_speedup": 10.662903225806451,
+          "crc": 2251084361
+        },
+        {
+          "name": "autoencoder.resize23",
+          "CPU_us": 5101,
+          "PL_us": 7483,
+          "PL_speedup": 0.6816784712013898,
+          "crc": 998685013
+        },
+        {
+          "name": "autoencoder.conv24",
+          "CPU_us": 56406,
+          "PL_us": 4671,
+          "PL_speedup": 12.075786769428388,
+          "crc": 81077367
+        },
+        {
+          "name": "autoencoder.resize27",
+          "CPU_us": 19790,
+          "PL_us": 28947,
+          "PL_speedup": 0.6836632466231388,
+          "crc": 1034991506
+        },
+        {
+          "name": "autoencoder.conv28",
+          "CPU_us": 211040,
+          "PL_us": 16938,
+          "PL_speedup": 12.459558389420238,
+          "crc": 3577628352
+        },
+        {
+          "name": "autoencoder.resize31",
+          "CPU_us": 80470,
+          "PL_us": 117888,
+          "PL_speedup": 0.6825970412595005,
+          "crc": 1372646880
+        },
+        {
+          "name": "autoencoder.conv32",
+          "CPU_us": 845229,
+          "PL_us": 66832,
+          "PL_speedup": 12.647070265740963,
+          "crc": 892481684
+        },
+        {
+          "name": "autoencoder.resize35",
+          "CPU_us": 16331,
+          "PL_us": 22936,
+          "PL_speedup": 0.7120247645622602,
+          "crc": 3547709569
+        },
+        {
+          "name": "autoencoder.conv36",
+          "CPU_us": 91543,
+          "PL_us": 9455,
+          "PL_speedup": 9.681967213114755,
+          "crc": 2009939175
+        },
+        {
+          "name": "autoencoder.conv38",
+          "CPU_us": 572002,
+          "PL_us": 56723,
+          "PL_speedup": 10.084128131445798,
+          "crc": 3682285041
+        }
+      ]
+    },
+    {
+      "image": "N17_03",
+      "CPU_ops_us": 32157174,
+      "PL_ops_us": 2319392,
+      "CPU_total_us": 32607462,
+      "PL_total_us": 2863950,
+      "ops_speedup": 13.864484313130337,
+      "total_speedup": 11.385485780128842,
+      "score": 0.07326433062553406,
+      "stages": [
+        {
+          "name": "teacher.conv0",
+          "CPU_us": 1246309,
+          "PL_us": 139036,
+          "PL_speedup": 8.96393020512673,
+          "crc": 458085110
+        },
+        {
+          "name": "teacher.conv3",
+          "CPU_us": 6105864,
+          "PL_us": 377288,
+          "PL_speedup": 16.1835626895104,
+          "crc": 4133183051
+        },
+        {
+          "name": "teacher.conv6",
+          "CPU_us": 1593891,
+          "PL_us": 110024,
+          "PL_speedup": 14.486757434741511,
+          "crc": 3459967659
+        },
+        {
+          "name": "teacher.conv8",
+          "CPU_us": 4068693,
+          "PL_us": 234828,
+          "PL_speedup": 17.326268588072974,
+          "crc": 906195341
+        },
+        {
+          "name": "student.conv0",
+          "CPU_us": 1219086,
+          "PL_us": 139037,
+          "PL_speedup": 8.76806893129167,
+          "crc": 2691561136
+        },
+        {
+          "name": "student.conv3",
+          "CPU_us": 6099460,
+          "PL_us": 377287,
+          "PL_speedup": 16.16663176838852,
+          "crc": 797413010
+        },
+        {
+          "name": "student.conv6",
+          "CPU_us": 1593204,
+          "PL_us": 110022,
+          "PL_speedup": 14.480776571958335,
+          "crc": 4252094697
+        },
+        {
+          "name": "student.conv8",
+          "CPU_us": 8137922,
+          "PL_us": 469655,
+          "PL_speedup": 17.32744674282186,
+          "crc": 1437167153
+        },
+        {
+          "name": "autoencoder.conv0",
+          "CPU_us": 77257,
+          "PL_us": 14433,
+          "PL_speedup": 5.3528026051409965,
+          "crc": 2806310309
+        },
+        {
+          "name": "autoencoder.conv2",
+          "CPU_us": 52689,
+          "PL_us": 6190,
+          "PL_speedup": 8.511954765751211,
+          "crc": 2432219737
+        },
+        {
+          "name": "autoencoder.conv4",
+          "CPU_us": 26592,
+          "PL_us": 3251,
+          "PL_speedup": 8.179637034758535,
+          "crc": 1047048994
+        },
+        {
+          "name": "autoencoder.conv6",
+          "CPU_us": 13357,
+          "PL_us": 1383,
+          "PL_speedup": 9.657989877078814,
+          "crc": 243467040
+        },
+        {
+          "name": "autoencoder.conv8",
+          "CPU_us": 3364,
+          "PL_us": 477,
+          "PL_speedup": 7.052410901467505,
+          "crc": 1036519529
+        },
+        {
+          "name": "autoencoder.conv10",
+          "CPU_us": 877,
+          "PL_us": 434,
+          "PL_speedup": 2.02073732718894,
+          "crc": 235879100
+        },
+        {
+          "name": "autoencoder.resize11",
+          "CPU_us": 46,
+          "PL_us": 68,
+          "PL_speedup": 0.6764705882352942,
+          "crc": 946196529
+        },
+        {
+          "name": "autoencoder.conv12",
+          "CPU_us": 846,
+          "PL_us": 226,
+          "PL_speedup": 3.743362831858407,
+          "crc": 1653483367
+        },
+        {
+          "name": "autoencoder.resize15",
+          "CPU_us": 319,
+          "PL_us": 475,
+          "PL_speedup": 0.671578947368421,
+          "crc": 3349547583
+        },
+        {
+          "name": "autoencoder.conv16",
+          "CPU_us": 4353,
+          "PL_us": 507,
+          "PL_speedup": 8.585798816568047,
+          "crc": 1771791276
+        },
+        {
+          "name": "autoencoder.resize19",
+          "CPU_us": 1121,
+          "PL_us": 1647,
+          "PL_speedup": 0.6806314511232544,
+          "crc": 3431773161
+        },
+        {
+          "name": "autoencoder.conv20",
+          "CPU_us": 13219,
+          "PL_us": 1241,
+          "PL_speedup": 10.651893634165996,
+          "crc": 4257252530
+        },
+        {
+          "name": "autoencoder.resize23",
+          "CPU_us": 5102,
+          "PL_us": 7486,
+          "PL_speedup": 0.681538872562116,
+          "crc": 4047719218
+        },
+        {
+          "name": "autoencoder.conv24",
+          "CPU_us": 56399,
+          "PL_us": 4671,
+          "PL_speedup": 12.074288160993364,
+          "crc": 4219181763
+        },
+        {
+          "name": "autoencoder.resize27",
+          "CPU_us": 19790,
+          "PL_us": 28947,
+          "PL_speedup": 0.6836632466231388,
+          "crc": 1109677054
+        },
+        {
+          "name": "autoencoder.conv28",
+          "CPU_us": 211083,
+          "PL_us": 16938,
+          "PL_speedup": 12.46209705986539,
+          "crc": 4237746590
+        },
+        {
+          "name": "autoencoder.resize31",
+          "CPU_us": 80466,
+          "PL_us": 117891,
+          "PL_speedup": 0.6825457414051963,
+          "crc": 2383405797
+        },
+        {
+          "name": "autoencoder.conv32",
+          "CPU_us": 845245,
+          "PL_us": 66832,
+          "PL_speedup": 12.647309672013407,
+          "crc": 446478220
+        },
+        {
+          "name": "autoencoder.resize35",
+          "CPU_us": 16330,
+          "PL_us": 22936,
+          "PL_speedup": 0.7119811649808162,
+          "crc": 2309192629
+        },
+        {
+          "name": "autoencoder.conv36",
+          "CPU_us": 91537,
+          "PL_us": 9455,
+          "PL_speedup": 9.681332628239026,
+          "crc": 3453409474
+        },
+        {
+          "name": "autoencoder.conv38",
+          "CPU_us": 572753,
+          "PL_us": 56727,
+          "PL_speedup": 10.09665591340984,
+          "crc": 2211465631
+        }
+      ]
+    }
+  ],
+  "frozen_inputs_sha256": {
+    "ea_model_data.h": "44123b2fd95bdf7d4852741007e51933ffcb9c2e68585cf89439d8bde3d1e27f",
+    "ea_expected.h": "e6be9945b834dcedda7d0740579aade2c0ac8a72ba6cb32a024334647bc5d996",
+    "deployment_manifest.json": "914562ba97e27a3def78f784723c03ccdd81c1d47583fad6ac003491013caf14",
+    "packed_tests.bin": "063bfcb21cf41d43d544b354ed3e8b20da50040062e27e72fd1f8e59010a521f"
+  },
+  "source_sha256": {
+    "runtime/main.c": "ee2d1cbb56f1918cccdf80b2025e95a6a7da8dd08df57ed51c577104bf19315b",
+    "runtime/ea_cpu_ops.h": "e87600530ff64ef3158507cf0f8ad9979153b8faae307068e9240cc01a7f1917",
+    "runtime/cpu_selftest.h": "40b58816af9e5d9c64a75a20d61d7264efdd728baa9c4d446da6bdffde5b0dcb",
+    "runtime/ea_score.h": "008470622c18862fa36b53ff99b22b68c813d858d413045fdfd8794433b75442",
+    "runtime/fixtures.S": "2511aaa153e6cc16d28dbd7abae0bd6df53d440d958a7d47448461d9e822d649",
+    "runtime/lscript.ld": "f6cf9193e2746d595dce1d7a573629f44cc1975e298a8d8210be628291bcd611"
+  },
+  "CPU_elf_sha256": "b6fba1523b16d707cc37b2bc1189e2a2a3a45bddaa36f1ff0c5da4bc8d82a063"
+}

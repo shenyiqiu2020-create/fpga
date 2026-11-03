@@ -1,0 +1,161 @@
+
+****** vitis-run v2025.2 (64-bit)
+  **** SW Build 6295257 on 2025-11-13-08:29:27
+  **** Start of session at: Sun Nov  1 22:58:42 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+  **** HLS Build v2025.2 6295257
+
+Sourcing Tcl script 'C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/scripts/build_hls.tcl'
+
+INFO: [HLS 200-1510] Running: open_project engine_project 
+
+WARNING: [HLS 200-2182] The 'engine_project' project will not automatically appear within Vitis IDE workspaces and is meant only for TCL batch use.  Please use open_component instead of open_project/open_solution to generate Vitis IDE compatible component files and directory structure.
+
+Resolution: For help on HLS 200-2182 see docs.amd.com/access/sources/dita/topic?Doc_Version=2025.2%20English&url=ug1448-hls-guidance&resourceid=200-2182.html
+
+INFO: [HLS 200-10] Opening solution 'C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project'.
+
+INFO: [HLS 200-1510] Running: set_top efficientad_engine 
+
+INFO: [HLS 200-1510] Running: add_files efficientad_engine.cpp 
+
+INFO: [HLS 200-10] Adding design file 'efficientad_engine.cpp' to the project
+
+INFO: [HLS 200-1510] Running: add_files -tb tb_engine.cpp 
+
+INFO: [HLS 200-10] Adding test bench file 'tb_engine.cpp' to the project
+
+INFO: [HLS 200-1510] Running: add_files -tb C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/generated/engine_tests.bin 
+
+INFO: [HLS 200-10] Adding test bench file 'C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/generated/engine_tests.bin' to the project
+
+INFO: [HLS 200-1510] Running: open_solution sol -flow_target vivado 
+
+INFO: [HLS 200-10] Opening solution 'C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol'.
+
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 8ns.
+
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg484-2'
+
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+
+Resolution: For help on HLS 200-1505 see docs.amd.com/access/sources/dita/topic?Doc_Version=2025.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+
+INFO: [HLS 200-1464] Running solution command: config_interface -m_axi_addr64=0
+
+INFO: [HLS 200-1464] Running solution command: config_export -display_name {EfficientAD Overlapped PE40 125MHz INT8 Engine}
+
+INFO: [HLS 200-1464] Running solution command: config_export -format=ip_catalog
+
+INFO: [HLS 200-1464] Running solution command: config_export -rtl=verilog
+
+INFO: [HLS 200-1510] Running: set_part xc7z020clg484-2 
+
+INFO: [HLS 200-1510] Running: create_clock -period 8 -name default 
+
+INFO: [HLS 200-1510] Running: config_interface -m_axi_addr64=false 
+
+INFO: [HLS 200-1510] Running: export_design -format ip_catalog -rtl verilog -display_name EfficientAD Overlapped PE40 125MHz INT8 Engine 
+
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+
+
+
+
+****** Vivado v2025.2 (64-bit)
+
+
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+
+
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+
+
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+
+
+  **** Start of session at: Sun Nov  1 22:58:46 2026
+
+
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+
+
+
+
+source run_ippack.tcl -notrace
+
+
+INFO: calling package_hls_ip ip_types=vitis sysgen json_file=C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/sol_data.json outdir=C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip srcdir=C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol ippack_options_dict= ippack_options_dict=
+
+
+INFO: Copied 1 ipmisc file(s) to C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/misc
+
+
+INFO: Copied 57 verilog file(s) to C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/hdl/verilog
+
+
+INFO: Copied 53 vhdl file(s) to C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/hdl/vhdl
+
+
+INFO: Copied 10 swdriver file(s) to C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/drivers
+
+
+INFO: Import ports from HDL: C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/hdl/vhdl/efficientad_engine.vhd (efficientad_engine)
+
+
+INFO: Add axi4lite interface s_axi_control
+
+
+INFO: Add clock interface ap_clk
+
+
+INFO: Add reset interface ap_rst_n
+
+
+INFO: Add interrupt interface interrupt
+
+
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+
+
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+
+
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/amd/2025.2/Vivado/data/ip'.
+
+
+INFO: Add axi4full interface m_axi_ddr
+
+
+INFO: Calling post_process_vitis to specialize IP
+
+
+INFO: Calling post_process_sysgen to specialize IP
+
+
+Generating sysgen info xml from json file
+
+
+INFO: Created IP C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/component.xml
+
+
+INFO: Created IP archive C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/xilinx_com_hls_efficientad_engine_1_0.zip
+
+
+INFO: [Common 17-206] Exiting Vivado at Sun Nov  1 22:58:52 2026...
+
+
+INFO: [HLS 200-802] Generated output file engine_project/sol/impl/export.zip
+
+INFO: [HLS 200-2161] Finished Command export_design Elapsed time: 00:00:08; Allocated memory: 17.160 MB.
+
+INFO: [HLS 200-112] Total CPU user time: 1 seconds. Total CPU system time: 1 seconds. Total elapsed time: 10.225 seconds; peak allocated memory: 209.473 MB.
+
+INFO: [vitis-run 60-791] Total elapsed time: 0h 0m 11s
+INFO: [vitis-run 60-1662] Stopping dispatch session having empty uuid.

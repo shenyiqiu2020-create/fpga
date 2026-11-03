@@ -1,0 +1,23 @@
+{
+  "status": "ROUTED_TIMING_AND_RTL_VALIDATED",
+  "clock_MHz": 75,
+  "wns_ns": 1.1,
+  "whs_ns": 0.012,
+  "ps_changes": "FCLK0 divider only; ARM, DDR, UART unchanged",
+  "ps_clock_parameters": {
+    "PCW_ACT_FPGA0_PERIPHERAL_FREQMHZ": "75.000000",
+    "PCW_ACT_UART_PERIPHERAL_FREQMHZ": "100.000000",
+    "PCW_CPU_CPU_PLL_FREQMHZ": "1333.333",
+    "PCW_DDR_DDR_PLL_FREQMHZ": "1066.667",
+    "PCW_FPGA0_PERIPHERAL_FREQMHZ": "75",
+    "PCW_IO_IO_PLL_FREQMHZ": "1800.000",
+    "PCW_UART_PERIPHERAL_FREQMHZ": "100",
+    "PCW_UIPARAM_ACT_DDR_FREQ_MHZ": "533.333374",
+    "PCW_UIPARAM_DDR_FREQ_MHZ": "533.333333"
+  },
+  "artifacts": {
+    "efficientad_full.bit": "7a503183afa7ee986a950d94f99e8d539a4e668683c6191d5da74738af62f01e",
+    "ax7021_efficientad_full.xsa": "a843d96513811a20eeb50db38a1680d6ac2d23050b2e900350019e3dcd67446c",
+    "ps7_init.tcl": "5ebea6b497565337aca5a3eca14a20b8acdbc5ca745d8629b78d7f0c36f1ac73"
+  }
+}

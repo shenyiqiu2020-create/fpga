@@ -1,0 +1,52 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Sun Nov  1 23:06:27 2026
+| Host         : FH running 64-bit major release  (build 9200)
+| Command      : report_high_fanout_nets -max_nets 30 -file C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/generated/fanout_after_replication.rpt
+| Design       : design_full_wrapper
+| Device       : xc7z020
+| Design State : Physopt postPlace
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+High Fan-out Nets Information
+
+1. Summary
+----------
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+-------------+
+| Net Name                                                                                                                                                                                                         | Fanout | Driver Type |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+-------------+
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/sums_U/U_efficientad_engine_fifo_w1280_d4_D_ram/SR[0]                                                                                    |   3119 | LUT1        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/ap_NS_fsm141_out                                                                                                                                                 |   2830 | LUT2        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_conv_layer_Outline_VITIS_LOOP_213_2_fu_2033/mac_muladd_10ns_6ns_21s_21_4_1_U64/efficientad_engine_mac_muladd_10ns_6ns_21s_21_4_1_DSP48_0_U/SR[0]             |   2653 | LUT2        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_conv_layer_Outline_VITIS_LOOP_213_2_fu_2033/E[0]                                                                                                             |   2560 | LUT2        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/ap_NS_fsm19_out                                                                                                              |   1524 | LUT3        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/mac_row_U0/cw_read_reg_1300[8]_i_1_n_0                                                                                                   |   1453 | LUT4        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/grp_emit_row_Pipeline_VITIS_LOOP_156_4_fu_5370/flow_control_loop_pipe_sequential_init_U/ap_CS_fsm_reg[10]                    |   1415 | LUT6        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/sums_U/U_efficientad_engine_fifo_w1280_d4_D_ram/pop                                                                                      |   1299 | LUT3        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/add_ln131_reg_11666[8]_i_1_n_0                                                                                               |   1296 | LUT3        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/mac_row_U0/grp_mac_row_Pipeline_VITIS_LOOP_71_3_fu_833/flow_control_loop_pipe_sequential_init_U/empty_fu_766[0]                          |   1280 | LUT2        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/ap_CS_fsm_state6                                                                                                             |   1075 | FDRE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/sums_U/waddr[1]                                                                                                                          |    864 | FDRE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/sums_U/U_efficientad_engine_fifo_w1280_d4_D_ram/push                                                                                     |    863 | LUT2        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/sums_U/waddr[0]                                                                                                                          |    852 | FDRE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/sums_U/waddr_reg[1]_rep_n_0                                                                                                              |    851 | FDRE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_conv_layer_Outline_VITIS_LOOP_213_2_fu_2033/ap_CS_fsm_state25_repN                                                                                           |    747 | FDRE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_1_ce0_local                                  |    692 | FDRE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/q_242_reg_3524[0]                                                                                                            |    642 | LUT4        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/grp_emit_row_Pipeline_VITIS_LOOP_156_4_fu_5370/flow_control_loop_pipe_sequential_init_U/pool_read_reg_11236_reg[0]_rep__6[0] |    640 | LUT4        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/left_78_reg_2946[7]_i_1_n_0                                                                                                  |    640 | LUT5        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/grp_emit_row_Pipeline_VITIS_LOOP_134_2_fu_5244/flow_control_loop_pipe_sequential_init_U/tmp_160_fu_1570_p4[2]                |    552 | LUT3        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_conv_layer_Outline_VITIS_LOOP_213_2_fu_2033/icmp_ln214_reg_4508_reg[0]_i_1_n_2                                                                               |    548 | CARRY4      |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/sums_U/waddr_reg[0]_rep_n_0                                                                                                              |    536 | FDRE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/sums_U/U_efficientad_engine_fifo_w1280_d4_D_ram/mem_reg_0_3_0_5_i_1_n_0                                                                  |    520 | LUT2        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/ap_CS_fsm_state94                                                                                                                                                |    410 | FDRE        |
+| design_full_i/engine/inst/ap_CS_fsm_state1                                                                                                                                                                       |    386 | FDSE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/grp_emit_row_Pipeline_VITIS_LOOP_134_2_fu_5244_ap_start_reg                                                                  |    366 | FDRE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/sums_U/U_efficientad_engine_fifo_w1280_d4_D_ram/full_n_reg                                                                               |    338 | LUT2        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/ap_CS_fsm_state41                                                                                                                                                |    331 | FDRE        |
+| design_full_i/engine/inst/grp_conv_layer_fu_387/grp_overlap_row_fu_2269/emit_row_U0/ox_fu_602_reg[0]_rep__15_n_0                                                                                                 |    329 | FDRE        |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+-------------+
+
+

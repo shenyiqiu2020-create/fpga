@@ -1,0 +1,17 @@
+{
+  "status": "FRONTEND_FPGA_AND_REFERENCE_E2E_PASSED",
+  "delivery_root": "C:\\Users\\sheny\\Desktop\\fpga",
+  "fpga_defect_score": "0.345157",
+  "fpga_normal_score": "0.073264",
+  "mobile_horizontal_overflow": false,
+  "javascript_errors": [],
+  "browser_capabilities": {
+    "camera": true,
+    "screenCapture": true,
+    "recorder": true
+  },
+  "received_board_images": 75,
+  "camera_physical_capture": "not tested; requires user camera permission",
+  "screen_recording": "API available; requires user screen selection",
+  "timestamp": "2026-11-02T15:00:55.325Z"
+}

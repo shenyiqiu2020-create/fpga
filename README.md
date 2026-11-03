@@ -1,164 +1,83 @@
-# 基于 FPGA 的工件外观检测系统
+# 基于 Zynq7020 的工件外观异常检测系统
 
-2026 年全国大学生嵌入式芯片与系统设计竞赛 FPGA 创新设计赛道作品。
+AMDYES 团队的 AMD 自主选题赛道工程整理稿，依据提供的 2026 选题指南第 3.3 节及第六节。当前适用组别按团队此前登记为初级组；年级、学历、报名信息与板卡修订须在最终提交前由团队确认。
 
-| 项目 | 内容 |
-| --- | --- |
-| 团队 | AMDYES |
-| 组队 | 1 名队长、2 名队员，均为大三；在读本科资格以报名审核为准 |
-| 参赛厂商 | AMD |
-| 选定赛道 | AMD 自主选题（初级），对应选题指南第 3.3 节 |
-| 目标器件 | ALINX 板卡，实物照片可见 XC7Z020；布局疑似 AX7021 系列，版本待核对 |
-| 算法方向 | 先复现 EfficientAD 完整推理，再研究 Zynq PS/PL 迁移；几何约束为可能的后续扩展 |
-| 开源协议 | [MIT](LICENSE) |
+## 可以直接运行什么
 
-## 项目简介
+1. 双击 `start_demo.cmd`，打开 `http://127.0.0.1:8765`。默认使用本机已验证的 `efficientad` Python 环境；换电脑时先设置 `EA_PYTHON`。
+2. 板卡接原配圆口电源与 JTAG USB。点击“初始化 FPGA”，临时加载已验证的 bitstream 和演示 ELF，不写 Flash。
+3. 选择样例或上传工件图片，保持“FPGA 板端推理”，点击“开始检测”。界面显示异常响应、分数、固定阈值、真实 PL 核调用耗时、板端总耗时和本次处理耗时。
+4. 需要摄像头时手动开启并授权，拍摄后再检测。拍摄模式隐藏侧栏与历史；录制画面由浏览器要求选择窗口，停止后保存本地 WebM，不上传外部服务。
+5. 可切换为电脑 FP32 或 INT8 参考，界面和 CSV 会明确标出计算后端。电脑模式不伪装为 FPGA 结果。
 
-本作品面向小批量规则工件的外观质量检测需求，拟基于 Zynq-7020 构建桌面式视觉检测系统。在固定照明与定位条件下，检测局部破损、缺角、缺孔等缺陷，输出异常区域、合格判定和检测统计，并支持结果显示与记录保存。
+## 已有实测
 
-团队当前目标是先在公开数据集上复现并评估 EfficientAD 推理，再将推理链路迁移到 ALINX Zynq-7020 板上，最后考虑实物。原论文包含局部教师–学生异常图及自动编码器相关的异常图；第一候选的外部网络代码和本机训练文件放在 Git 忽略目录，尚未形成仓库内可独立运行的完整模型工程或板端实现。原先提出的几何约束是可能的后续扩展，不能替代论文完整推理或声称已经实现。
+完整模型包含 Teacher、Student、Autoencoder；22 个卷积阶段及 ReLU/平均池化、7 个 Resize 在 PL 中运行，ARM 负责调度与最终评分。计算核为一个可复用 HLS IP，逐层配置，不是三个同时铺开的网络。
 
-硬件侧计划围绕卷积、特征差分与通道累加设计可复用加速单元，研究 INT8 权重与激活量化、分块缓存及数据流优化。竞赛版拟由 Zynq 的 ARM（PS）负责图像输入、参数配置与结果显示，FPGA（PL）负责计算加速。本队课程版仍须在 PL 中实际构建可运行的 RISC-V 内核及 SoC，接入扩展 IP 并运行嵌入式程序；两版分别构建和验证。网络规模、接口和阈值由后续基线测试与资源评估确定。课程页面截图使用“RISC-V/ARM”表述，本队保留 RISC-V 必达要求，详见[课程要求交接](report/course_requirements.md)。
+| 指标 | 结果 | 证据 |
+|---|---:|---|
+| PL 时钟 | 125 MHz | 布线后时序与 SLCR 读回 |
+| PL 核调用合计 | 约 1.484 s/图 | 同两张固定输入实测 |
+| 含逐层 CRC 自检总耗时 | 约 2.028 s/图 | 优化版完整模型程序 |
+| 新演示服务板端总耗时 | 约 1.713 s/图 | 省略逐层 CRC，保留真实网络与评分 |
+| 资源 | 25,750 LUT / 33,207 FF / 203 DSP / 57 BRAM36 | Vivado 实现报告 |
+| 时序 | WNS +0.175 ns / WHS +0.038 ns | 125 MHz 布线后报告 |
+| 正确性 | 31 组 C/RTL；两图 58 阶段 CRC；上传链路异常图逐像素一致 | `sim/results/`、`board/evidence/` |
 
-当前仓库已有异常评分图的软件参考计算，以及一个固定机位的**灰度像素模板演示**：输入正常参考图和待测图，保存差异图、缺陷掩码、红色叠加图和 JSON 判定。演示只在人工生成的规则工件图片上验证，使用像素差异而非教师/学生网络；阈值未用真实样本标定。另在 Git 忽略目录中用非官方 EfficientAD 候选实现，对 MVTec AD 的 `bottle` 类完成 1,000 步小模型训练和 83 张测试图推理，图像级 AUC 为 95.71%。已导出两类分图，并用 21 张正常验证图设阈值；测试集异常检出 59/63，正常判对 16/20。63 张异常图的融合图逐图像素 AUC 平均为 91.82%，这是位置排序指标，并非缺陷框准确率。上述结果不代表论文完整配置、实物工件或板上效果。尚无硬件加速器、可重建板级工程或板级实测数据。
+JTAG 下载、图片传输、图像预处理不计入上述核耗时；前端显示的“本次处理”另外包含上位机与 JTAG 等开销。单核 ARM NEON 基线算子约 32.157 s，当前核调用约 1.484 s，约 21.68 倍；这是本工程特定实现与输入的比较，不代表所有 CPU 库的上限。
 
-实物演示候选件为白色 40×40 mm 规格方形尼龙扎带固定座（商品图手测约 38×38 mm）。组员 2026-10-15 报告**已到货 100 件，尚未试拍**；实际尺寸和质量待逐件检查，没有自采数据或实物检测结果。先用 3 件试拍缺陷，确认在模型输入尺寸下可见后再扩大采集。编号、缺陷制作、拍摄和暂定划分见[工件采集方案](data/capture_plan.md)。
+## 本次准确率评估
 
-A 工作线的电脑已确认有 RTX 4060 Laptop GPU（约 8 GB 显存）和 Python 3.13.0；仓库忽略的 `build/work/` 中已建立独立 Python 3.10 环境。重复人工图片的两步流程检查与真实 `bottle` 数据的 1,000 步初步评估分别留存；后者使用正常训练图 209 张、测试图 83 张，且未使用 ImageNet 辅助数据。数据许可、命令、指标边界和下一步见 [迁移计划](report/efficientad_plan.md)与[进度记录](report/progress.md)。
+已收到四组共 284 张裁剪图（224 种图片哈希），使用同一冻结模型与阈值重新推理；这些图片曾参与方法排查，属于回顾性评估，不是新盲测。不同组含重复图片和不同裁剪版本，分别统计，不合并报一个准确率。
 
-## 当前开发入口
+| 数据组 | 数量 | FP32 准确率 | 部署 INT8 准确率 | INT8 AUROC |
+|---|---:|---:|---:|---:|
+| 早期开发 | 48 | 89.58% | 93.75% | 96.88% |
+| 早期留出裁剪 | 33 | 96.97% | 96.97% | 100.00% |
+| 扩批开发 | 155 | 79.35% | 81.94% | 60.35% |
+| 扩批留出 | 48 | 68.75% | 66.67% | 74.02% |
 
-- [项目工作交接报告](report/team_outline.md)：先读状态快照、三条工作线、交付接口和验收节点；新结果以进度记录为准。
-- [工作记录与下一步](report/progress.md)：记录每次改动、原因、验证和待办，供队员同步进度。
-- [AMD 自主选题赛道规则核对表](report/contest_rules.md)：初级组资格、器件、交付物、AI 协作记录与待核验事项；开始新任务前先核对。
-- [课程大作业要求与方案交接](report/course_requirements.md)：课程平台截图的要求、团队保留的 RISC-V 必达条件、课程版缺口和打包清单；与 AMD 赛道规则分开。
-- [EfficientAD 数据集与板端迁移计划](report/efficientad_plan.md)：来源核对、阶段完成判据和 ALINX 板卡待确认信息。
-- [GitHub 协作步骤](report/collaboration.md)：通过 GitHub Desktop 获取项目、提交分支和同步。
-- [异常评分图参考实现](src/score_map.py)：消费已对齐的教师/学生特征，不含网络训练或权重。
-- [图片模板基线](src/image_baseline.py)：固定机位、同尺寸图片的像素差异判定；与 EfficientAD 模型分开记录。
-- [模拟图片生成器](sim/make_demo_images.py)：生成正常、缺角、缺孔三张人工图片，仅用于流程检查。
-- [EfficientAD 人工数据流程检查生成器](sim/make_efficientad_smoke_data.py)：将同一批人工图片排成候选训练脚本所需的目录结构；重复样本不用于精度结论。
-- [EfficientAD 异常图评估脚本](sim/evaluate_efficientad_maps.py)：核对保存图与测试图片逐张对应，输出图像级 AUC 和逐张分数；不产生二值判定或像素定位指标。
-- [EfficientAD 分图与阈值导出脚本](sim/export_efficientad_components.py)：读取本机 1,000 步模型，导出教师–学生图、自动编码器图和融合图，并用正常验证图确定图像级判定阈值；需独立 Python 3.10 环境。
-- [EfficientAD 像素位置评估脚本](sim/evaluate_efficientad_localization.py)：用异常测试图的像素标注计算逐图像素 AUC、按缺陷类别汇总，并生成本地误判样本对照图；不自动给出可靠缺陷框。
-- [工件采集方案](data/capture_plan.md)：100 件到货后的初检、先试 3 件缺陷、固定拍摄、按工件编号划分和原图交接；数量为首轮计划，不是已采集数据。
+扩批留出 INT8 判对 32/48，32 张缺陷均检出，16 张正常全部误报；FP32 也有 15 张正常误报。当前模型对扩批样本的误报问题尚未解决，不能只引用早期较好的 96.97%。测试没有调整模型、量化或阈值。
 
-在仓库根目录安装软件参考模块依赖并运行数值检查：
+排除参与标定的 D19、N17 整个实物组后，对两组留出中的 75 张图实际执行 FPGA 推理，逐图完整异常响应与整数参考比对。详细结果见 `report/accuracy_evaluation.md` 与 `sim/results/received_accuracy/`。输入、标签与 SHA256 在 `data/test_inputs/evaluation_manifest.json`。
 
-```sh
-python -m pip install -r requirements.txt
-python -m unittest discover -s sim -v
+原早期 35 张留出照片有 2 张定位失败，只有 33 张成功裁剪图在本次交接中；定位拒绝仍保留历史记录，不声称重新验证了原图全流程。新实物盲测和像素级定位精度仍未完成。新的独立数据可用 `sim/evaluate_accuracy.py`，按实物分组并排除标定组。
+
+## 目录对照
+
+| 指南目录 | 本工程组织 |
+|---|---|
+| `src/` | `accelerator/` 冻结 HLS、PS 自检程序及其原构建入口；`model/` 固定模型参考；`ps_demo/` 图片输入服务；`demo/` 本地前后端 |
+| `sim/` | 测试入口、原始 C/RTL 日志、统计结果、上传异常图对照和浏览器验证 |
+| `build/` | 重建入口、工程恢复、交付检查及资源/时序/优化历史报告 |
+| `board/` | bit、ELF、XSA、已布线 checkpoint、IP 归档、上板/演示服务、实测证据 |
+| `data/` | 固定原模型、样例、划分与评分表、竞赛指南、文件身份清单 |
+| `skill/` | 通用黄金参考校验、时序读取、提示词工作流与失败案例 |
+| `report/` | 可编辑报告初稿、PDF、协作记录、复现手册和拍摄脚本 |
+
+`src/accelerator/` 保留已验证版本的独立包布局，避免整理时改变计算源码和量化数据；重复放置的板端产物和分类证据由 SHA256 核验。工具自动生成的原生 RTL/IP 文件名保留在小写归档内或 Git 忽略的工具工作目录中；手工维护的提交文件名使用小写英文，按指南保留 `README.md` 标准例外。
+
+桌面目录原有的手工资料保存在 `data/legacy_original/`，仅供历史追溯；原报名截图单独保存在 `data/private_archive/`。这两个目录与原有 `build/work/` 缓存均保留在本机，不放入公开交付压缩包，也不作为当前验证证据。
+
+## 复现与检查
+
+已验证环境为 Windows、Vivado/Vitis 2025.2、Python 3.11.17、PyTorch 2.7.1+cu128、torchvision 0.22.1+cu128、NumPy 1.26.4、Pillow 10.4.0、scikit-learn 1.5.2。GPU 仅用于电脑参考计算，板端网络不依赖 PC GPU。
+
+```powershell
+python build/verify_delivery.py
+python sim/test_delivery_tools.py
+python build/restore_prebuilt.py
+python sim/evaluate_accuracy.py
 ```
 
-若 Windows 受限环境禁止测试写入系统临时目录，可在 PowerShell 中先执行 `New-Item -ItemType Directory -Force build/work/tmp | Out-Null; $env:TEMP = (Resolve-Path build/work/tmp).Path; $env:TMP = $env:TEMP`，再运行 `python -B -m unittest discover -s sim -v`。临时输出位于 Git 忽略的 `build/work/`。
+从源码重建：参考 `report/reproduction.md` 设置 `EA_PYTHON`、`EA_BSP` 和 AMD 工具路径，再执行 `build/rebuild.cmd`。复现完整综合、RTL 仿真和布局布线需要相应工具与时间；`restore_prebuilt.py` 只是还原已通过验证的原生 IP 文件，不冒称重新综合。
 
-在仓库根目录运行电脑端图片演示（PowerShell、终端均可；生成文件放在被 Git 忽略的 `build/work/`）：
+双击 `board/view_implemented.cmd` 可在 Vivado 查看交付的已实现设计。新生成的可编辑 XPR 位于 `src/accelerator/_build/vivado/ea_full.xpr`。原 D: 工程和本工作区此前版本未被改写。
 
-```sh
-python -m sim.make_demo_images --output-dir build/work/demo_inputs
-python -m src.image_baseline build/work/demo_inputs/normal.png build/work/demo_inputs/missing_corner.png --output-dir build/work/demo_corner
-python -m src.image_baseline build/work/demo_inputs/normal.png build/work/demo_inputs/missing_hole.png --output-dir build/work/demo_hole
-```
+本地交付压缩包为 `build/efficientad_submission.zip`，配套 `build/submission_archive.sha256` 与 `data/submission_manifest.json`。修改文件后可执行 `python build/package_submission.py` 重新审计并打包；私人报名截图、旧资料和工具缓存被排除。
 
-在 `build/work/demo_corner/` 和 `build/work/demo_hole/` 查看 `result.json`（判定、区域数、像素数、区域坐标）、`score.npy`（浮点平方差）、`score.png`（差异可视化）、`mask.png`（保留的异常区域）和 `overlay.png`（待测图上红色标记）。上述模拟图应分别判为 `defect`，缺角面积 256 像素、缺孔面积 144 像素；正常图与自身比较应判为 `normal`。这只是软件流程的预期值，不是检测准确率或板上结果。
+## 提交状态
 
-换成自采图片时，用一张正常图片作为 `reference`，把待测图片作为 `target`。两张图必须同尺寸、相机与工件位置对齐、照明尽量固定，否则移动或光照变化也会产生红色区域。`--threshold` 是归一化灰度差的平方阈值，默认 `0.25`；`--min-area` 是保留区域的最小像素数，默认 `9`。这些默认值只为模拟图片设置，需要从独立的真实验证集重新确定。输出框坐标的 `right`、`bottom` 为不包含边界。
+报告是初稿。新实物盲测、扩批正常误报改进、官方海报模板、报名信息/板卡修订核验、现场相机与录屏实际拍摄仍待补齐；详见 `report/contest_compliance.md`。这次只整理本地工程，没有替团队向赛事或 Git 远端提交。
 
-加入模型之后，保存教师和学生的 `[C,H,W]` 特征为 `.npy`，再执行：
-
-```sh
-python src/score_map.py teacher.npy student.npy --output score.npy
-```
-
-只有在两组 INT8 特征的量化尺度与零点已经对齐后才可追加 `--int8`。输出是 `[H,W]` 的局部异常分数图；阈值、几何约束和最终判定尚未实现。
-
-## 目录结构
-
-仓库根目录 `fpga/` 即规则中的 `<project_name>/`。以下七个目录与选题指南第 3.3.5.4 节逐项对应；各目录中的 `README.md` 说明后续文件的归属，并使目录可被 Git 保存。
-
-```text
-fpga/
-├── README.md
-├── LICENSE
-├── .gitignore
-├── requirements.txt
-├── src/
-│   ├── README.md
-│   ├── image_baseline.py
-│   └── score_map.py
-├── sim/
-│   ├── README.md
-│   ├── make_demo_images.py
-│   ├── make_efficientad_smoke_data.py
-│   ├── test_image_baseline.py
-│   └── test_score_map.py
-├── build/
-│   └── README.md
-├── board/
-│   └── README.md
-├── data/
-│   └── README.md
-├── skill/
-│   └── README.md
-└── report/
-    ├── README.md
-    ├── progress.md
-    ├── collaboration.md
-    ├── contest_rules.md
-    ├── efficientad_plan.md
-    └── team_outline.md
-```
-
-| 目录 | 比赛要求 | 本项目内容 |
-| --- | --- | --- |
-| [src/](src/README.md) | 设计源码 | 教师/学生网络训练与参考实现、RTL/HLS 加速单元、PS 侧调用与检测流程 |
-| [sim/](sim/README.md) | 仿真或验证脚本与结果 | 算子和系统验证、量化误差分析、异常图与几何判定的参考比对 |
-| [build/](build/README.md) | 可复现构建脚本、综合与实现报告 | Vivado/Vitis 构建入口、资源报告、时序报告和优化前后对比 |
-| [board/](board/README.md) | 上板工程、运行脚本与实测输出 | 板卡配置、约束与部署文件、运行入口、实测输出与参考比对 |
-| [data/](data/README.md) | 测试数据与参考结果 | 工件样本、划分清单、缺陷标注、黄金参考和量化校准数据 |
-| [skill/](skill/README.md) | 可复用技能包 | 提示词工作流、工程模板、校验方法和经验证的排错经验 |
-| [report/](report/README.md) | 设计报告与大模型协作记录 | 设计依据、软硬件划分、优化结果、复现说明和协作纠错过程 |
-
-新增目录及普通文件使用英文小写字母、数字、下划线或连字符命名，不使用中文、空格或特殊字符。`README.md` 按规则目录示例保留标准名称，`LICENSE` 沿用仓库现有许可证，`.gitignore` 用于排除工具缓存；中文说明写在正文中。
-
-## 环境与复现步骤
-
-选题指南第 3.3.3.1 节推荐 Vivado / Vitis 2026.1 或 2025.2。若采用其他版本，应在设计报告中解释原因并验证构建脚本可复现。实际使用的工具版本、板卡型号、操作系统及软件依赖将在实现阶段记录。
-
-目前可复现的是仓库结构、评分图参考计算和人工图片上的电脑端模板演示：
-
-```sh
-git clone https://github.com/shenyiqiu2020-create/fpga.git
-cd fpga
-```
-
-系统实现完成后，按以下顺序补齐可执行命令、输入文件、预期输出和验证结果：
-
-1. 在 `board/` 声明板卡、器件完整型号、相机接口、照明和工件定位方式；在 `report/` 记录工具和依赖版本。
-2. 在 `data/` 登记数据来源、授权、训练/验证/测试划分以及获取方法。
-3. 在 `src/` 提供离线训练、软件基线、量化和硬件实现；记录权重来源与校验值。
-4. 在 `sim/` 执行仿真和黄金参考比对，记录误差容限、判定阈值及结果。
-5. 在 `build/` 执行构建，保存综合、实现、资源和时序报告。
-6. 在 `board/` 部署运行，保存实测输出、参考比对及性能统计。
-7. 在 `skill/` 和 `report/` 整理已验证经验、优化对比、协作记录和完整复现说明。
-
-上述系统步骤尚未实现，当前不能用于训练、生成 bitstream 或运行板端检测。规则要求作品最终在板上跑通并提供实测输出，离线数值检查与板级实测结果分别记录。
-
-## 两条实施路线与最小演示
-
-两版可复用同一套图片采集规范、软件参考算法、阈值评估、测试图片和结果格式，但必须分别构建与验收。
-
-| 路线 | 必须补齐的部分 | 当前状态 |
-| --- | --- | --- |
-| 竞赛版 | Zynq ARM PS 读图、显示和保存；选定并验证一项 PL 计算模块，和软件黄金参考比对；整机上板记录输入、输出、耗时与资源 | 尚未开始板端工作 |
-| 课程版 | 在 PL 构建真正运行程序的 RISC-V 内核及存储、总线、外设组成的 SoC，接入扩展检测 IP；嵌入式程序实际配置并读取 IP，单独保存设计、软件、验证、实物演示和提交材料 | 尚未开始；仅有 Zynq ARM 不满足本队保留的 RISC-V 要求，详见[课程要求交接](report/course_requirements.md) |
-
-面向团队提供的 11 月 4 日期限，按“数据集上的 EfficientAD 完整推理基线 → 固定数值与资源预算 → Zynq 板上数据集图片的推理和 PS/PL 比对 → 实物”的顺序推进。板端至少验证一个 PL 算子是本团队的工程目标，**不是指南规定的最低数量**。若器件资源不足，先比较较小模型、PS/PL 分层和量化；任何省略自动编码器或换算法的方案须单独命名、重新评估，不应称为论文完整模型。11 月 4 日须以正式通知核对；阶段判据见 [迁移计划](report/efficientad_plan.md) 和 [工作记录](report/progress.md)。
-
-## 提交依据
-
-本次初始化依据提供的 AMD 2026 选题指南第 3.3 节，重点为第 3.3.5.1 至 3.3.5.4 节（文档页码 21-22），以及报名页面中可见的选定赛道、作品名称和简介。报名页面的简介末尾受滚动区域遮挡，本文概述仅使用可核实内容。
-
-后续提交应包含完整源码、仿真或验证结果、可复现构建脚本、综合与实现报告、上板工程和实测输出、技能包、设计报告及大模型协作记录。仓库中的性能、准确率、资源占用和时钟频率均应来自实际测试，并注明测试条件。
-
-课程作业另有独立提交：课程页面截图显示上传窗口为 10 月 13 日至 12 月 31 日，页面同时写“无截止日期”，因此须向教师核对最终期限；不能用这个窗口推迟竞赛准备。课程压缩包需有 PDF 报告、整理后的代码、佐证材料、AI 使用与验收记录及不超过 10 MB 的实物演示视频，整包不超过 30 MB。具体口径和未完成项见[课程要求交接](report/course_requirements.md)。
+自有代码沿用 `license.txt` 的 MIT 协议；EfficientAD 候选代码来源与 Apache 2.0 许可、FINN 辅助库的 BSD 3 Clause 许可在 `report/sources.md` 中单独登记。没有把完整 FINN 编译器、现成 DPU 或 PYNQ Overlay 当作已实现成果。

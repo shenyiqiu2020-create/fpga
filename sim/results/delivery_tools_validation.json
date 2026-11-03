@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "checks": [
+    "matching_hash_passes",
+    "changed_hash_rejected",
+    "path_escape_rejected",
+    "valid_timing_passes",
+    "negative_slack_rejected"
+  ]
+}

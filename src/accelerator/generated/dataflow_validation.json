@@ -1,0 +1,22 @@
+{
+  "status": "HLS_DATAFLOW_AND_C_SIM_VERIFIED",
+  "C_cases": 31,
+  "dataflow_processes": [
+    "mac_row",
+    "emit_row"
+  ],
+  "FIFO_bits": 1280,
+  "FIFO_depth": 4,
+  "FIFO_implementation": "LUTRAM",
+  "PE": 40,
+  "SIMD": 8,
+  "requant_lanes": 4,
+  "clock_ns": 8,
+  "compute_II": 1,
+  "source_sha256": "ca2448426355e36330f48317a0238674987ab439d4239182e40ef8b140f6accc",
+  "evidence": [
+    "hls/engine_project/sol/syn/report/overlap_row_csynth.rpt",
+    "logs/hls_prepare.log",
+    "generated/export_instrumentation.json"
+  ]
+}

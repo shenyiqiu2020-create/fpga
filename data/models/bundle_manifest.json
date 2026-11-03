@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "bundle_id": "tie_mount_20261026_3000step_dedupval",
+  "sha256": {
+    "teacher_final.pth": "976fda79aef1db98a108b4922dfa6fb904cae86f9e81700ed75c470d2a72fdab",
+    "student_final.pth": "f37a94bbb6fa9c400e25d8f6e8b81ac0c402bd4da56f1d11d177776df5e9119b",
+    "autoencoder_final.pth": "6e556dc18878c48ecc9577c9bef3f9c077213a84809e3eb5bcb9142dac185bde",
+    "normalization.npz": "71ebc3c70e4ad7ce35495fd0e0e285cec5bf0fba56466d6d1f84e3b3f7709b04",
+    "summary.json": "e1fab63cb32df645ef2e74502b5475858e1a10ad61172afff4370b7415fe22b5"
+  }
+}

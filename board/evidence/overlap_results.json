@@ -1,0 +1,498 @@
+{
+  "status": "BOARD_FULL_MODEL_OVERLAP125_PROFILE_PASSED",
+  "timestamp": "2026-11-01T23:20:09.206282+08:00",
+  "architecture": {
+    "PE": 40,
+    "SIMD": 8,
+    "INT8_MAC_per_cycle": 320,
+    "requant_lanes": 4,
+    "MAC_II": 1,
+    "clock_MHz": 125,
+    "AXI_address_bits": 32,
+    "postprocessing_overlap": "per-row DATAFLOW, 1280-bit FIFO depth 4"
+  },
+  "wns_ns": 0.175,
+  "whs_ns": 0.038,
+  "resources": {
+    "Slice LUTs": 25750,
+    "Slice Registers": 33207,
+    "Block RAM Tile": 57,
+    "DSPs": 203
+  },
+  "baseline_resources": {
+    "Slice LUTs": 23599,
+    "Slice Registers": 27105,
+    "Block RAM Tile": 57,
+    "DSPs": 203
+  },
+  "model_and_quantization_unchanged": true,
+  "validation": {
+    "C_cases": 31,
+    "RTL_cases": 31,
+    "board_images": 2,
+    "board_stage_CRCs": 58
+  },
+  "board_clock_MHz": 125.00000000000001,
+  "ARM_clock_MHz": 666.6666666666667,
+  "comparison": [
+    {
+      "image": "D19_01",
+      "old_engine_us": 1787291,
+      "new_engine_us": 1483552,
+      "old_total_us": 2333464,
+      "new_total_us": 2027909,
+      "engine_speedup": 1.2047376836133818,
+      "total_speedup": 1.1506749070101272,
+      "score": 0.3451572060585022,
+      "predicted_defect": true,
+      "stages": [
+        {
+          "name": "teacher.conv0",
+          "old_engine_us": 132240,
+          "new_engine_us": 87960,
+          "speedup": 1.5034106412005457,
+          "crc": 3237218885
+        },
+        {
+          "name": "teacher.conv3",
+          "old_engine_us": 273649,
+          "new_engine_us": 243180,
+          "speedup": 1.1252940208898758,
+          "crc": 249140991
+        },
+        {
+          "name": "teacher.conv6",
+          "old_engine_us": 83306,
+          "new_engine_us": 66833,
+          "speedup": 1.2464800323193632,
+          "crc": 678997613
+        },
+        {
+          "name": "teacher.conv8",
+          "old_engine_us": 165178,
+          "new_engine_us": 143720,
+          "speedup": 1.1493042026161981,
+          "crc": 1122203732
+        },
+        {
+          "name": "student.conv0",
+          "old_engine_us": 132240,
+          "new_engine_us": 87960,
+          "speedup": 1.5034106412005457,
+          "crc": 2197978013
+        },
+        {
+          "name": "student.conv3",
+          "old_engine_us": 273650,
+          "new_engine_us": 243180,
+          "speedup": 1.1252981330701537,
+          "crc": 923423740
+        },
+        {
+          "name": "student.conv6",
+          "old_engine_us": 83307,
+          "new_engine_us": 66831,
+          "speedup": 1.2465322978857116,
+          "crc": 1901149630
+        },
+        {
+          "name": "student.conv8",
+          "old_engine_us": 331026,
+          "new_engine_us": 287463,
+          "speedup": 1.1515429811836653,
+          "crc": 137591826
+        },
+        {
+          "name": "autoencoder.conv0",
+          "old_engine_us": 12616,
+          "new_engine_us": 9367,
+          "speedup": 1.3468559837728196,
+          "crc": 1158410371
+        },
+        {
+          "name": "autoencoder.conv2",
+          "old_engine_us": 5231,
+          "new_engine_us": 3203,
+          "speedup": 1.633156415860131,
+          "crc": 14316409
+        },
+        {
+          "name": "autoencoder.conv4",
+          "old_engine_us": 2977,
+          "new_engine_us": 1901,
+          "speedup": 1.566017885323514,
+          "crc": 1553325805
+        },
+        {
+          "name": "autoencoder.conv6",
+          "old_engine_us": 1223,
+          "new_engine_us": 929,
+          "speedup": 1.3164693218514532,
+          "crc": 3550792148
+        },
+        {
+          "name": "autoencoder.conv8",
+          "old_engine_us": 429,
+          "new_engine_us": 360,
+          "speedup": 1.1916666666666667,
+          "crc": 2687971399
+        },
+        {
+          "name": "autoencoder.conv10",
+          "old_engine_us": 427,
+          "new_engine_us": 425,
+          "speedup": 1.0047058823529411,
+          "crc": 640638061
+        },
+        {
+          "name": "autoencoder.resize11",
+          "old_engine_us": 59,
+          "new_engine_us": 60,
+          "speedup": 0.9833333333333333,
+          "crc": 2306179280
+        },
+        {
+          "name": "autoencoder.conv12",
+          "old_engine_us": 210,
+          "new_engine_us": 196,
+          "speedup": 1.0714285714285714,
+          "crc": 1327082413
+        },
+        {
+          "name": "autoencoder.resize15",
+          "old_engine_us": 416,
+          "new_engine_us": 417,
+          "speedup": 0.9976019184652278,
+          "crc": 1199892720
+        },
+        {
+          "name": "autoencoder.conv16",
+          "old_engine_us": 459,
+          "new_engine_us": 371,
+          "speedup": 1.2371967654986522,
+          "crc": 2996987316
+        },
+        {
+          "name": "autoencoder.resize19",
+          "old_engine_us": 1425,
+          "new_engine_us": 1425,
+          "speedup": 1.0,
+          "crc": 1778614032
+        },
+        {
+          "name": "autoencoder.conv20",
+          "old_engine_us": 1108,
+          "new_engine_us": 815,
+          "speedup": 1.3595092024539877,
+          "crc": 2251084361
+        },
+        {
+          "name": "autoencoder.resize23",
+          "old_engine_us": 6450,
+          "new_engine_us": 6452,
+          "speedup": 0.9996900185988841,
+          "crc": 998685013
+        },
+        {
+          "name": "autoencoder.conv24",
+          "old_engine_us": 4140,
+          "new_engine_us": 2851,
+          "speedup": 1.4521220624342337,
+          "crc": 81077367
+        },
+        {
+          "name": "autoencoder.resize27",
+          "old_engine_us": 25000,
+          "new_engine_us": 24997,
+          "speedup": 1.0001200144017282,
+          "crc": 1034991506
+        },
+        {
+          "name": "autoencoder.conv28",
+          "old_engine_us": 14998,
+          "new_engine_us": 10069,
+          "speedup": 1.48952229615652,
+          "crc": 3577628352
+        },
+        {
+          "name": "autoencoder.resize31",
+          "old_engine_us": 101791,
+          "new_engine_us": 101791,
+          "speedup": 1.0,
+          "crc": 1372646880
+        },
+        {
+          "name": "autoencoder.conv32",
+          "old_engine_us": 59167,
+          "new_engine_us": 39282,
+          "speedup": 1.5062114963596558,
+          "crc": 892481684
+        },
+        {
+          "name": "autoencoder.resize35",
+          "old_engine_us": 19793,
+          "new_engine_us": 19791,
+          "speedup": 1.0001010560355716,
+          "crc": 3547709569
+        },
+        {
+          "name": "autoencoder.conv36",
+          "old_engine_us": 8668,
+          "new_engine_us": 5124,
+          "speedup": 1.6916471506635442,
+          "crc": 2009939175
+        },
+        {
+          "name": "autoencoder.conv38",
+          "old_engine_us": 46108,
+          "new_engine_us": 26599,
+          "speedup": 1.7334486258881914,
+          "crc": 3682285041
+        }
+      ]
+    },
+    {
+      "image": "N17_03",
+      "old_engine_us": 1787290,
+      "new_engine_us": 1483546,
+      "old_total_us": 2329985,
+      "new_total_us": 2027261,
+      "engine_speedup": 1.204741881950408,
+      "total_speedup": 1.149326603727887,
+      "score": 0.07326433062553406,
+      "predicted_defect": false,
+      "stages": [
+        {
+          "name": "teacher.conv0",
+          "old_engine_us": 132240,
+          "new_engine_us": 87960,
+          "speedup": 1.5034106412005457,
+          "crc": 458085110
+        },
+        {
+          "name": "teacher.conv3",
+          "old_engine_us": 273649,
+          "new_engine_us": 243179,
+          "speedup": 1.1252986483207843,
+          "crc": 4133183051
+        },
+        {
+          "name": "teacher.conv6",
+          "old_engine_us": 83306,
+          "new_engine_us": 66831,
+          "speedup": 1.2465173347697924,
+          "crc": 3459967659
+        },
+        {
+          "name": "teacher.conv8",
+          "old_engine_us": 165178,
+          "new_engine_us": 143721,
+          "speedup": 1.1492962058432659,
+          "crc": 906195341
+        },
+        {
+          "name": "student.conv0",
+          "old_engine_us": 132239,
+          "new_engine_us": 87959,
+          "speedup": 1.5034163644425245,
+          "crc": 2691561136
+        },
+        {
+          "name": "student.conv3",
+          "old_engine_us": 273649,
+          "new_engine_us": 243180,
+          "speedup": 1.1252940208898758,
+          "crc": 797413010
+        },
+        {
+          "name": "student.conv6",
+          "old_engine_us": 83306,
+          "new_engine_us": 66832,
+          "speedup": 1.2464986832655016,
+          "crc": 4252094697
+        },
+        {
+          "name": "student.conv8",
+          "old_engine_us": 331025,
+          "new_engine_us": 287463,
+          "speedup": 1.1515395024751012,
+          "crc": 1437167153
+        },
+        {
+          "name": "autoencoder.conv0",
+          "old_engine_us": 12616,
+          "new_engine_us": 9367,
+          "speedup": 1.3468559837728196,
+          "crc": 2806310309
+        },
+        {
+          "name": "autoencoder.conv2",
+          "old_engine_us": 5231,
+          "new_engine_us": 3203,
+          "speedup": 1.633156415860131,
+          "crc": 2432219737
+        },
+        {
+          "name": "autoencoder.conv4",
+          "old_engine_us": 2978,
+          "new_engine_us": 1900,
+          "speedup": 1.5673684210526315,
+          "crc": 1047048994
+        },
+        {
+          "name": "autoencoder.conv6",
+          "old_engine_us": 1223,
+          "new_engine_us": 930,
+          "speedup": 1.3150537634408601,
+          "crc": 243467040
+        },
+        {
+          "name": "autoencoder.conv8",
+          "old_engine_us": 429,
+          "new_engine_us": 361,
+          "speedup": 1.188365650969529,
+          "crc": 1036519529
+        },
+        {
+          "name": "autoencoder.conv10",
+          "old_engine_us": 426,
+          "new_engine_us": 427,
+          "speedup": 0.9976580796252927,
+          "crc": 235879100
+        },
+        {
+          "name": "autoencoder.resize11",
+          "old_engine_us": 60,
+          "new_engine_us": 60,
+          "speedup": 1.0,
+          "crc": 946196529
+        },
+        {
+          "name": "autoencoder.conv12",
+          "old_engine_us": 210,
+          "new_engine_us": 196,
+          "speedup": 1.0714285714285714,
+          "crc": 1653483367
+        },
+        {
+          "name": "autoencoder.resize15",
+          "old_engine_us": 416,
+          "new_engine_us": 415,
+          "speedup": 1.002409638554217,
+          "crc": 3349547583
+        },
+        {
+          "name": "autoencoder.conv16",
+          "old_engine_us": 459,
+          "new_engine_us": 371,
+          "speedup": 1.2371967654986522,
+          "crc": 1771791276
+        },
+        {
+          "name": "autoencoder.resize19",
+          "old_engine_us": 1427,
+          "new_engine_us": 1427,
+          "speedup": 1.0,
+          "crc": 3431773161
+        },
+        {
+          "name": "autoencoder.conv20",
+          "old_engine_us": 1107,
+          "new_engine_us": 814,
+          "speedup": 1.3599508599508598,
+          "crc": 4257252530
+        },
+        {
+          "name": "autoencoder.resize23",
+          "old_engine_us": 6449,
+          "new_engine_us": 6451,
+          "speedup": 0.999689970547202,
+          "crc": 4047719218
+        },
+        {
+          "name": "autoencoder.conv24",
+          "old_engine_us": 4141,
+          "new_engine_us": 2850,
+          "speedup": 1.4529824561403508,
+          "crc": 4219181763
+        },
+        {
+          "name": "autoencoder.resize27",
+          "old_engine_us": 24996,
+          "new_engine_us": 24999,
+          "speedup": 0.999879995199808,
+          "crc": 1109677054
+        },
+        {
+          "name": "autoencoder.conv28",
+          "old_engine_us": 14998,
+          "new_engine_us": 10069,
+          "speedup": 1.48952229615652,
+          "crc": 4237746590
+        },
+        {
+          "name": "autoencoder.resize31",
+          "old_engine_us": 101792,
+          "new_engine_us": 101788,
+          "speedup": 1.000039297363147,
+          "crc": 2383405797
+        },
+        {
+          "name": "autoencoder.conv32",
+          "old_engine_us": 59167,
+          "new_engine_us": 39281,
+          "speedup": 1.5062498408899978,
+          "crc": 446478220
+        },
+        {
+          "name": "autoencoder.resize35",
+          "old_engine_us": 19797,
+          "new_engine_us": 19792,
+          "speedup": 1.0002526273241714,
+          "crc": 2309192629
+        },
+        {
+          "name": "autoencoder.conv36",
+          "old_engine_us": 8667,
+          "new_engine_us": 5123,
+          "speedup": 1.6917821588912747,
+          "crc": 3453409474
+        },
+        {
+          "name": "autoencoder.conv38",
+          "old_engine_us": 46109,
+          "new_engine_us": 26597,
+          "speedup": 1.7336165732977404,
+          "crc": 2211465631
+        }
+      ]
+    }
+  ],
+  "engine_time_reduction_fraction": 0.16994523274196327,
+  "artifacts": {
+    "efficientad_full.bit": {
+      "sha256": "d7c76fc83e275d8e18bd0eed07632ad3958f3f31761ecca8f4ad7359ab76be1d",
+      "bytes": 4045695
+    },
+    "efficientad_full.elf": {
+      "sha256": "c009f8f1014688d032dfa558ca1b883891c15bcae4bd88b2e200f860de78c63e",
+      "bytes": 9324172
+    },
+    "ax7021_efficientad_full.xsa": {
+      "sha256": "629c4f6cb443753a46dc9d94f54f8c4019851a1739ab9967778765dd598977c9",
+      "bytes": 1304900
+    },
+    "ps7_init.tcl": {
+      "sha256": "a5b95b661318dc1e60d3cf5486e0434e075afa4ec888b1b95045fe536b5021c5",
+      "bytes": 26573
+    },
+    "ea_model_data.h": {
+      "sha256": "44123b2fd95bdf7d4852741007e51933ffcb9c2e68585cf89439d8bde3d1e27f",
+      "bytes": 25856708
+    },
+    "ea_expected.h": {
+      "sha256": "e6be9945b834dcedda7d0740579aade2c0ac8a72ba6cb32a024334647bc5d996",
+      "bytes": 126
+    }
+  }
+}

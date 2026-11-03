@@ -1,0 +1,35 @@
+{
+  "status": "ROUTED_TIMING_AND_RTL_VALIDATED",
+  "clock_MHz": 125,
+  "wns_ns": 0.175,
+  "whs_ns": 0.038,
+  "control_replication": [
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_387/grp_conv_layer_Outline_VITIS_LOOP_213_2_fu_2033/ap_CS_fsm_state25",
+      "original_loads": 1376,
+      "replicas_added": 9
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_387/grp_conv_layer_Outline_VITIS_LOOP_213_2_fu_2033/ap_CS_fsm_state5",
+      "original_loads": 626,
+      "replicas_added": 9
+    }
+  ],
+  "ps_changes": "PS initialization identical to PE32 125 MHz; ARM, DDR, UART and PL frequencies unchanged",
+  "ps_clock_parameters": {
+    "PCW_ACT_FPGA0_PERIPHERAL_FREQMHZ": "125.000000",
+    "PCW_ACT_UART_PERIPHERAL_FREQMHZ": "100.000000",
+    "PCW_CPU_CPU_PLL_FREQMHZ": "1333.333",
+    "PCW_DDR_DDR_PLL_FREQMHZ": "1066.667",
+    "PCW_FPGA0_PERIPHERAL_FREQMHZ": "125",
+    "PCW_IO_IO_PLL_FREQMHZ": "1000.000",
+    "PCW_UART_PERIPHERAL_FREQMHZ": "100",
+    "PCW_UIPARAM_ACT_DDR_FREQ_MHZ": "533.333374",
+    "PCW_UIPARAM_DDR_FREQ_MHZ": "533.333333"
+  },
+  "artifacts": {
+    "efficientad_full.bit": "d7c76fc83e275d8e18bd0eed07632ad3958f3f31761ecca8f4ad7359ab76be1d",
+    "ax7021_efficientad_full.xsa": "629c4f6cb443753a46dc9d94f54f8c4019851a1739ab9967778765dd598977c9",
+    "ps7_init.tcl": "a5b95b661318dc1e60d3cf5486e0434e075afa4ec888b1b95045fe536b5021c5"
+  }
+}

@@ -1,25 +1,13 @@
-# Python environments and caches
 __pycache__/
-*.py[cod]
-.venv/
-venv/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
-# Vivado/Vitis transient state; keep source, scripts and reports tracked
+*.pyc
+build/work/
+build/tmp/
+src/accelerator/_build/
+src/accelerator/hls/engine_project/
 .Xil/
-*.cache/
-*.runs/
 *.jou
-/vivado.log
-/vivado_*.log
-/build/work/
-/build/tmp/
-
-# Local editor and operating-system temporary files
-.idea/
-*.swp
-*.swo
-Thumbs.db
-.DS_Store
+*.log.tmp
+.venv/
+data/private_archive/
+data/legacy_original/
+build/efficientad_submission.zip

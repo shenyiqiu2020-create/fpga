@@ -1,0 +1,39 @@
+attempting to launch hw_server
+
+****** Xilinx hw_server v2025.2
+  **** Build date : Oct 28 2025 at 10:03:13
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+INFO: hw_server application started
+INFO: Use Ctrl-C to exit hw_server application
+
+
+
+****** Xilinx hw_server v2025.2
+
+  **** Build date : Oct 28 2025 at 10:03:13
+
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+
+
+INFO: hw_server application started
+
+INFO: Use Ctrl-C to exit hw_server application
+
+
+
+
+INFO: To connect to this hw_server instance use url: TCP:127.0.0.1:3121
+
+
+
+  1  APU
+     2  ARM Cortex-A9 MPCore #0 (Running)
+     3  ARM Cortex-A9 MPCore #1 (Running)
+  4  xc7z020
+EA_PREVIOUS_CLOCK 122888 2098176
+EA_PREVIOUS_STATUS 1161905713 4 1 28 2211465631 0 1051768946 1033243548 1 0 2333 2329 29 29 0 0 1345597493

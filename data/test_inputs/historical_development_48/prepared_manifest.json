@@ -1,0 +1,1845 @@
+[
+  {
+    "file": "D:\\工件照片\\do6\\01eef5320565698d88c3519800c2bf6c.jpg",
+    "object_group": "D09",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "3f8dc2e62ef1141bb771ace1263f0198dd5acb298d73c3bd144ec0de06cb76b8",
+    "output": "tie_mount\\test\\outer_edge_loss\\0001_D09.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      154,
+      462,
+      1012,
+      1320
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do6\\373545d22aa7a3087511f6e1b4afb218.jpg",
+    "object_group": "D09",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "63e3d00cbb36bd8c1e1705b8699b39cf4883310341210945f89888bd35f235d3",
+    "output": "tie_mount\\test\\outer_edge_loss\\0002_D09.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      38,
+      289,
+      1022,
+      1273
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do6\\6315d5c601b1bb227e8456cc5401a61d.jpg",
+    "object_group": "D09",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "849eb6f28aa3ce64eb5e9ea6dbc86d9bc4b8326acd2562a8c494099470ea5431",
+    "output": "tie_mount\\test\\outer_edge_loss\\0003_D09.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      97,
+      312,
+      1052,
+      1267
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do6\\6c57fdae01a049b2e28715dfc6d2e44b.jpg",
+    "object_group": "D09",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "333d8314d45848da577441b7e456c63c578f61fbbdcd601e2aaed1195d22a053",
+    "output": "tie_mount\\test\\outer_edge_loss\\0004_D09.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      202,
+      432,
+      1203,
+      1433
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do7\\0d1b2fc34359fc6da5138572b413103f.jpg",
+    "object_group": "D10",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "acecf8587f5a09f29b6cbaf8ed2d4a2de83db440be4f1e62aed4b6291b61b0b2",
+    "output": "tie_mount\\test\\outer_edge_loss\\0005_D10.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      261,
+      117,
+      1399,
+      1255
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do7\\0ead3b263945c9cded71643d266d589d.jpg",
+    "object_group": "D10",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "beafb37dfc77b04fa0b6a8b8949efae8a4e3a9212a72d4f535fb3a48f4df3583",
+    "output": "tie_mount\\test\\outer_edge_loss\\0006_D10.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      354,
+      216,
+      1298,
+      1160
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do7\\203c2197621ec10fd3d3fd065948482a.jpg",
+    "object_group": "D10",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "caf549782ed702b9330059abd9dfffaae78e2f0c86b2904321398b36e9948462",
+    "output": "tie_mount\\test\\outer_edge_loss\\0007_D10.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      370,
+      170,
+      1362,
+      1162
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do7\\2afe96325c998a53f53e70cb96864a99.jpg",
+    "object_group": "D10",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "e1f48e0e101b5ef0308e43c0f860c6204fd9d7defe0593fdad3a61769a21a490",
+    "output": "tie_mount\\test\\outer_edge_loss\\0008_D10.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      331,
+      104,
+      1421,
+      1194
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do8\\5686055cb1d65efc49d773e5a137b194.jpg",
+    "object_group": "D11",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "4b58fe92eff696a67d554b861dfd72da9a9d29b750fbd844b791ee757bd0a9c2",
+    "output": "tie_mount\\test\\outer_edge_loss\\0009_D11.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      155,
+      335,
+      1200,
+      1380
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do8\\89c0ca3776d255fc84effd751865cbd9.jpg",
+    "object_group": "D11",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "3f786900a077d914037d8cddf5d7b556d32518bd8418b5f66be6cfd90a9f5068",
+    "output": "tie_mount\\test\\outer_edge_loss\\0010_D11.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      109,
+      1279,
+      1388
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do8\\c06ec64e9e3083eaef793031fab3f41a.jpg",
+    "object_group": "D11",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "f01b58d1be83a50bee97379de97d7edd572fcc8c6d30ce1d75c3587b29b78d68",
+    "output": "tie_mount\\test\\outer_edge_loss\\0011_D11.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      100,
+      225,
+      1263,
+      1388
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do8\\cac7e60eea31c1efa64a6942492fa631.jpg",
+    "object_group": "D11",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "ea3749d5e47114f98153a0b31ce63366e22f164a0241d0593fdc7d1352f49c03",
+    "output": "tie_mount\\test\\outer_edge_loss\\0012_D11.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      35,
+      181,
+      1279,
+      1425
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do9\\23d14307129143ed4d0c52bf1d7077a4.jpg",
+    "object_group": "D12",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "fc557ee8d2e245bd41bcdc8d4b0c5043a979b0bb570beb2b0f2a1d5adb380495",
+    "output": "tie_mount\\test\\outer_edge_loss\\0013_D12.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      269,
+      448,
+      1209,
+      1388
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do9\\41bfaeaf26a4091c2c09e7a21c35945e.jpg",
+    "object_group": "D12",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "5db5a0dcb7326dcf2a4a60bd61033af852ec89d6f70c32ec34af1ee7f1957418",
+    "output": "tie_mount\\test\\outer_edge_loss\\0014_D12.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      233,
+      1151,
+      1384
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do9\\892a39882d4a9df5242e72b2349f3423.jpg",
+    "object_group": "D12",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "246ff8177be44501cb912c2ab740e77a30cf529763ff83515bc1da88f4c4bbb1",
+    "output": "tie_mount\\test\\outer_edge_loss\\0015_D12.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      168,
+      323,
+      1018,
+      1173
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do9\\92ae2fbc33375d7b35b5c8ac4b3bfbd3.jpg",
+    "object_group": "D12",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "f0329caf991d2af2d2959ed84ed9b6dcc1c1158727e6d25f3909d36ef67e1e1b",
+    "output": "tie_mount\\test\\outer_edge_loss\\0016_D12.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      38,
+      370,
+      1104,
+      1436
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do10\\46499b6f3098ba4d6d2d6b6f20e7a325.jpg",
+    "object_group": "D13",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "c04c893a1483a2636fc8c6d455638725598bf1dcabefb4174187e4a3bbd7606d",
+    "output": "tie_mount\\test\\outer_edge_loss\\0017_D13.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      169,
+      259,
+      1214,
+      1304
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do10\\61628d8576edc1c0c7e333fa06c2e067.jpg",
+    "object_group": "D13",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "6d6f73206953ed378ea4f38900d71864d64aa20d41a148af204e463df652f36a",
+    "output": "tie_mount\\test\\outer_edge_loss\\0018_D13.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      139,
+      311,
+      1184,
+      1356
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do10\\a0bbaf33f37687947ec0a852574589e0.jpg",
+    "object_group": "D13",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "7352047b4a97c903324e2aa3ad419879ac7aeac084caebedcd8e8bf5e0f3ed84",
+    "output": "tie_mount\\test\\outer_edge_loss\\0019_D13.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      120,
+      272,
+      1125,
+      1277
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do10\\ecdf4dbe15cad0d70ea3f82a1e7f5b2a.jpg",
+    "object_group": "D13",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "da30df398955df24ffdf75af77392afa25913a8cd74b0cf0434b0e1f5263f52c",
+    "output": "tie_mount\\test\\outer_edge_loss\\0020_D13.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      219,
+      357,
+      1207,
+      1345
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do11\\3fe4346d350332ea730b31d7e20f9b33.jpg",
+    "object_group": "D14",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "584b34ff6b9a6a50170e9413f7c2931011f4a2417b52c1569257308a9ddd0613",
+    "output": "tie_mount\\test\\outer_edge_loss\\0021_D14.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      124,
+      316,
+      1112,
+      1304
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do11\\91c91540b85594f4008fbc67a1994cc2.jpg",
+    "object_group": "D14",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "904cf8cd4cc513641684c74a3a3905792fe38b2eaffd60a38ce1bb88c52df9f1",
+    "output": "tie_mount\\test\\outer_edge_loss\\0022_D14.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      230,
+      414,
+      1145,
+      1329
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do11\\c1bbe91cb6e8de9acb7418b95d4542ef.jpg",
+    "object_group": "D14",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "9795b2f0d7fa23427c83fd502e4e1a215355cc9eccea6dfa9252a3894127554a",
+    "output": "tie_mount\\test\\outer_edge_loss\\0023_D14.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      141,
+      371,
+      1161,
+      1391
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do11\\e0afac6bf02129527e88188542c169a0.jpg",
+    "object_group": "D14",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "620e7440e06b6eca2bbf16e7b03fe8c7eafd4990a9468bb902a87147086cb6aa",
+    "output": "tie_mount\\test\\outer_edge_loss\\0024_D14.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      117,
+      323,
+      1003,
+      1209
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do12\\2d65f9d50c3f7931d5342de4b0048ba4.jpg",
+    "object_group": "D15",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "00409626797190e3d745bc1aa0e2aade63b240bef5e4e132ac81053384c0d36a",
+    "output": "tie_mount\\test\\outer_edge_loss\\0025_D15.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      161,
+      351,
+      1178,
+      1368
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do12\\34b66b0cb5d47ff0629c10b5c1a4525c.jpg",
+    "object_group": "D15",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "ad9cda9aade7e438f484d956b0767f39b100285d678c8ea94e533cd764f8358f",
+    "output": "tie_mount\\test\\outer_edge_loss\\0026_D15.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      119,
+      464,
+      1136,
+      1481
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do12\\670e8fe4956ed15a78881374b55395a3.jpg",
+    "object_group": "D15",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "38f5fdf250f66883e5bef687a3a0139261eb36cdbe92544b0e8bb1cd8a21ca19",
+    "output": "tie_mount\\test\\outer_edge_loss\\0027_D15.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      220,
+      462,
+      1225,
+      1467
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do12\\76ac6f25caaf8cae52de05a70d495ffc.jpg",
+    "object_group": "D15",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "7e90e2073e21fba516599e30f12c5c8ae87c646bfd4fd10504c21acdc3a76485",
+    "output": "tie_mount\\test\\outer_edge_loss\\0028_D15.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      37,
+      172,
+      1192,
+      1327
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do13\\244cf405c6935be9b9ae919ca8a5d34c.jpg",
+    "object_group": "D16",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "e042672de0dd848697482b4472f440138d7b3ba537373aa79b49339103ca4de0",
+    "output": "tie_mount\\test\\outer_edge_loss\\0029_D16.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      101,
+      383,
+      1195,
+      1477
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do13\\e81b5206ae98bda0f45cf20d69ef4b7b.jpg",
+    "object_group": "D16",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "0700c73a4c9b775670a5c2eeddb2d734a844f3f27fb2d38f9606800c106c1a85",
+    "output": "tie_mount\\test\\outer_edge_loss\\0030_D16.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      191,
+      1215,
+      1406
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do13\\e84f7e238473665964ddb1fc640c38ef.jpg",
+    "object_group": "D16",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "51564b0bed65de50fef593926e8138a8028bcd8ec5e4ea9dba5b993613da287f",
+    "output": "tie_mount\\test\\outer_edge_loss\\0031_D16.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      357,
+      1066,
+      1423
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do13\\fce3b550a8588a1912a18225c56a8d58.jpg",
+    "object_group": "D16",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "3e166f7a07d4d9be37874af29413cc67e604ec34d4383098ae7f65e8d03c07c8",
+    "output": "tie_mount\\test\\outer_edge_loss\\0032_D16.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      267,
+      1279,
+      1546
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do14\\14f9b9d275680464ac1fe5fd545879e8.jpg",
+    "object_group": "D17",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "cb1b667abbe0a07a0c9bf82fe599a334068d23bb057248fd8a90e9189216022b",
+    "output": "tie_mount\\test\\outer_edge_loss\\0033_D17.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      143,
+      401,
+      1050,
+      1308
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do14\\ac95d8d704c2d392f61ab67d4265e8ce.jpg",
+    "object_group": "D17",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "bb1fc2376c61eb655b49c0c7df80a35d532cdce22fa76c83f5899d9394573cec",
+    "output": "tie_mount\\test\\outer_edge_loss\\0034_D17.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      23,
+      297,
+      1129,
+      1403
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do14\\fa0661ffde50261f324b1bff43bffe03.jpg",
+    "object_group": "D17",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "69746faabc5148fc8ccf2d3ed3de40726eed30e5a50a11812913e9e54768bed7",
+    "output": "tie_mount\\test\\outer_edge_loss\\0035_D17.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      108,
+      470,
+      1104,
+      1466
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do14\\fc4a60a55704a8eb7852a42adaabc901.jpg",
+    "object_group": "D17",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "43cf6ffc0dd90a088e6b610ac6753a90f7412943724e933439499ebe47dc6fb6",
+    "output": "tie_mount\\test\\outer_edge_loss\\0036_D17.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      191,
+      1204,
+      1395
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do15\\312ed777fc24f527e3c488406ec261ce.jpg",
+    "object_group": "D18",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "486eed4aff5052537dfa04f9d1e3d1397f71b191adc09d768be297255f50c3b0",
+    "output": "tie_mount\\test\\outer_edge_loss\\0037_D18.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      387,
+      258,
+      1408,
+      1279
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do15\\3b9e64b6271235f02a1d5d6fb03db9cd.jpg",
+    "object_group": "D18",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "ca4c6577546259bd98c9f6f065c1f8a685c9fff6cc27f808cdd44eecc624c0cb",
+    "output": "tie_mount\\test\\outer_edge_loss\\0038_D18.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      396,
+      253,
+      1173,
+      1030
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do15\\e627a94aa6be91d33e582d62279d09e9.jpg",
+    "object_group": "D18",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "6a411e0dff27875fc7607cef6269e2ed499e9a3065ecbe40575c58c6a56fbb81",
+    "output": "tie_mount\\test\\outer_edge_loss\\0039_D18.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      636,
+      262,
+      1344,
+      970
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\do15\\e7df3aa3533706c1e83150329767696c.jpg",
+    "object_group": "D18",
+    "split": "test",
+    "label": "outer_edge_loss",
+    "source_sha256": "2428ee9ef715e7b520c1b04ccc8c2900731bd16f31e6f9ce8264e9a31113dec0",
+    "output": "tie_mount\\test\\outer_edge_loss\\0040_D18.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      474,
+      159,
+      1348,
+      1033
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常1\\a60352190f76bb9a0638d01cd5ba6589.jpg",
+    "object_group": "N01",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "6b04bb16edebc95c78cc912c32af73f5f9ebff9d4094e86b9b08d4159de6c233",
+    "output": "tie_mount\\train\\good\\0041_N01.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      249,
+      464,
+      1014,
+      1229
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常1\\e0cc892c2852352a996a661fcb93cbce.jpg",
+    "object_group": "N01",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "81c8fb6d0679bcac7f8d72775296797b7ccd6cabca4335de545a8d3e8c8ef270",
+    "output": "tie_mount\\train\\good\\0042_N01.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      106,
+      334,
+      1163,
+      1391
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常2\\007975cee51800aa8b45d5bedcd2d613.jpg",
+    "object_group": "N02",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "b4b733a6a00fd5e328c7c0ce9afff9d769e8f0c5eacf6488ed0eb67ccc4a2a3b",
+    "output": "tie_mount\\train\\good\\0043_N02.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      282,
+      493,
+      1051,
+      1262
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常2\\1d0df38424446f5c5aa28cd4b55b8218.jpg",
+    "object_group": "N02",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "44447303dce8719a51c5f75cc7b8863a62ec88102bb6d4770c049401e6c7ddaf",
+    "output": "tie_mount\\train\\good\\0044_N02.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      82,
+      328,
+      1131,
+      1377
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常3\\3ad13cca1f76ecec93a77053f387926e.jpg",
+    "object_group": "N03",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "67d62d4bc55edab2fd92ca3525efbed396022d5e2b1e83971d2cedbe9e1ba144",
+    "output": "tie_mount\\train\\good\\0045_N03.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      84,
+      311,
+      1145,
+      1372
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常3\\3dc05d95fabb4603de4361754b14fbfd.jpg",
+    "object_group": "N03",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "663ec2f3d7e686a218afbcd51458ef66d17121270e33cb60c4904f6ec30da616",
+    "output": "tie_mount\\train\\good\\0046_N03.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      98,
+      290,
+      1204,
+      1396
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常3\\403ef78a4cd7c78da4c7d64bd1630f77.jpg",
+    "object_group": "N03",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "01deabfc04f33df7e9d1486e1d0f79178f47898a08ac729b30f597e4c7021cfd",
+    "output": "tie_mount\\train\\good\\0047_N03.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      158,
+      486,
+      1045,
+      1373
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常3\\d5d3c7e581afc7ff3ada16a27ccc9803.jpg",
+    "object_group": "N03",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "bd04b289227cb3962dbdb0780597033a8c6d8cc03176e3ba5886a1edb9d236e6",
+    "output": "tie_mount\\train\\good\\0048_N03.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      59,
+      264,
+      1084,
+      1289
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常4\\3e02fe078e9a58edc58f95105c17b6f3.jpg",
+    "object_group": "N04",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "0c6a7edee8d40db21d120771e24442991a59766693385ac9a7568bf67b9b7964",
+    "output": "tie_mount\\train\\good\\0049_N04.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      28,
+      286,
+      1138,
+      1396
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常4\\58694b45c49c97ee437a5f6b36639995.jpg",
+    "object_group": "N04",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "bc60a3a4e1fa8f9f37afe3e31daeb35f7cc7edded605b5ef45dc3e9ad68e5d31",
+    "output": "tie_mount\\train\\good\\0050_N04.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      159,
+      442,
+      981,
+      1264
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常4\\60e128c29080a2903af59b78ee0e8a90.jpg",
+    "object_group": "N04",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "e5eec1a467b4709bb727234104552278bfa32d0556acfd9955766dc76533b52d",
+    "output": "tie_mount\\train\\good\\0051_N04.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      213,
+      1151,
+      1364
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常4\\91b6fa919e2fb47438735e818c3e7aab.jpg",
+    "object_group": "N04",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "9983d4bb32210c85699d0b582f28dfe2dfc8b8590c97828e7447cc6bb5ef240e",
+    "output": "tie_mount\\train\\good\\0052_N04.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      42,
+      284,
+      1067,
+      1309
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常5\\1abb0f354d96e2618ea35a58a9f816da.jpg",
+    "object_group": "N05",
+    "split": "test",
+    "label": "good",
+    "source_sha256": "bd46d2b6311a91e0ff7a3aaf0faff85498bfbc0fe95e2a4331ed3202114b98c4",
+    "output": "tie_mount\\test\\good\\0053_N05.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      80,
+      377,
+      1215,
+      1512
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常5\\31073c8eaf29a6bd9326a77e35aa2d7f.jpg",
+    "object_group": "N05",
+    "split": "test",
+    "label": "good",
+    "source_sha256": "34ef93e4f061f5146d2ed625363e1cdd3bed84a1b9dd5a7bd71c436a7534c743",
+    "output": "tie_mount\\test\\good\\0054_N05.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      111,
+      426,
+      1079,
+      1394
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常5\\783fe770cfdd8b0e4d7837e1e2be65df.jpg",
+    "object_group": "N05",
+    "split": "test",
+    "label": "good",
+    "source_sha256": "4bcbec257237d645912dbb12c5e83aaa7215dd7d02b0db164b0ab3d135073066",
+    "output": "tie_mount\\test\\good\\0055_N05.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      324,
+      431,
+      1048,
+      1155
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常5\\bcd2ac2005a649a40c06a9f199d437cf.jpg",
+    "object_group": "N05",
+    "split": "test",
+    "label": "good",
+    "source_sha256": "8f8df9575bde24841cd0122c4457a3acac3356b73d729730ffd7ae6b4b317c2d",
+    "output": "tie_mount\\test\\good\\0056_N05.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      271,
+      1167,
+      1438
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常6\\20e7eb5819407a7a5ffc48aea4188fd6.jpg",
+    "object_group": "N06",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "1d3c55a795f2457ee76099ae52219a0a2584c11add878b055e60ffd59a94ac99",
+    "output": "tie_mount\\train\\good\\0057_N06.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      298,
+      35,
+      1457,
+      1194
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常6\\214ba76d06575629b6883086dcde7ecb.jpg",
+    "object_group": "N06",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "68da6bc3ab67e1a13ff55d23f7947ecf4d66375c50df26f9ee271939faff8ef1",
+    "output": "tie_mount\\train\\good\\0058_N06.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      257,
+      12,
+      1392,
+      1147
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常6\\c9851574c2321567571ec0de7c0e6804.jpg",
+    "object_group": "N06",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "1f02406ee6465b900bcf76bc1146bee9d2a1fc293ed75e73f68c8ea1b296cc94",
+    "output": "tie_mount\\train\\good\\0059_N06.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      280,
+      52,
+      1309,
+      1081
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常6\\f237b4bff5d191b6e64cdcccd8b6acfa.jpg",
+    "object_group": "N06",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "88f455b363213fe64ea03f7e2e51d929f6387ca924b5067c266b2de5bec3b99d",
+    "output": "tie_mount\\train\\good\\0060_N06.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      308,
+      53,
+      1365,
+      1110
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常7\\1d4c97c9deaa919963908691e913ad01.jpg",
+    "object_group": "N07",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "3f16bc819e82c7e5b3aadc5ff8bec19360014169609f02366c9b1fbf2929224c",
+    "output": "tie_mount\\train\\good\\0061_N07.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      111,
+      416,
+      1112,
+      1417
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常7\\29398a3fc7c72a8f0f86ad659d7384ad.jpg",
+    "object_group": "N07",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "9d1b968bf063d6a9319dae2ca293009e5a3f82d7edea34903379e7baa387ef5c",
+    "output": "tie_mount\\train\\good\\0062_N07.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      143,
+      417,
+      1172,
+      1446
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常7\\a3488a558a9fe1586f886fc7d0101676.jpg",
+    "object_group": "N07",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "ab06d7ae29a0602333af1a4c38cbb9dbcd5b007d01282777027e8e603895dd95",
+    "output": "tie_mount\\train\\good\\0063_N07.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      65,
+      322,
+      1114,
+      1371
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常7\\dd60949b0c6f14194e0e0f8e3a49ebc9.jpg",
+    "object_group": "N07",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "af148044a21a122d9815b28593f73c922ea23746d288a0a5fb93a38d995cd1d8",
+    "output": "tie_mount\\train\\good\\0064_N07.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      135,
+      350,
+      1164,
+      1379
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常8\\8aee9cc1269dcb656382eae2ae73104f.jpg",
+    "object_group": "N08",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "76d07394cdd8450256e0d0ec9a2b35423ea3da4bc3f244b3a88a5bbd5de6d433",
+    "output": "tie_mount\\train\\good\\0065_N08.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      168,
+      305,
+      1225,
+      1362
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常8\\fe4c720eab864e37545a0148da0065d1.jpg",
+    "object_group": "N08",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "4208951ee5ca0eef63a930ebe50fa6e68c89970197027a472083723f75185c73",
+    "output": "tie_mount\\train\\good\\0066_N08.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      47,
+      415,
+      1096,
+      1464
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常9\\2da69a09a19ff18feecf977fb9b0f634.jpg",
+    "object_group": "N09",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "7ffc2866eb8abc733148ff80f85c40b0f7aa72af8a0b8471a85292ae7ad4c5f5",
+    "output": "tie_mount\\train\\good\\0067_N09.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      195,
+      1273,
+      1468
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常9\\45153cbf0db021634c14a889aed6f7b8.jpg",
+    "object_group": "N09",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "757d573b89649fd410ae06b7e4363ab93806fdc98d96e50079b01f9c2ab2d961",
+    "output": "tie_mount\\train\\good\\0068_N09.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      183,
+      1261,
+      1444
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常9\\95b9956e496541598281490198076dcf.jpg",
+    "object_group": "N09",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "f4a9540d4ca98ce5a4f86155231acb3ae5103eb81bd09f8d89c6c56640485923",
+    "output": "tie_mount\\train\\good\\0069_N09.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      235,
+      1279,
+      1514
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常9\\af253a15627480d1c3a04af896ffc1e2.jpg",
+    "object_group": "N09",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "a125e3c5f4d139b5f0c79908e90fbee972717b46ffb9dfb8bd79ff4e7e6615b6",
+    "output": "tie_mount\\train\\good\\0070_N09.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      6,
+      199,
+      1230,
+      1423
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常10\\465968234f55acfcabfdb681dbebe0fd.jpg",
+    "object_group": "N10",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "b8ebfe1957e7356e70996ee22796a96df962b0b71907382b42f7b12792842a6d",
+    "output": "tie_mount\\train\\good\\0071_N10.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      54,
+      258,
+      1148,
+      1352
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常10\\6e30eff238db4f786cb0b68f1549cc42.jpg",
+    "object_group": "N10",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "6185c9076418d33b8ba31ac2d5b5edc6a59d6d490a5e8a410d95ab2916533a08",
+    "output": "tie_mount\\train\\good\\0072_N10.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      51,
+      233,
+      1202,
+      1384
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常10\\b9f1981f9ccb31e10bf00bdc4c7b69a7.jpg",
+    "object_group": "N10",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "54766792a14818a7acd59bf9e370ba323f23eb0803c385792bd3bb9ef33c8b1f",
+    "output": "tie_mount\\train\\good\\0073_N10.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      24,
+      301,
+      1122,
+      1399
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常10\\cadca6db9ba2c3daa306c1d3b3dd9b1e.jpg",
+    "object_group": "N10",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "888c89410dcae13fb286d341c65284ff517f2984608e71a0a220172dc5239e2b",
+    "output": "tie_mount\\train\\good\\0074_N10.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      172,
+      1279,
+      1451
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常11\\7766648e35ce4c0767ba9cf92f0c82ff.jpg",
+    "object_group": "N11",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "d80d3af2c5a2268b94f0ebc0ff259f9be148e33fa0eff3657864d427586b9169",
+    "output": "tie_mount\\train\\good\\0075_N11.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      218,
+      1279,
+      1497
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常11\\9339ebaf645f507c8cea90a50b5a5135.jpg",
+    "object_group": "N11",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "8a3c671e301fd2d2a5a598d75ba5f02fdc7c49dd46674d7498c057c7f649719b",
+    "output": "tie_mount\\train\\good\\0076_N11.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      261,
+      1244,
+      1505
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常11\\ce244f5d8585dc0acfe9273cc8cee3fa.jpg",
+    "object_group": "N11",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "4c2833c676b8ce1fa7c4171d1696dd49a36b269cf9bfbd08d99932ec8250710b",
+    "output": "tie_mount\\train\\good\\0077_N11.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      68,
+      336,
+      1142,
+      1410
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常11\\f174105d5dbbd45e94a94cbea345c322.jpg",
+    "object_group": "N11",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "f475d06f78097d50bf7b5c2dc702a679c852b6b32b83043717caa96e1620df9e",
+    "output": "tie_mount\\train\\good\\0078_N11.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      214,
+      1279,
+      1493
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常12\\5aa0b58854989f97dfaa99bce49d5507.jpg",
+    "object_group": "N12",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "64cd74e687f274abd699de0219d59f2fc8d20f3ba4bc6df1bdc3aa44063b59c5",
+    "output": "tie_mount\\train\\good\\0079_N12.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      363,
+      1114,
+      1477
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常12\\83b98113b35f238f578e2f104052c189.jpg",
+    "object_group": "N12",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "21537fb0781deedf487077ae67c73436f5095a2427725e405e5892d4f4884afe",
+    "output": "tie_mount\\train\\good\\0080_N12.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      267,
+      1208,
+      1475
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常12\\d794343c54f124c3f929323b3947c9ee.jpg",
+    "object_group": "N12",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "617033257c38b80e6c7b5fa67f8f499cad39d3efba46fa0ccc8c85e0ffc9ce89",
+    "output": "tie_mount\\train\\good\\0081_N12.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      92,
+      323,
+      1231,
+      1462
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常13\\7fafd03fa733e76d1f7788ebbe8fb926.jpg",
+    "object_group": "N13",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "7d5afae84117bedf22217f91a926df92992a299afab1a7af84b2df45e22237ec",
+    "output": "tie_mount\\train\\good\\0082_N13.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      399,
+      1261,
+      1660
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常13\\9c11c45e67dd97b5e230c8a84531ad3b.jpg",
+    "object_group": "N13",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "eea9ee70b92cb905a2daf2b9cfe4f6252d07b662768603ba3846563df8607c6b",
+    "output": "tie_mount\\train\\good\\0083_N13.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      210,
+      425,
+      1219,
+      1434
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常13\\ad293cc64cde7835a1230e3c6600b273.jpg",
+    "object_group": "N13",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "92d104204d99bab69dcb80f5aa05f99cfdcaafa9b2797e3139a168fb497e3958",
+    "output": "tie_mount\\train\\good\\0084_N13.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      32,
+      373,
+      1138,
+      1479
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常13\\d4a7ad262d20544168e6bc11fe923241.jpg",
+    "object_group": "N13",
+    "split": "train",
+    "label": "good",
+    "source_sha256": "c936d6ebc34d7d74d6ca59086288d60e968eca7729b3a6efef4603b31fa3d685",
+    "output": "tie_mount\\train\\good\\0085_N13.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      87,
+      182,
+      1173,
+      1268
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常14\\674baa0e3f96e231def18733925c2e30.jpg",
+    "object_group": "N14",
+    "split": "validation",
+    "label": "good",
+    "source_sha256": "0f324b8878f3e8def79d5f89bf44e1197272a3c2b4b288d341e37be10fe24c7e",
+    "output": "tie_mount\\validation\\good\\0086_N14.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      208,
+      1240,
+      1448
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常14\\ac383e148ce6040b9505c40b92b95b97.jpg",
+    "object_group": "N14",
+    "split": "validation",
+    "label": "good",
+    "source_sha256": "887e14f3daf4893e3d53bdaa47f59f9dacdec1950b2b7ac32b527ed3274fede1",
+    "output": "tie_mount\\validation\\good\\0087_N14.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      355,
+      1086,
+      1441
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常14\\cc15d60653d80ebeca6ca94115f3a70b.jpg",
+    "object_group": "N14",
+    "split": "validation",
+    "label": "good",
+    "source_sha256": "887e14f3daf4893e3d53bdaa47f59f9dacdec1950b2b7ac32b527ed3274fede1",
+    "output": "tie_mount\\validation\\good\\0088_N14.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      355,
+      1086,
+      1441
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常14\\d004e879a8cec1f8cc13551929cde10b.jpg",
+    "object_group": "N14",
+    "split": "validation",
+    "label": "good",
+    "source_sha256": "cf2301a370e1726f143d2893a0e3fb2d18842caa756553cc5d45bd0d8aa2af26",
+    "output": "tie_mount\\validation\\good\\0089_N14.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      250,
+      1279,
+      1529
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常15\\81bd757d1d2abd32a2c7d59ed9a318b4.jpg",
+    "object_group": "N15",
+    "split": "validation",
+    "label": "good",
+    "source_sha256": "0bbd42581d3f66aa944a985156f9d24ea9b6ac22672a78c00578f053a2cd0c2e",
+    "output": "tie_mount\\validation\\good\\0090_N15.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      282,
+      0,
+      1547,
+      1265
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常15\\8ac07428268c4ac07ba4bb0d672dd8ff.jpg",
+    "object_group": "N15",
+    "split": "validation",
+    "label": "good",
+    "source_sha256": "42a18e4d89e3fb43a7c63a19bdb7162f8e2609225ff4839b8b6a663282b91b4e",
+    "output": "tie_mount\\validation\\good\\0091_N15.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      327,
+      88,
+      1246,
+      1007
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常15\\916ac82a826caea809066ce215645b60.jpg",
+    "object_group": "N15",
+    "split": "validation",
+    "label": "good",
+    "source_sha256": "6d374ffe945ee7450756ba9edbc4cac88d0c5bc64ea7eb0f6fbf5be91b65bc48",
+    "output": "tie_mount\\validation\\good\\0092_N15.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      390,
+      299,
+      1167,
+      1076
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常15\\9700114108e07d35e3b007178cb34ad8.jpg",
+    "object_group": "N15",
+    "split": "validation",
+    "label": "good",
+    "source_sha256": "312bf3aaf0a18d7e6d69fa139c29b6f5a4960f61ff97e86a959c3a7b05c3c2fa",
+    "output": "tie_mount\\validation\\good\\0093_N15.png",
+    "source_size": [
+      1706,
+      1279
+    ],
+    "crop_box": [
+      304,
+      66,
+      1402,
+      1164
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常16\\2da053f289a731e29e108b0438664aec.jpg",
+    "object_group": "N16",
+    "split": "test",
+    "label": "good",
+    "source_sha256": "25611ee854811dac2a89d4131c957d3c4ba3027d0a6e9f1294ea349c70148990",
+    "output": "tie_mount\\test\\good\\0094_N16.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      149,
+      1279,
+      1428
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常16\\3577eae01849762476909ce096a483b1.jpg",
+    "object_group": "N16",
+    "split": "test",
+    "label": "good",
+    "source_sha256": "8a6879823584623a0dc3e9443fa8b7bc3353fdbeccfb9b3495edd3f3daa6c19c",
+    "output": "tie_mount\\test\\good\\0095_N16.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      104,
+      1279,
+      1383
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常16\\9c798c08e635a61e80d3a2a52482972e.jpg",
+    "object_group": "N16",
+    "split": "test",
+    "label": "good",
+    "source_sha256": "51a5f3d1d1087339b95d5931ec184cd996b814873fe97f04113e768819d94819",
+    "output": "tie_mount\\test\\good\\0096_N16.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      162,
+      1279,
+      1441
+    ],
+    "augmentation_degrees": 0
+  },
+  {
+    "file": "D:\\工件照片\\正常16\\cd836291015d82f862bc8daf1e1699d2.jpg",
+    "object_group": "N16",
+    "split": "test",
+    "label": "good",
+    "source_sha256": "5bfcf5be076d7ff8fb427352db5b839643c412a5285e50efed6604a4a3f8a485",
+    "output": "tie_mount\\test\\good\\0097_N16.png",
+    "source_size": [
+      1279,
+      1706
+    ],
+    "crop_box": [
+      0,
+      257,
+      1208,
+      1465
+    ],
+    "augmentation_degrees": 0
+  }
+]

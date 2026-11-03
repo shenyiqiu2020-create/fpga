@@ -1,0 +1,500 @@
+{
+  "status": "BOARD_FULL_MODEL_AND_125MHZ_PROFILE_PASSED",
+  "timestamp": "2026-11-01T21:29:06.648726+08:00",
+  "architecture": {
+    "PE": 32,
+    "SIMD": 8,
+    "INT8_MAC_per_cycle": 256,
+    "requant_lanes": 4,
+    "MAC_II": 1,
+    "clock_MHz": 125,
+    "AXI_address_bits": 32
+  },
+  "wns_ns": 0.616,
+  "whs_ns": 0.013,
+  "resources": {
+    "Slice LUTs": 20332,
+    "Slice Registers": 23397,
+    "Block RAM Tile": 49,
+    "DSPs": 171
+  },
+  "control_replication": [
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_307/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_5775/ap_CS_fsm_state23",
+      "original_loads": 1106,
+      "replicas_added": 8
+    }
+  ],
+  "model_and_quantization_unchanged": true,
+  "validation": {
+    "C_cases": 27,
+    "RTL_cases": 27,
+    "board_images": 2,
+    "board_stage_CRCs": 58
+  },
+  "board_clock_MHz": 125.00000000000001,
+  "ARM_clock_MHz": 666.6666666666667,
+  "PS_changes": "IO PLL and derived dividers changed; ARM, DDR and UART frequencies unchanged",
+  "comparison": [
+    {
+      "image": "D19_01",
+      "old_engine_us": 2319380,
+      "new_engine_us": 1897531,
+      "old_total_us": 2859188,
+      "new_total_us": 2439739,
+      "engine_speedup": 1.2223146815519745,
+      "total_speedup": 1.1719237180698427,
+      "score": 0.3451572060585022,
+      "predicted_defect": true,
+      "stages": [
+        {
+          "name": "teacher.conv0",
+          "old_engine_us": 139036,
+          "new_engine_us": 117488,
+          "speedup": 1.1834059648644968,
+          "crc": 3237218885
+        },
+        {
+          "name": "teacher.conv3",
+          "old_engine_us": 377287,
+          "new_engine_us": 304896,
+          "speedup": 1.2374285002099077,
+          "crc": 249140991
+        },
+        {
+          "name": "teacher.conv6",
+          "old_engine_us": 110024,
+          "new_engine_us": 89213,
+          "speedup": 1.2332731776758992,
+          "crc": 678997613
+        },
+        {
+          "name": "teacher.conv8",
+          "old_engine_us": 234829,
+          "new_engine_us": 189486,
+          "speedup": 1.2392947236207423,
+          "crc": 1122203732
+        },
+        {
+          "name": "student.conv0",
+          "old_engine_us": 139036,
+          "new_engine_us": 117488,
+          "speedup": 1.1834059648644968,
+          "crc": 2197978013
+        },
+        {
+          "name": "student.conv3",
+          "old_engine_us": 377287,
+          "new_engine_us": 304896,
+          "speedup": 1.2374285002099077,
+          "crc": 923423740
+        },
+        {
+          "name": "student.conv6",
+          "old_engine_us": 110023,
+          "new_engine_us": 89213,
+          "speedup": 1.2332619685471848,
+          "crc": 1901149630
+        },
+        {
+          "name": "student.conv8",
+          "old_engine_us": 469657,
+          "new_engine_us": 378984,
+          "speedup": 1.239252844447259,
+          "crc": 137591826
+        },
+        {
+          "name": "autoencoder.conv0",
+          "old_engine_us": 14433,
+          "new_engine_us": 12222,
+          "speedup": 1.1809032891507119,
+          "crc": 1158410371
+        },
+        {
+          "name": "autoencoder.conv2",
+          "old_engine_us": 6189,
+          "new_engine_us": 5129,
+          "speedup": 1.2066679664651978,
+          "crc": 14316409
+        },
+        {
+          "name": "autoencoder.conv4",
+          "old_engine_us": 3251,
+          "new_engine_us": 2695,
+          "speedup": 1.206307977736549,
+          "crc": 1553325805
+        },
+        {
+          "name": "autoencoder.conv6",
+          "old_engine_us": 1382,
+          "new_engine_us": 1135,
+          "speedup": 1.2176211453744494,
+          "crc": 3550792148
+        },
+        {
+          "name": "autoencoder.conv8",
+          "old_engine_us": 476,
+          "new_engine_us": 393,
+          "speedup": 1.2111959287531806,
+          "crc": 2687971399
+        },
+        {
+          "name": "autoencoder.conv10",
+          "old_engine_us": 433,
+          "new_engine_us": 356,
+          "speedup": 1.2162921348314606,
+          "crc": 640638061
+        },
+        {
+          "name": "autoencoder.resize11",
+          "old_engine_us": 67,
+          "new_engine_us": 59,
+          "speedup": 1.1355932203389831,
+          "crc": 2306179280
+        },
+        {
+          "name": "autoencoder.conv12",
+          "old_engine_us": 227,
+          "new_engine_us": 187,
+          "speedup": 1.213903743315508,
+          "crc": 1327082413
+        },
+        {
+          "name": "autoencoder.resize15",
+          "old_engine_us": 475,
+          "new_engine_us": 416,
+          "speedup": 1.1418269230769231,
+          "crc": 1199892720
+        },
+        {
+          "name": "autoencoder.conv16",
+          "old_engine_us": 507,
+          "new_engine_us": 418,
+          "speedup": 1.2129186602870814,
+          "crc": 2996987316
+        },
+        {
+          "name": "autoencoder.resize19",
+          "old_engine_us": 1648,
+          "new_engine_us": 1425,
+          "speedup": 1.1564912280701753,
+          "crc": 1778614032
+        },
+        {
+          "name": "autoencoder.conv20",
+          "old_engine_us": 1240,
+          "new_engine_us": 1020,
+          "speedup": 1.2156862745098038,
+          "crc": 2251084361
+        },
+        {
+          "name": "autoencoder.resize23",
+          "old_engine_us": 7483,
+          "new_engine_us": 6450,
+          "speedup": 1.16015503875969,
+          "crc": 998685013
+        },
+        {
+          "name": "autoencoder.conv24",
+          "old_engine_us": 4671,
+          "new_engine_us": 3834,
+          "speedup": 1.2183098591549295,
+          "crc": 81077367
+        },
+        {
+          "name": "autoencoder.resize27",
+          "old_engine_us": 28947,
+          "new_engine_us": 24997,
+          "speedup": 1.158018962275473,
+          "crc": 1034991506
+        },
+        {
+          "name": "autoencoder.conv28",
+          "old_engine_us": 16938,
+          "new_engine_us": 13897,
+          "speedup": 1.2188242066633086,
+          "crc": 3577628352
+        },
+        {
+          "name": "autoencoder.resize31",
+          "old_engine_us": 117888,
+          "new_engine_us": 101792,
+          "speedup": 1.1581263753536624,
+          "crc": 1372646880
+        },
+        {
+          "name": "autoencoder.conv32",
+          "old_engine_us": 66832,
+          "new_engine_us": 54818,
+          "speedup": 1.2191615892590024,
+          "crc": 892481684
+        },
+        {
+          "name": "autoencoder.resize35",
+          "old_engine_us": 22936,
+          "new_engine_us": 19794,
+          "speedup": 1.1587349701929879,
+          "crc": 3547709569
+        },
+        {
+          "name": "autoencoder.conv36",
+          "old_engine_us": 9455,
+          "new_engine_us": 7833,
+          "speedup": 1.2070726413889952,
+          "crc": 2009939175
+        },
+        {
+          "name": "autoencoder.conv38",
+          "old_engine_us": 56723,
+          "new_engine_us": 46997,
+          "speedup": 1.2069493797476434,
+          "crc": 3682285041
+        }
+      ]
+    },
+    {
+      "image": "N17_03",
+      "old_engine_us": 2319392,
+      "new_engine_us": 1897543,
+      "old_total_us": 2863950,
+      "new_total_us": 2443383,
+      "engine_speedup": 1.2223132756411845,
+      "total_speedup": 1.1721248776798399,
+      "score": 0.07326433062553406,
+      "predicted_defect": false,
+      "stages": [
+        {
+          "name": "teacher.conv0",
+          "old_engine_us": 139036,
+          "new_engine_us": 117487,
+          "speedup": 1.1834160375190446,
+          "crc": 458085110
+        },
+        {
+          "name": "teacher.conv3",
+          "old_engine_us": 377288,
+          "new_engine_us": 304896,
+          "speedup": 1.2374317800167927,
+          "crc": 4133183051
+        },
+        {
+          "name": "teacher.conv6",
+          "old_engine_us": 110024,
+          "new_engine_us": 89214,
+          "speedup": 1.233259353913063,
+          "crc": 3459967659
+        },
+        {
+          "name": "teacher.conv8",
+          "old_engine_us": 234828,
+          "new_engine_us": 189488,
+          "speedup": 1.2392763657856962,
+          "crc": 906195341
+        },
+        {
+          "name": "student.conv0",
+          "old_engine_us": 139037,
+          "new_engine_us": 117488,
+          "speedup": 1.183414476372055,
+          "crc": 2691561136
+        },
+        {
+          "name": "student.conv3",
+          "old_engine_us": 377287,
+          "new_engine_us": 304897,
+          "speedup": 1.2374244416967042,
+          "crc": 797413010
+        },
+        {
+          "name": "student.conv6",
+          "old_engine_us": 110022,
+          "new_engine_us": 89214,
+          "speedup": 1.2332369359069204,
+          "crc": 4252094697
+        },
+        {
+          "name": "student.conv8",
+          "old_engine_us": 469655,
+          "new_engine_us": 378986,
+          "speedup": 1.2392410273730428,
+          "crc": 1437167153
+        },
+        {
+          "name": "autoencoder.conv0",
+          "old_engine_us": 14433,
+          "new_engine_us": 12222,
+          "speedup": 1.1809032891507119,
+          "crc": 2806310309
+        },
+        {
+          "name": "autoencoder.conv2",
+          "old_engine_us": 6190,
+          "new_engine_us": 5129,
+          "speedup": 1.206862936244882,
+          "crc": 2432219737
+        },
+        {
+          "name": "autoencoder.conv4",
+          "old_engine_us": 3251,
+          "new_engine_us": 2696,
+          "speedup": 1.2058605341246291,
+          "crc": 1047048994
+        },
+        {
+          "name": "autoencoder.conv6",
+          "old_engine_us": 1383,
+          "new_engine_us": 1136,
+          "speedup": 1.2174295774647887,
+          "crc": 243467040
+        },
+        {
+          "name": "autoencoder.conv8",
+          "old_engine_us": 477,
+          "new_engine_us": 393,
+          "speedup": 1.213740458015267,
+          "crc": 1036519529
+        },
+        {
+          "name": "autoencoder.conv10",
+          "old_engine_us": 434,
+          "new_engine_us": 355,
+          "speedup": 1.2225352112676056,
+          "crc": 235879100
+        },
+        {
+          "name": "autoencoder.resize11",
+          "old_engine_us": 68,
+          "new_engine_us": 59,
+          "speedup": 1.152542372881356,
+          "crc": 946196529
+        },
+        {
+          "name": "autoencoder.conv12",
+          "old_engine_us": 226,
+          "new_engine_us": 188,
+          "speedup": 1.202127659574468,
+          "crc": 1653483367
+        },
+        {
+          "name": "autoencoder.resize15",
+          "old_engine_us": 475,
+          "new_engine_us": 416,
+          "speedup": 1.1418269230769231,
+          "crc": 3349547583
+        },
+        {
+          "name": "autoencoder.conv16",
+          "old_engine_us": 507,
+          "new_engine_us": 418,
+          "speedup": 1.2129186602870814,
+          "crc": 1771791276
+        },
+        {
+          "name": "autoencoder.resize19",
+          "old_engine_us": 1647,
+          "new_engine_us": 1428,
+          "speedup": 1.153361344537815,
+          "crc": 3431773161
+        },
+        {
+          "name": "autoencoder.conv20",
+          "old_engine_us": 1241,
+          "new_engine_us": 1020,
+          "speedup": 1.2166666666666666,
+          "crc": 4257252530
+        },
+        {
+          "name": "autoencoder.resize23",
+          "old_engine_us": 7486,
+          "new_engine_us": 6450,
+          "speedup": 1.1606201550387596,
+          "crc": 4047719218
+        },
+        {
+          "name": "autoencoder.conv24",
+          "old_engine_us": 4671,
+          "new_engine_us": 3834,
+          "speedup": 1.2183098591549295,
+          "crc": 4219181763
+        },
+        {
+          "name": "autoencoder.resize27",
+          "old_engine_us": 28947,
+          "new_engine_us": 24997,
+          "speedup": 1.158018962275473,
+          "crc": 1109677054
+        },
+        {
+          "name": "autoencoder.conv28",
+          "old_engine_us": 16938,
+          "new_engine_us": 13897,
+          "speedup": 1.2188242066633086,
+          "crc": 4237746590
+        },
+        {
+          "name": "autoencoder.resize31",
+          "old_engine_us": 117891,
+          "new_engine_us": 101792,
+          "speedup": 1.158155847217856,
+          "crc": 2383405797
+        },
+        {
+          "name": "autoencoder.conv32",
+          "old_engine_us": 66832,
+          "new_engine_us": 54819,
+          "speedup": 1.2191393494956129,
+          "crc": 446478220
+        },
+        {
+          "name": "autoencoder.resize35",
+          "old_engine_us": 22936,
+          "new_engine_us": 19797,
+          "speedup": 1.1585593776834875,
+          "crc": 2309192629
+        },
+        {
+          "name": "autoencoder.conv36",
+          "old_engine_us": 9455,
+          "new_engine_us": 7832,
+          "speedup": 1.207226762002043,
+          "crc": 3453409474
+        },
+        {
+          "name": "autoencoder.conv38",
+          "old_engine_us": 56727,
+          "new_engine_us": 46995,
+          "speedup": 1.2070858601978933,
+          "crc": 2211465631
+        }
+      ]
+    }
+  ],
+  "PE40_enabled": false,
+  "engine_time_reduction_fraction": 0.1818796008943746,
+  "artifacts": {
+    "efficientad_full.bit": {
+      "sha256": "79a6e4665e2ac602397edf86a2f7e5c22ff5626fcf79c46c61227f9bf67c9b3b",
+      "bytes": 4045695
+    },
+    "efficientad_full.elf": {
+      "sha256": "88b1f8a56559d6feadb6026acb21fad8572c607c1ded7bac08057d11ff13e2e7",
+      "bytes": 9324172
+    },
+    "ax7021_efficientad_full.xsa": {
+      "sha256": "aa3c6b4d710198c8a0d076dea10f5eba4f228becf305944d351a61764d31c9eb",
+      "bytes": 1085820
+    },
+    "ps7_init.tcl": {
+      "sha256": "a5b95b661318dc1e60d3cf5486e0434e075afa4ec888b1b95045fe536b5021c5",
+      "bytes": 26573
+    },
+    "ea_model_data.h": {
+      "sha256": "44123b2fd95bdf7d4852741007e51933ffcb9c2e68585cf89439d8bde3d1e27f",
+      "bytes": 25856708
+    },
+    "ea_expected.h": {
+      "sha256": "e6be9945b834dcedda7d0740579aade2c0ac8a72ba6cb32a024334647bc5d996",
+      "bytes": 126
+    }
+  }
+}

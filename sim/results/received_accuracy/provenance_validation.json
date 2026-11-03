@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "rows": 284,
+  "max_matching_model_score_error": 1.1920928955078125e-07,
+  "selection": "Expanded CSV old_score matches current bundle; historical CSV new_score matches current bundle",
+  "predictions_modified": false,
+  "threshold_modified": false,
+  "weights_modified": false
+}

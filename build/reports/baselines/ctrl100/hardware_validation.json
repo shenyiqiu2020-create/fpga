@@ -1,0 +1,35 @@
+{
+  "status": "ROUTED_TIMING_AND_RTL_VALIDATED",
+  "clock_MHz": 100,
+  "wns_ns": 0.127,
+  "whs_ns": 0.035,
+  "control_replication": [
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_306/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_5839/ap_CS_fsm_state2",
+      "original_loads": 353,
+      "replicas_added": 9
+    },
+    {
+      "net": "design_full_i/engine/inst/grp_conv_layer_fu_306/grp_conv_layer_Outline_VITIS_LOOP_81_2_fu_5839/ap_CS_fsm_state22",
+      "original_loads": 1107,
+      "replicas_added": 9
+    }
+  ],
+  "ps_changes": "FCLK0 divider only; ARM, DDR, UART unchanged",
+  "ps_clock_parameters": {
+    "PCW_ACT_FPGA0_PERIPHERAL_FREQMHZ": "100.000000",
+    "PCW_ACT_UART_PERIPHERAL_FREQMHZ": "100.000000",
+    "PCW_CPU_CPU_PLL_FREQMHZ": "1333.333",
+    "PCW_DDR_DDR_PLL_FREQMHZ": "1066.667",
+    "PCW_FPGA0_PERIPHERAL_FREQMHZ": "100",
+    "PCW_IO_IO_PLL_FREQMHZ": "1800.000",
+    "PCW_UART_PERIPHERAL_FREQMHZ": "100",
+    "PCW_UIPARAM_ACT_DDR_FREQ_MHZ": "533.333374",
+    "PCW_UIPARAM_DDR_FREQ_MHZ": "533.333333"
+  },
+  "artifacts": {
+    "efficientad_full.bit": "eb4e411fe8427d2855945b3db6a52eac7f7126225ac5b2bd3df319e60606245d",
+    "ax7021_efficientad_full.xsa": "6d64da1f3d86bfe4d1000be1c6632b8954421ff4fa44678f51f0a1821cc3dfef",
+    "ps7_init.tcl": "557ca36d8d3bd510d894bbe7d6784c9c1ae4752bb0a48b2aef22a944b35f8558"
+  }
+}

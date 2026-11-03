@@ -1,0 +1,21 @@
+{
+  "threshold_rule": "max of 7 normal validation image scores; defect if score > threshold",
+  "threshold": 0.11209306865930557,
+  "validation_normal_count": 7,
+  "test_image_count": 48,
+  "test_image_auroc_percent": 96.25,
+  "test_confusion": {
+    "tp": 36,
+    "fn": 4,
+    "tn": 7,
+    "fp": 1
+  },
+  "max_abs_difference_from_prior_fused_map": null,
+  "reference_map_comparison": "not_run_explicit_recalibration",
+  "device": "cuda",
+  "input_size": [
+    256,
+    256
+  ],
+  "pixel_localization_metric": null
+}

@@ -1,0 +1,14 @@
+{
+  "status": "EXPORTED_RTL_SYNTHESIZABLE_LOGIC_IDENTICAL",
+  "simulation_only_changes": [
+    "efficientad_engine.v"
+  ],
+  "simulation_only_added_modules": [
+    "efficientad_engine_hls_deadlock_detection_unit.v"
+  ],
+  "RTL_simulation_uses_exact_packaged_files": true,
+  "exported_headers": {
+    "efficientad_engine_hls_deadlock_detector.vh": "d9e948267d1a7bdc22aff668a544c18bf5606b3d1fbe59f76f57085595b28559",
+    "efficientad_engine_hls_deadlock_report_unit.vh": "655f667aed8c55d43040e297b9d2fa5c1a87da5005cb2c676bf8a6ea51ddc70a"
+  }
+}

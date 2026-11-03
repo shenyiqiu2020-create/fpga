@@ -1,0 +1,93 @@
+{
+  "development": {
+    "count": 48,
+    "accuracy": 0.8958333333333334,
+    "auroc": 0.9624999999999999,
+    "precision": 0.972972972972973,
+    "recall": 0.9,
+    "specificity": 0.875,
+    "f1": 0.935064935064935,
+    "tn": 7,
+    "fp": 1,
+    "fn": 4,
+    "tp": 36,
+    "source": "existing teammate CSV; recomputed metrics only, not new inference",
+    "rows_in_csv": 48,
+    "scored_rows": 48,
+    "unique_scored_rows": 48,
+    "rejected": [],
+    "mistakes": [
+      {
+        "image": "0002_D09.png",
+        "label": "defect",
+        "object_group": "D09",
+        "threshold": 0.11209306865930557,
+        "score": 0.07395349442958832,
+        "source_sha256": "63e3d00cbb36bd8c1e1705b8699b39cf4883310341210945f89888bd35f235d3"
+      },
+      {
+        "image": "0007_D10.png",
+        "label": "defect",
+        "object_group": "D10",
+        "threshold": 0.11209306865930557,
+        "score": 0.09904002398252487,
+        "source_sha256": "caf549782ed702b9330059abd9dfffaae78e2f0c86b2904321398b36e9948462"
+      },
+      {
+        "image": "0012_D11.png",
+        "label": "defect",
+        "object_group": "D11",
+        "threshold": 0.11209306865930557,
+        "score": 0.10998772084712982,
+        "source_sha256": "ea3749d5e47114f98153a0b31ce63366e22f164a0241d0593fdc7d1352f49c03"
+      },
+      {
+        "image": "0020_D13.png",
+        "label": "defect",
+        "object_group": "D13",
+        "threshold": 0.11209306865930557,
+        "score": 0.10321030020713806,
+        "source_sha256": "da30df398955df24ffdf75af77392afa25913a8cd74b0cf0434b0e1f5263f52c"
+      },
+      {
+        "image": "0095_N16.png",
+        "label": "good",
+        "object_group": "N16",
+        "threshold": 0.11209306865930557,
+        "score": 0.12329959124326706,
+        "source_sha256": "8a6879823584623a0dc3e9443fa8b7bc3353fdbeccfb9b3495edd3f3daa6c19c"
+      }
+    ]
+  },
+  "holdout": {
+    "count": 33,
+    "accuracy": 0.9696969696969697,
+    "auroc": 1.0,
+    "precision": 0.9523809523809523,
+    "recall": 1.0,
+    "specificity": 0.9230769230769231,
+    "f1": 0.975609756097561,
+    "tn": 12,
+    "fp": 1,
+    "fn": 0,
+    "tp": 20,
+    "source": "existing teammate CSV; recomputed metrics only, not new inference",
+    "rows_in_csv": 35,
+    "scored_rows": 33,
+    "unique_scored_rows": 33,
+    "rejected": [
+      "N17_02.png",
+      "N19_01.png"
+    ],
+    "mistakes": [
+      {
+        "image": "N20_01.png",
+        "label": "good",
+        "object_group": "N20",
+        "threshold": 0.11209306865930557,
+        "score": 0.12521299719810486,
+        "source_sha256": "fb192ac96d4c6548138fde706e3ef01806f5bf92e3a24356775844e3aa43c15b"
+      }
+    ]
+  }
+}

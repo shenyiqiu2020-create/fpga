@@ -1,0 +1,997 @@
+  **** HLS Build v2025.2 6295257
+Sourcing Tcl script 'C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/scripts/build_hls.tcl'
+INFO: [HLS 200-1510] Running: open_project engine_project 
+WARNING: [HLS 200-2182] The 'engine_project' project will not automatically appear within Vitis IDE workspaces and is meant only for TCL batch use.  Please use open_component instead of open_project/open_solution to generate Vitis IDE compatible component files and directory structure.
+Resolution: For help on HLS 200-2182 see docs.amd.com/access/sources/dita/topic?Doc_Version=2025.2%20English&url=ug1448-hls-guidance&resourceid=200-2182.html
+INFO: [HLS 200-10] Opening solution 'C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project'.
+INFO: [HLS 200-1510] Running: set_top efficientad_engine 
+INFO: [HLS 200-1510] Running: add_files efficientad_engine.cpp 
+INFO: [HLS 200-10] Adding design file 'efficientad_engine.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb tb_engine.cpp 
+INFO: [HLS 200-10] Adding test bench file 'tb_engine.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/generated/engine_tests.bin 
+INFO: [HLS 200-10] Adding test bench file 'C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/generated/engine_tests.bin' to the project
+INFO: [HLS 200-1510] Running: open_solution sol -flow_target vivado 
+INFO: [HLS 200-10] Opening solution 'C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol'.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see docs.amd.com/access/sources/dita/topic?Doc_Version=2025.2%20English&url=ug1448-hls-guidance&resourceid=200-1505.html
+INFO: [HLS 200-1510] Running: set_part xc7z020clg484-2 
+INFO: [HLS 200-1611] Setting target device to 'xc7z020-clg484-2'
+INFO: [HLS 200-1510] Running: create_clock -period 8 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 8ns.
+INFO: [HLS 200-1510] Running: config_interface -m_axi_addr64=false 
+INFO: [HLS 200-1510] Running: csim_design -argv {C:\Users\sheny\Documents\ChatGPT\fpga\efficientad_full_pl_overlap125\generated\pe40_tests.bin} 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [HLS 200-2191] C-Simulation will use clang-16 as the compiler
+INFO: [HLS 200-2036] Building debug C Simulation binaries
+   Compiling ../../../../tb_engine.cpp in debug mode
+   Compiling ../../../../efficientad_engine.cpp in debug mode
+   Generating csim.exe
+In file included from ../../../../tb_engine.cpp:1:
+In file included from ../../../../efficientad_engine.h:6:
+In file included from D:/amd/2025.2/Vitis/include\ap_int.h:10:
+In file included from D:/amd/2025.2/Vitis/include\etc/ap_common.h:668:
+In file included from D:/amd/2025.2/Vitis/include\etc/ap_private.h:68:
+In file included from D:/amd/2025.2/Vitis/include\hls_half.h:26:
+In file included from D:/amd/2025.2/Vitis/include/etc/hls_half_fpo.h:19:
+In file included from D:/amd/2025.2/Vitis/include\hls_fpo.h:140:
+In file included from D:/amd/2025.2/Vitis/include/floating_point_v7_1_bitacc_cmodel.h:150:
+D:/amd/2025.2/Vitis/include\gmp.h:58:9: warning: '__GMP_LIBGMP_DLL' macro redefined [-Wmacro-redefined]
+#define __GMP_LIBGMP_DLL  0
+        ^
+D:/amd/2025.2/Vitis/include/floating_point_v7_1_bitacc_cmodel.h:142:9: note: previous definition is here
+#define __GMP_LIBGMP_DLL 1
+        ^
+1 warning generated.
+In file included from ../../../../efficientad_engine.cpp:3:
+In file included from ../../../../efficientad_engine.h:6:
+In file included from D:/amd/2025.2/Vitis/include\ap_int.h:10:
+In file included from D:/amd/2025.2/Vitis/include\etc/ap_common.h:668:
+In file included from D:/amd/2025.2/Vitis/include\etc/ap_private.h:68:
+In file included from D:/amd/2025.2/Vitis/include\hls_half.h:26:
+In file included from D:/amd/2025.2/Vitis/include/etc/hls_half_fpo.h:19:
+In file included from D:/amd/2025.2/Vitis/include\hls_fpo.h:140:
+In file included from D:/amd/2025.2/Vitis/include/floating_point_v7_1_bitacc_cmodel.h:150:
+D:/amd/2025.2/Vitis/include\gmp.h:58:9: warning: '__GMP_LIBGMP_DLL' macro redefined [-Wmacro-redefined]
+#define __GMP_LIBGMP_DLL  0
+        ^
+D:/amd/2025.2/Vitis/include/floating_point_v7_1_bitacc_cmodel.h:142:9: note: previous definition is here
+#define __GMP_LIBGMP_DLL 1
+        ^
+1 warning generated.
+Case 1/31 PASS: op=0 K=4 Cin=3 pool=1 shape=16x16 -> 6x6
+Case 2/31 PASS: op=0 K=4 Cin=128 pool=1 shape=7x7 -> 2x2
+Case 3/31 PASS: op=0 K=3 Cin=256 pool=0 shape=7x7 -> 5x5
+Case 4/31 PASS: op=0 K=4 Cin=256 pool=0 shape=7x7 -> 4x4
+Case 5/31 PASS: op=0 K=4 Cin=3 pool=0 shape=7x7 -> 3x3
+Case 6/31 PASS: op=0 K=4 Cin=32 pool=0 shape=7x7 -> 3x3
+Case 7/31 PASS: op=0 K=8 Cin=64 pool=0 shape=8x8 -> 1x1
+Case 8/31 PASS: op=0 K=4 Cin=64 pool=0 shape=7x7 -> 8x8
+Case 9/31 PASS: op=0 K=3 Cin=64 pool=0 shape=7x7 -> 7x7
+Case 10/31 PASS: op=1 K=0 Cin=16 pool=0 shape=1x1 -> 3x3
+Case 11/31 PASS: op=1 K=0 Cin=16 pool=0 shape=4x4 -> 8x8
+Case 12/31 PASS: op=1 K=0 Cin=16 pool=0 shape=9x9 -> 15x15
+Case 13/31 PASS: op=1 K=0 Cin=16 pool=0 shape=16x16 -> 32x32
+Case 14/31 PASS: op=1 K=0 Cin=16 pool=0 shape=33x33 -> 63x63
+Case 15/31 PASS: op=1 K=0 Cin=16 pool=0 shape=64x64 -> 127x127
+Case 16/31 PASS: op=1 K=0 Cin=16 pool=0 shape=128x128 -> 56x56
+Case 17/31 PASS: op=0 K=4 Cin=128 pool=1 shape=7x7 -> 2x2
+Case 18/31 PASS: op=0 K=8 Cin=64 pool=0 shape=8x8 -> 1x1
+Case 19/31 PASS: op=0 K=3 Cin=8 pool=0 shape=19x17 -> 19x17
+Case 20/31 PASS: op=0 K=4 Cin=16 pool=0 shape=21x19 -> 10x9
+Case 21/31 PASS: op=0 K=4 Cin=8 pool=1 shape=19x17 -> 8x7
+Case 22/31 PASS: op=0 K=4 Cin=128 pool=1 shape=10x126 -> 3x61
+Case 23/31 PASS: op=0 K=3 Cin=256 pool=0 shape=12x61 -> 10x59
+Case 24/31 PASS: op=0 K=8 Cin=64 pool=0 shape=20x13 -> 13x6
+Case 25/31 PASS: op=0 K=4 Cin=128 pool=1 shape=10x126 -> 3x61
+Case 26/31 PASS: op=0 K=3 Cin=256 pool=0 shape=12x61 -> 10x59
+Case 27/31 PASS: op=0 K=4 Cin=256 pool=0 shape=9x9 -> 6x6
+Case 28/31 PASS: op=0 K=3 Cin=8 pool=0 shape=5x7 -> 5x7
+Case 29/31 PASS: op=0 K=3 Cin=8 pool=0 shape=7x7 -> 5x5
+Case 30/31 PASS: op=0 K=3 Cin=8 pool=1 shape=7x9 -> 3x4
+Case 31/31 PASS: op=0 K=3 Cin=8 pool=0 shape=3x3 -> 1x1
+EFFICIENTAD ENGINE TEST PASSED: 31 cases.
+INFO [HLS SIM]: The maximum depth reached by any hls::stream() instance in the design is 123
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-2161] Finished Command csim_design Elapsed time: 00:01:59; Allocated memory: 0.535 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.793 seconds; current allocated memory: 130.723 MB.
+INFO: [HLS 200-2191] C-Synthesis will use clang-16 as the compiler
+INFO: [HLS 200-10] Analyzing design file 'efficientad_engine.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 5.641 seconds; current allocated memory: 134.547 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 200-1995] There were 13,142 instructions in the design after the 'Compile/Link' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 9,182 instructions in the design after the 'Unroll/Inline (step 1)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,302 instructions in the design after the 'Unroll/Inline (step 2)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,107 instructions in the design after the 'Unroll/Inline (step 3)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,024 instructions in the design after the 'Unroll/Inline (step 4)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 14,864 instructions in the design after the 'Array/Struct (step 1)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,616 instructions in the design after the 'Array/Struct (step 2)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,616 instructions in the design after the 'Array/Struct (step 3)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,615 instructions in the design after the 'Array/Struct (step 4)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 9,178 instructions in the design after the 'Array/Struct (step 5)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,901 instructions in the design after the 'Performance (step 1)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,684 instructions in the design after the 'Performance (step 2)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,674 instructions in the design after the 'Performance (step 3)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,674 instructions in the design after the 'Performance (step 4)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,732 instructions in the design after the 'HW Transforms (step 1)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 200-1995] There were 8,681 instructions in the design after the 'HW Transforms (step 2)' phase of compilation. See the Design Size Report for more details (C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/report/csynth_design_size.rpt:2)
+INFO: [HLS 214-131] Inlining function 'decltype((fp) * (fp0)) mul<ap_int<25>, ap_int<8> >(ap_int<25> const&, ap_int<8> const&, ap_resource_dsp const&)' into 'paired_mul(ap_int<8>, ap_int<8>, ap_int<8>, ap_int<16>&, ap_int<16>&)' (efficientad_engine.cpp:16:24)
+INFO: [HLS 214-131] Inlining function 'paired_mul(ap_int<8>, ap_int<8>, ap_int<8>, ap_int<16>&, ap_int<16>&)' into 'mac_row(ap_uint<64> const*, ap_uint<64> const (*) [512], ap_int<32> const*, ap_uint<14> const*, bool const*, ap_uint<6>, ap_uint<10>, ap_uint<4>, ap_uint<2>, ap_uint<2>, ap_uint<9>, ap_uint<9>, hls::stream<ap_uint<1280>, 0>&)' (efficientad_engine.cpp:93:25)
+INFO: [HLS 214-131] Inlining function 'average4(ap_int<8>, ap_int<8>, ap_int<8>, ap_int<8>)' into 'emit_row(ap_uint<64>*, unsigned int, unsigned int, ap_uint<9>, ap_uint<9>, ap_uint<9>, ap_uint<10>, bool, bool, ap_int<32> const*, hls::stream<ap_uint<1280>, 0>&)' (efficientad_engine.cpp:149:27)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_159_5' is marked as complete unroll implied by the pipeline pragma (efficientad_engine.cpp:159:35)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_81_4' is marked as complete unroll implied by the pipeline pragma (efficientad_engine.cpp:81:34)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_85_5' is marked as complete unroll implied by the pipeline pragma (efficientad_engine.cpp:85:34)
+INFO: [HLS 214-291] Loop 'VITIS_LOOP_89_6' is marked as complete unroll implied by the pipeline pragma (efficientad_engine.cpp:89:38)
+INFO: [HLS 214-188] Unrolling loop 'VITIS_LOOP_134_2' (efficientad_engine.cpp:134:27) in function 'emit_row' partially with a factor of 4 (efficientad_engine.cpp:118:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_145_3' (efficientad_engine.cpp:145:31) in function 'emit_row' completely with a factor of 40 (efficientad_engine.cpp:118:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_159_5' (efficientad_engine.cpp:159:35) in function 'emit_row' completely with a factor of 8 (efficientad_engine.cpp:118:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_62_2' (efficientad_engine.cpp:62:26) in function 'mac_row' completely with a factor of 40 (efficientad_engine.cpp:53:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_81_4' (efficientad_engine.cpp:81:34) in function 'mac_row' completely with a factor of 8 (efficientad_engine.cpp:53:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_85_5' (efficientad_engine.cpp:85:34) in function 'mac_row' completely with a factor of 20 (efficientad_engine.cpp:53:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_89_6' (efficientad_engine.cpp:89:38) in function 'mac_row' completely with a factor of 8 (efficientad_engine.cpp:53:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_107_7' (efficientad_engine.cpp:107:27) in function 'mac_row' completely with a factor of 40 (efficientad_engine.cpp:53:0)
+WARNING: [HLS 214-464] Skipping array undecay on variable length array 'mem'. (efficientad_engine.cpp:187:0)
+WARNING: [HLS 214-464] Skipping array undecay on variable length array 'mem'. (efficientad_engine.cpp:175:0)
+INFO: [HLS 214-248] Applying array_partition to '_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6streamIS_ILi1280EELi0EEEE3top': Complete partitioning on dimension 2. (efficientad_engine.cpp:123:0)
+INFO: [HLS 214-248] Applying array_partition to 'left': Complete partitioning on dimension 1. (efficientad_engine.cpp:126:15)
+INFO: [HLS 214-248] Applying array_partition to 'q': Complete partitioning on dimension 1. (efficientad_engine.cpp:126:24)
+INFO: [HLS 214-248] Applying array_partition to 'wc': Complete partitioning on dimension 1. (efficientad_engine.cpp:189:17)
+INFO: [HLS 214-248] Applying array_partition to 'tags': Complete partitioning on dimension 1. (efficientad_engine.cpp:192:9)
+INFO: [HLS 214-248] Applying array_partition to 'row_base': Complete partitioning on dimension 1. (efficientad_engine.cpp:193:17)
+INFO: [HLS 214-248] Applying array_partition to 'row_valid': Complete partitioning on dimension 1. (efficientad_engine.cpp:194:10)
+INFO: [HLS 214-248] Applying array_partition to 'bias': Complete partitioning on dimension 1. (efficientad_engine.cpp:198:16)
+INFO: [HLS 214-248] Applying array_partition to 'mult': Complete partitioning on dimension 1. (efficientad_engine.cpp:198:26)
+WARNING: [HLS 214-358] Array transformation on index using bit extension logic may lead to poor performance. Please use int or long for array index computation to benefit from optimizations. (efficientad_engine.cpp:75:28)
+WARNING: [HLS 214-358] Array transformation on index using bit extension logic may lead to poor performance. Please use int or long for array index computation to benefit from optimizations. (efficientad_engine.cpp:231:31)
+INFO: [HLS 214-376] Pipelining loop< VITIS_LOOP_223_4> at efficientad_engine.cpp:223:27 due to pipeline_loops threshold
+INFO: [HLS 214-437] Disabling loop flattening for loop 'VITIS_LOOP_274_3'. (efficientad_engine.cpp:274:31)
+INFO: [HLS 214-437] Disabling loop flattening for loop 'VITIS_LOOP_213_2'. (efficientad_engine.cpp:213:27)
+INFO: [HLS 214-437] Disabling loop flattening for loop 'VITIS_LOOP_226_6'. (efficientad_engine.cpp:226:29)
+INFO: [HLS 214-115] Multiple burst reads of variable length and bit width 64 in loop 'VITIS_LOOP_217_3'(efficientad_engine.cpp:217:31) has been inferred on bundle 'ddr'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (efficientad_engine.cpp:217:31)
+INFO: [HLS 214-115] Multiple burst reads of variable length and bit width 64 in loop 'VITIS_LOOP_237_7'(efficientad_engine.cpp:237:39) has been inferred on bundle 'ddr'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (efficientad_engine.cpp:237:39)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 10.207 seconds; current allocated memory: 138.141 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.004 seconds; current allocated memory: 138.141 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.38 seconds; current allocated memory: 153.855 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+WARNING: [SYNCHK 200-23] efficientad_engine.cpp:282: variable-indexed range selection may cause suboptimal QoR.
+INFO: [SYNCHK 200-10] 0 error(s), 1 warning(s).
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.326 seconds; current allocated memory: 162.141 MB.
+WARNING: [XFORM 203-561] Updating loop upper bound from 511 to 256 for loop 'VITIS_LOOP_265_2' (efficientad_engine.cpp:265:40) in function 'resize_layer'.
+WARNING: [XFORM 203-561] Updating loop upper bound from 511 to 256 for loop 'VITIS_LOOP_258_1' (efficientad_engine.cpp:258:36) in function 'resize_layer'.
+INFO: [HLS 200-1947] Using 'stable' for argument 'mem' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'dst' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'oc' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'y' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'iw' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'cw' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'ow' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'cout' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'cg' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'kw' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'k' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'stride' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'pad' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'relu' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'pool' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'rows' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_0' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_1' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_2' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_3' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_4' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_5' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_6' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_7' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_8' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_9' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_10' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_11' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_12' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_13' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_14' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_15' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_16' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_17' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_18' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_19' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_20' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_21' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_22' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_23' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_24' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_25' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_26' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_27' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_28' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_29' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_30' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_31' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_32' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_33' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_34' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_35' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_36' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_37' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_38' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'wc_39' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_0.val1' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_1.val2' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_2.val3' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_3.val4' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_4.val5' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_5.val6' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_6.val7' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_7.val8' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_8.val9' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_9.val10' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_10.val11' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_11.val12' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_12.val13' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_13.val14' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_14.val15' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_15.val16' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_16.val17' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_17.val18' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_18.val19' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_19.val20' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_20.val21' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_21.val22' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_22.val23' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_23.val24' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_24.val25' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_25.val26' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_26.val27' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_27.val28' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_28.val29' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_29.val30' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_30.val31' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_31.val32' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_32.val33' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_33.val34' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_34.val35' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_35.val36' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_36.val37' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_37.val38' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_38.val39' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'bias_39.val40' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_0.val41' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_1.val42' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_2.val43' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_3.val44' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_4.val45' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_5.val46' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_6.val47' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_7.val48' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_8.val49' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_9.val50' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_10.val51' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_11.val52' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_12.val53' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_13.val54' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_14.val55' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_15.val56' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_16.val57' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_17.val58' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_18.val59' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_19.val60' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_20.val61' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_21.val62' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_22.val63' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_23.val64' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_24.val65' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_25.val66' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_26.val67' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_27.val68' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_28.val69' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_29.val70' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_30.val71' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_31.val72' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_32.val73' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_33.val74' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_34.val75' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_35.val76' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_36.val77' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_37.val78' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_38.val79' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'mult_39.val80' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_base_0.val81' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_base_1.val82' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_base_2.val83' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_base_3.val84' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_base_4.val85' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_base_5.val86' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_base_6.val87' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_base_7.val88' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_valid_0.val89' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_valid_1.val90' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_valid_2.val91' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_valid_3.val92' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_valid_4.val93' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_valid_5.val94' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_valid_6.val95' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [HLS 200-1947] Using 'stable' for argument 'row_valid_7.val96' of dataflow function 'overlap_row' (efficientad_engine.cpp:176:1).
+INFO: [XFORM 203-712] Applying dataflow to function 'overlap_row' (efficientad_engine.cpp:176:1), detected/extracted 2 process function(s): 
+	 'mac_row'
+	 'emit_row'.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (efficientad_engine.cpp:307:1) to (efficientad_engine.cpp:324:1) in function 'validate_conv_shape'... converting 5 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (efficientad_engine.cpp:72:1) to (efficientad_engine.cpp:71:30) in function 'mac_row'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (efficientad_engine.cpp:149:36) to (efficientad_engine.cpp:39:8) in function 'emit_row'... converting 118 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (efficientad_engine.cpp:231:43) to (efficientad_engine.cpp:234:20) in function 'conv_layer'... converting 10 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'validate_conv_shape' (efficientad_engine.cpp:307:1)...6 expression(s) balanced.
+INFO: [XFORM 203-11] Balancing expressions in function 'resize_layer' (efficientad_engine.cpp:255:35)...3 expression(s) balanced.
+INFO: [XFORM 203-11] Balancing expressions in function 'mac_row' (efficientad_engine.cpp:15:38)...320 expression(s) balanced.
+INFO: [XFORM 203-11] Balancing expressions in function 'emit_row' (efficientad_engine.cpp:37:31)...4 expression(s) balanced.
+INFO: [XFORM 203-11] Balancing expressions in function 'efficientad_engine' (efficientad_engine.cpp:326:5)...7 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 11.559 seconds; current allocated memory: 198.031 MB.
+INFO: [HLS 200-2060] Failed to convert nested loops 'VITIS_LOOP_61_1'(efficientad_engine.cpp:61:22) and 'VITIS_LOOP_71_3'(efficientad_engine.cpp:71:30) in function 'mac_row' into perfectly nested loops.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 2.207 seconds; current allocated memory: 358.156 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'efficientad_engine' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'validate_conv_shape' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.38 seconds; current allocated memory: 363.980 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.021 seconds; current allocated memory: 364.969 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'conv_layer_Pipeline_VITIS_LOOP_217_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_217_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'VITIS_LOOP_217_3'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.054 seconds; current allocated memory: 367.652 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.032 seconds; current allocated memory: 368.004 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'conv_layer_Outline_VITIS_LOOP_213_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln213_3) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.208 seconds; current allocated memory: 374.398 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.096 seconds; current allocated memory: 374.438 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'conv_layer_Pipeline_VITIS_LOOP_223_4' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_223_4'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 1, loop 'VITIS_LOOP_223_4'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.101 seconds; current allocated memory: 374.477 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.678 seconds; current allocated memory: 374.477 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'conv_layer_Pipeline_VITIS_LOOP_237_7' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_237_7'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 3, loop 'VITIS_LOOP_237_7'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.026 seconds; current allocated memory: 374.496 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.014 seconds; current allocated memory: 374.496 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mac_row_Pipeline_VITIS_LOOP_71_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=res_159) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_158) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_157) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_156) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_155) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_154) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_153) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_152) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_151) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_150) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_149) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_148) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_147) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_146) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_145) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_144) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_143) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_142) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_141) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_140) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_139) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_138) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_137) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_136) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_135) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_134) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_133) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_132) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_131) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_130) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_129) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_128) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_127) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_126) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_125) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_124) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_123) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_122) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_121) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_120) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_119) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_118) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_117) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_116) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_115) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_114) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_113) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_112) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_111) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_110) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_109) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_108) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_107) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_106) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_105) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_104) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_103) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_102) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_101) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_100) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_99) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_98) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_97) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_96) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_95) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_94) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_93) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_92) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_91) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_90) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_89) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_88) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_87) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_86) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_85) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_84) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_83) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_82) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_81) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_80) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_79) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_78) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_77) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_76) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_75) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_74) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_73) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_72) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_71) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_70) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_69) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_68) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_67) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_66) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_65) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_64) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_63) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_62) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_61) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_60) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_59) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_58) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_57) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_56) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_55) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_54) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_53) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_52) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_51) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_50) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_49) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_48) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_47) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_46) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_45) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_44) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_43) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_42) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_41) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_40) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_39) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_38) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_37) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_36) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_35) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_34) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_33) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_32) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_31) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_30) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_29) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_28) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_27) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_26) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_25) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_24) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_23) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_22) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_21) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_20) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_19) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_18) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_17) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_16) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_15) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_14) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_13) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_12) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_11) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_10) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_9) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_8) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_7) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_6) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_5) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_4) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_3) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_2) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=res) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=address) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_71_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 10, loop 'VITIS_LOOP_71_3'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 8.753 seconds; current allocated memory: 405.926 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.893 seconds; current allocated memory: 405.988 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mac_row' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.478 seconds; current allocated memory: 405.988 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.045 seconds; current allocated memory: 406.016 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'requant' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'requant'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 5, function 'requant'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 0.061 seconds; current allocated memory: 406.031 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.013 seconds; current allocated memory: 406.051 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'emit_row_Pipeline_VITIS_LOOP_134_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_134_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 8, loop 'VITIS_LOOP_134_2'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.065 seconds; current allocated memory: 406.227 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.05 seconds; current allocated memory: 406.227 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'emit_row_Pipeline_VITIS_LOOP_156_4' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_156_4'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 9, loop 'VITIS_LOOP_156_4'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.071 seconds; current allocated memory: 406.230 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.025 seconds; current allocated memory: 406.234 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'emit_row' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.454 seconds; current allocated memory: 420.523 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.207 seconds; current allocated memory: 420.727 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'overlap_row' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.234 seconds; current allocated memory: 420.781 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.053 seconds; current allocated memory: 420.801 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'conv_layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln227_1) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.287 seconds; current allocated memory: 427.824 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.128 seconds; current allocated memory: 427.977 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'resize_layer_Pipeline_VITIS_LOOP_280_4' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=mul_ln287_1) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=mul_ln287) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_280_4'.
+INFO: [HLS 200-1470] Pipelining result : Target II = 1, Final II = 1, Depth = 8, loop 'VITIS_LOOP_280_4'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.162 seconds; current allocated memory: 428.094 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.022 seconds; current allocated memory: 428.094 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'resize_layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln296) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln271) to 3 in order to utilize available DSP registers.
+INFO: [HLS 200-486] Changing DSP latency (root=add_ln269) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.059 seconds; current allocated memory: 428.168 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.032 seconds; current allocated memory: 428.168 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'efficientad_engine' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.053 seconds; current allocated memory: 428.434 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.043 seconds; current allocated memory: 429.105 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'validate_conv_shape' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mul_14ns_4ns_18_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_4ns_4ns_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_6ns_8ns_14_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_6ns_9ns_14_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'validate_conv_shape'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.12 seconds; current allocated memory: 430.895 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'conv_layer_Pipeline_VITIS_LOOP_217_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'conv_layer_Pipeline_VITIS_LOOP_217_3' pipeline 'VITIS_LOOP_217_3' pipeline type 'loop pipeline'
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_217_3/m_axi_ddr_0_ARUSER' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'conv_layer_Pipeline_VITIS_LOOP_217_3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 1.715 seconds; current allocated memory: 434.242 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'conv_layer_Outline_VITIS_LOOP_213_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_10ns_6ns_21s_21_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'conv_layer_Outline_VITIS_LOOP_213_2'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.342 seconds; current allocated memory: 441.324 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'conv_layer_Pipeline_VITIS_LOOP_223_4' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'conv_layer_Pipeline_VITIS_LOOP_223_4'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.525 seconds; current allocated memory: 456.684 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'conv_layer_Pipeline_VITIS_LOOP_237_7' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'conv_layer_Pipeline_VITIS_LOOP_237_7' pipeline 'VITIS_LOOP_237_7' pipeline type 'loop pipeline'
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'conv_layer_Pipeline_VITIS_LOOP_237_7/m_axi_ddr_0_ARUSER' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'conv_layer_Pipeline_VITIS_LOOP_237_7'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.113 seconds; current allocated memory: 456.684 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mac_row_Pipeline_VITIS_LOOP_71_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'mac_row_Pipeline_VITIS_LOOP_71_3' pipeline 'VITIS_LOOP_71_3' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-104] Estimated max fanout for 'mac_row_Pipeline_VITIS_LOOP_71_3' is 10088 from HDL expression: (1'b0 == ap_block_pp0_stage0_11001)
+INFO: [RTGEN 206-100] Generating core module 'am_addmul_24s_8s_8s_33_4_1': 160 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_9ns_6ns_13s_13_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_17_3_13_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_17_3_1_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mac_row_Pipeline_VITIS_LOOP_71_3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.023 seconds; current allocated memory: 482.707 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mac_row' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mac_row'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 4 seconds. Elapsed time: 4.64 seconds; current allocated memory: 547.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'requant' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mul_32s_32s_64_2_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'requant'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.173 seconds; current allocated memory: 547.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'emit_row_Pipeline_VITIS_LOOP_134_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'emit_row_Pipeline_VITIS_LOOP_134_2' pipeline 'VITIS_LOOP_134_2' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'partselect_32ns_1280ns_11ns_32_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_21_6_32_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'emit_row_Pipeline_VITIS_LOOP_134_2'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.177 seconds; current allocated memory: 547.723 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'emit_row_Pipeline_VITIS_LOOP_156_4' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'emit_row_Pipeline_VITIS_LOOP_156_4' pipeline 'VITIS_LOOP_156_4' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_11_3_8_1_1': 8 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'emit_row_Pipeline_VITIS_LOOP_156_4'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.348 seconds; current allocated memory: 548.008 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'emit_row' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_9_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_abkb' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_8_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_acud' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_7_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_adEe' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_6_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_aeOg' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_5_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_afYi' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_4_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ag8j' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_3_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ahbi' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_2_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_aibs' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_1_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ajbC' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_ap_uint_bool_RAM_2P_LUTRAM_1R1W' to 'emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_akbM' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_29_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILlbW' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_28_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILmb6' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_27_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILncg' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_26_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILocq' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_25_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILpcA' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_24_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILqcK' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_23_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILrcU' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_22_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILsc4' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_21_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILtde' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_20_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILudo' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_19_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILvdy' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_18_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILwdI' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_17_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILxdS' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_16_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILyd2' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_15_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILzec' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_14_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILAem' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_13_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILBew' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_12_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILCeG' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_11_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILDeQ' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_10_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILEe0' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_9_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILFfa' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_8_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILGfk' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_7_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILHfu' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_6_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILIfE' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_5_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILJfO' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_4_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILKfY' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_3_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILLf8' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_2_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILMgi' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_1_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILNgs' due to the length limit 80
+INFO: [SYN 201-210] Renamed object name 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILi32EERN3hls6s_RAM_2P_LUTRAM_1R1W' to 'emit_row_p_ZZL8emit_rowP7ap_uintILi64EEjjS_ILi9EES2_S2_S_ILi10EEbbPK6ap_intILOgC' due to the length limit 80
+INFO: [RTGEN 206-100] Generating core module 'mul_16ns_9ns_24_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_7ns_9ns_16_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'emit_row'.
+INFO: [RTMG 210-278] Implementing memory 'efficientad_engine_emit_row_emit_row_ap_uint_unsigned_int_unsigned_int_ap_uint_ap_uint_ap_uint_abkb' using distributed RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.888 seconds; current allocated memory: 554.750 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'overlap_row' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_ARUSER' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'overlap_row/m_axi_ddr_0_RREADY' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'overlap_row'.
+INFO: [RTMG 210-285] Implementing FIFO 'sums_U(efficientad_engine_fifo_w1280_d4_D)' using Distributed RAMs.
+INFO: [RTMG 210-285] Implementing FIFO 'start_for_emit_row_U0_U(efficientad_engine_start_for_emit_row_U0)' using Shift Registers.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 1 seconds. Elapsed time: 1.946 seconds; current allocated memory: 591.121 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'conv_layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_14ns_9ns_29s_29_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_14ns_4ns_18_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_16ns_5ns_21_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_4ns_4ns_8_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_8ns_6ns_10_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_9ns_6ns_14_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'sparsemux_17_3_32_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'udiv_32s_2ns_32_36_seq_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'udiv_32s_2ns_9_36_seq_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'urem_32ns_4ns_4_36_seq_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'conv_layer'.
+INFO: [RTMG 210-278] Implementing memory 'efficientad_engine_conv_layer_wc_RAM_1P_BRAM_1R1W' using block RAMs.
+INFO: [RTMG 210-278] Implementing memory 'efficientad_engine_conv_layer_rows_RAM_1P_BRAM_1R1W' using block RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 0.459 seconds; current allocated memory: 595.066 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'resize_layer_Pipeline_VITIS_LOOP_280_4' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'resize_layer_Pipeline_VITIS_LOOP_280_4' pipeline 'VITIS_LOOP_280_4' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'am_addmul_24s_24s_16ns_41_4_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_16ns_8s_24_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'partselect_8ns_64ns_6ns_8_1_1': 4 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'partset_64ns_64ns_8ns_6ns_64_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'resize_layer_Pipeline_VITIS_LOOP_280_4'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.429 seconds; current allocated memory: 616.375 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'resize_layer' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_14ns_8ns_29s_29_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_14ns_9ns_29s_29_4_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_6ns_8ns_14_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_6ns_9ns_14_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_9ns_6ns_15_1_1': 2 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'resize_layer'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.178 seconds; current allocated memory: 620.023 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'efficientad_engine' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/ddr' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/mem' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/opcode' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/src' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/dst' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/weights' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/biases' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/multipliers' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/ih' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/iw' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/cin' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/cout' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/kernel' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/stride' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/pad' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/relu' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/pool' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/oh' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/ow' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'efficientad_engine/coordinates' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'efficientad_engine' to 's_axilite & ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Bundling port 'return', 'mem', 'opcode', 'src', 'dst', 'weights', 'biases', 'multipliers', 'ih', 'iw', 'cin', 'cout', 'kernel', 'stride', 'pad', 'relu', 'oh', 'ow' and 'coordinates' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'efficientad_engine'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.299 seconds; current allocated memory: 623.492 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 1.006 seconds; current allocated memory: 628.777 MB.
+INFO: [HLS 200-1603] Design has inferred MAXI bursts and missed bursts, see Vitis HLS GUI synthesis summary report for detailed information.
+INFO: [HLS 200-2225] Wrote inferred directives to file C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/syn/inferred_directives.ini
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 1.843 seconds; current allocated memory: 656.742 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for efficientad_engine.
+INFO: [VLOG 209-307] Generating Verilog RTL for efficientad_engine.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 171.23 MHz
+INFO: [HLS 200-2161] Finished Command csynth_design Elapsed time: 00:01:04; Allocated memory: 526.355 MB.
+INFO: [HLS 200-1510] Running: export_design -format ip_catalog -rtl verilog -display_name EfficientAD Overlapped PE40 125MHz INT8 Engine 
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Sun Nov  1 22:57:34 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source run_ippack.tcl -notrace
+INFO: calling package_hls_ip ip_types=vitis sysgen json_file=C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/sol_data.json outdir=C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip srcdir=C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol ippack_options_dict= ippack_options_dict=
+INFO: Copied 1 ipmisc file(s) to C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/misc
+INFO: Copied 57 verilog file(s) to C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/hdl/verilog
+INFO: Copied 53 vhdl file(s) to C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/hdl/vhdl
+INFO: Copied 10 swdriver file(s) to C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/drivers
+INFO: Import ports from HDL: C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/hdl/vhdl/efficientad_engine.vhd (efficientad_engine)
+INFO: Add axi4lite interface s_axi_control
+INFO: Add clock interface ap_clk
+INFO: Add reset interface ap_rst_n
+INFO: Add interrupt interface interrupt
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/amd/2025.2/Vivado/data/ip'.
+INFO: Add axi4full interface m_axi_ddr
+INFO: Calling post_process_vitis to specialize IP
+INFO: Calling post_process_sysgen to specialize IP
+Generating sysgen info xml from json file
+INFO: Created IP C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/component.xml
+INFO: Created IP archive C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/hls/engine_project/sol/impl/ip/xilinx_com_hls_efficientad_engine_1_0.zip
+INFO: [Common 17-206] Exiting Vivado at Sun Nov  1 22:57:41 2026...
+INFO: [HLS 200-802] Generated output file engine_project/sol/impl/export.zip
+INFO: [HLS 200-2161] Finished Command export_design Elapsed time: 00:00:08; Allocated memory: 6.125 MB.
+Traceback (most recent call last):
+  File "C:\Users\sheny\Documents\ChatGPT\fpga\efficientad_full_pl_overlap125\scripts\sync_export_rtl.py", line 13, in <module>
+    assert before.keys()==after.keys(), 'Export changed the RTL module set'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Export changed the RTL module set
+    while executing
+"exec C:/Users/sheny/anaconda3/python.exe [file join $root scripts sync_export_rtl.py]"
+    invoked from within
+"if {$stage eq "package" || $stage eq "all" || $stage eq "prepare"} {
+    set impl [file normalize [file join $root hls engine_project sol impl]]
+    e..."
+    (file "C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/scripts/build_hls.tcl" line 31)
+    invoked from within
+"source C:/Users/sheny/Documents/ChatGPT/fpga/efficientad_full_pl_overlap125/scripts/build_hls.tcl"
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel \#0 [list source $tclfile] "
+
+INFO: [HLS 200-112] Total CPU user time: 17 seconds. Total CPU system time: 9 seconds. Total elapsed time: 194.005 seconds; peak allocated memory: 662.910 MB.
+INFO: [vitis-run 60-1662] Stopping dispatch session having empty uuid.

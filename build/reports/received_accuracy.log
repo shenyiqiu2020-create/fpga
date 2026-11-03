@@ -1,0 +1,236 @@
+REFERENCE 10/284; unique=10; elapsed=3.8s
+REFERENCE 20/284; unique=20; elapsed=7.3s
+REFERENCE 30/284; unique=30; elapsed=10.8s
+REFERENCE 40/284; unique=40; elapsed=14.3s
+REFERENCE 50/284; unique=50; elapsed=17.8s
+REFERENCE 60/284; unique=60; elapsed=21.3s
+REFERENCE 70/284; unique=70; elapsed=24.9s
+REFERENCE 80/284; unique=80; elapsed=28.4s
+REFERENCE 90/284; unique=90; elapsed=31.9s
+REFERENCE 100/284; unique=95; elapsed=33.7s
+REFERENCE 110/284; unique=95; elapsed=33.8s
+REFERENCE 120/284; unique=95; elapsed=33.8s
+REFERENCE 130/284; unique=95; elapsed=33.8s
+REFERENCE 140/284; unique=95; elapsed=33.9s
+REFERENCE 150/284; unique=95; elapsed=33.9s
+REFERENCE 160/284; unique=100; elapsed=35.7s
+REFERENCE 170/284; unique=110; elapsed=39.2s
+REFERENCE 180/284; unique=120; elapsed=42.7s
+REFERENCE 190/284; unique=130; elapsed=46.2s
+REFERENCE 200/284; unique=140; elapsed=49.7s
+REFERENCE 210/284; unique=150; elapsed=53.2s
+REFERENCE 220/284; unique=160; elapsed=56.7s
+REFERENCE 230/284; unique=170; elapsed=60.2s
+REFERENCE 240/284; unique=180; elapsed=63.7s
+REFERENCE 250/284; unique=190; elapsed=67.3s
+REFERENCE 260/284; unique=200; elapsed=70.9s
+REFERENCE 270/284; unique=210; elapsed=74.4s
+REFERENCE 280/284; unique=220; elapsed=77.9s
+REFERENCE 284/284; unique=224; elapsed=79.3s
+Initializing FPGA for 75 historical held-out crops (D19/N17 excluded)
+FPGA 1/75 D20_01.png: score=0.368190 map_error=0
+FPGA 2/75 D20_02.png: score=0.287889 map_error=0
+FPGA 3/75 D20_03.png: score=0.230151 map_error=0
+FPGA 4/75 D20_04.png: score=0.354224 map_error=0
+FPGA 5/75 D21_01.png: score=0.307453 map_error=0
+FPGA 6/75 D21_02.png: score=0.291118 map_error=0
+FPGA 7/75 D21_03.png: score=0.426262 map_error=0
+FPGA 8/75 D21_04.png: score=0.293290 map_error=0
+FPGA 9/75 D22_01.png: score=0.199705 map_error=0
+FPGA 10/75 D22_02.png: score=0.369310 map_error=0
+FPGA 11/75 D22_03.png: score=0.295009 map_error=0
+FPGA 12/75 D22_04.png: score=0.231965 map_error=0
+FPGA 13/75 D23_01.png: score=0.138108 map_error=0
+FPGA 14/75 D23_02.png: score=0.177112 map_error=0
+FPGA 15/75 D23_03.png: score=0.209414 map_error=0
+FPGA 16/75 D23_04.png: score=0.157020 map_error=0
+FPGA 17/75 N18_01.png: score=0.088750 map_error=0
+FPGA 18/75 N18_02.png: score=0.108766 map_error=0
+FPGA 19/75 N18_03.png: score=0.084400 map_error=0
+FPGA 20/75 N18_04.png: score=0.088714 map_error=0
+FPGA 21/75 N19_02.png: score=0.020288 map_error=0
+FPGA 22/75 N19_03.png: score=0.043485 map_error=0
+FPGA 23/75 N19_04.png: score=0.017359 map_error=0
+FPGA 24/75 N20_01.png: score=0.134252 map_error=0
+FPGA 25/75 N20_02.png: score=0.040187 map_error=0
+FPGA 26/75 N20_03.png: score=0.064331 map_error=0
+FPGA 27/75 N20_04.png: score=0.090366 map_error=0
+FPGA 28/75 0001_D38.png: score=0.252469 map_error=0
+FPGA 29/75 0002_D38.png: score=0.140942 map_error=0
+FPGA 30/75 0003_D38.png: score=0.306955 map_error=0
+FPGA 31/75 0004_D38.png: score=0.280698 map_error=0
+FPGA 32/75 0005_D39.png: score=0.427243 map_error=0
+FPGA 33/75 0006_D39.png: score=0.145620 map_error=0
+FPGA 34/75 0007_D39.png: score=0.234229 map_error=0
+FPGA 35/75 0008_D39.png: score=0.316160 map_error=0
+FPGA 36/75 0009_D40.png: score=0.171128 map_error=0
+FPGA 37/75 0010_D40.png: score=0.186757 map_error=0
+FPGA 38/75 0011_D40.png: score=0.196218 map_error=0
+FPGA 39/75 0012_D40.png: score=0.233542 map_error=0
+FPGA 40/75 0013_D41.png: score=0.330484 map_error=0
+FPGA 41/75 0014_D41.png: score=0.234331 map_error=0
+FPGA 42/75 0015_D41.png: score=0.220719 map_error=0
+FPGA 43/75 0016_D41.png: score=0.276886 map_error=0
+FPGA 44/75 0017_D42.png: score=0.156952 map_error=0
+FPGA 45/75 0018_D42.png: score=0.214921 map_error=0
+FPGA 46/75 0019_D42.png: score=0.249313 map_error=0
+FPGA 47/75 0020_D42.png: score=0.231584 map_error=0
+FPGA 48/75 0021_D43.png: score=0.296084 map_error=0
+FPGA 49/75 0022_D43.png: score=0.316203 map_error=0
+FPGA 50/75 0023_D43.png: score=0.232990 map_error=0
+FPGA 51/75 0024_D43.png: score=0.164453 map_error=0
+FPGA 52/75 0025_D44.png: score=0.262218 map_error=0
+FPGA 53/75 0026_D44.png: score=0.249103 map_error=0
+FPGA 54/75 0027_D44.png: score=0.207879 map_error=0
+FPGA 55/75 0028_D44.png: score=0.171950 map_error=0
+FPGA 56/75 0029_D45.png: score=0.312869 map_error=0
+FPGA 57/75 0030_D45.png: score=0.357909 map_error=0
+FPGA 58/75 0031_D45.png: score=0.395910 map_error=0
+FPGA 59/75 0032_D45.png: score=0.226400 map_error=0
+FPGA 60/75 0033_N42.png: score=0.179616 map_error=0
+FPGA 61/75 0034_N42.png: score=0.145889 map_error=0
+FPGA 62/75 0035_N42.png: score=0.365369 map_error=0
+FPGA 63/75 0036_N42.png: score=0.395998 map_error=0
+FPGA 64/75 0037_N45.png: score=0.171920 map_error=0
+FPGA 65/75 0038_N45.png: score=0.169251 map_error=0
+FPGA 66/75 0039_N45.png: score=0.169386 map_error=0
+FPGA 67/75 0040_N45.png: score=0.122974 map_error=0
+FPGA 68/75 0041_N46.png: score=0.171329 map_error=0
+FPGA 69/75 0042_N46.png: score=0.199506 map_error=0
+FPGA 70/75 0043_N46.png: score=0.188724 map_error=0
+FPGA 71/75 0044_N46.png: score=0.210877 map_error=0
+FPGA 72/75 0045_N47.png: score=0.187048 map_error=0
+FPGA 73/75 0046_N47.png: score=0.186424 map_error=0
+FPGA 74/75 0047_N47.png: score=0.164392 map_error=0
+FPGA 75/75 0048_N47.png: score=0.182169 map_error=0
+{
+  "expanded_development_155": {
+    "count": 155,
+    "fp32": {
+      "count": 155,
+      "accuracy": 0.7935483870967742,
+      "auroc": 0.592128801431127,
+      "precision": 0.8489208633093526,
+      "recall": 0.9147286821705426,
+      "specificity": 0.19230769230769232,
+      "f1": 0.8805970149253731,
+      "tn": 5,
+      "fp": 21,
+      "fn": 11,
+      "tp": 118
+    },
+    "int8": {
+      "count": 155,
+      "accuracy": 0.8193548387096774,
+      "auroc": 0.6034585569469291,
+      "precision": 0.8531468531468531,
+      "recall": 0.9457364341085271,
+      "specificity": 0.19230769230769232,
+      "f1": 0.8970588235294118,
+      "tn": 5,
+      "fp": 21,
+      "fn": 7,
+      "tp": 122
+    },
+    "prediction_agreement": 0.9741935483870968
+  },
+  "expanded_holdout_48": {
+    "count": 48,
+    "fp32": {
+      "count": 48,
+      "accuracy": 0.6875,
+      "auroc": 0.75390625,
+      "precision": 0.6808510638297872,
+      "recall": 1.0,
+      "specificity": 0.0625,
+      "f1": 0.810126582278481,
+      "tn": 1,
+      "fp": 15,
+      "fn": 0,
+      "tp": 32
+    },
+    "int8": {
+      "count": 48,
+      "accuracy": 0.6666666666666666,
+      "auroc": 0.740234375,
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "specificity": 0.0,
+      "f1": 0.8,
+      "tn": 0,
+      "fp": 16,
+      "fn": 0,
+      "tp": 32
+    },
+    "prediction_agreement": 0.9791666666666666
+  },
+  "historical_development_48": {
+    "count": 48,
+    "fp32": {
+      "count": 48,
+      "accuracy": 0.8958333333333334,
+      "auroc": 0.9624999999999999,
+      "precision": 0.972972972972973,
+      "recall": 0.9,
+      "specificity": 0.875,
+      "f1": 0.935064935064935,
+      "tn": 7,
+      "fp": 1,
+      "fn": 4,
+      "tp": 36
+    },
+    "int8": {
+      "count": 48,
+      "accuracy": 0.9375,
+      "auroc": 0.96875,
+      "precision": 0.9743589743589743,
+      "recall": 0.95,
+      "specificity": 0.875,
+      "f1": 0.9620253164556962,
+      "tn": 7,
+      "fp": 1,
+      "fn": 2,
+      "tp": 38
+    },
+    "prediction_agreement": 0.9583333333333334
+  },
+  "historical_holdout_33_accepted": {
+    "count": 33,
+    "fp32": {
+      "count": 33,
+      "accuracy": 0.9696969696969697,
+      "auroc": 1.0,
+      "precision": 0.9523809523809523,
+      "recall": 1.0,
+      "specificity": 0.9230769230769231,
+      "f1": 0.975609756097561,
+      "tn": 12,
+      "fp": 1,
+      "fn": 0,
+      "tp": 20
+    },
+    "int8": {
+      "count": 33,
+      "accuracy": 0.9696969696969697,
+      "auroc": 1.0,
+      "precision": 0.9523809523809523,
+      "recall": 1.0,
+      "specificity": 0.9230769230769231,
+      "f1": 0.975609756097561,
+      "tn": 12,
+      "fp": 1,
+      "fn": 0,
+      "tp": 20
+    },
+    "prediction_agreement": 1.0
+  }
+}
+{
+  "status": "PASS",
+  "rows": 284,
+  "max_matching_model_score_error": 1.1920928955078125e-07,
+  "selection": "Expanded CSV old_score matches current bundle; historical CSV new_score matches current bundle",
+  "predictions_modified": false,
+  "threshold_modified": false,
+  "weights_modified": false
+}

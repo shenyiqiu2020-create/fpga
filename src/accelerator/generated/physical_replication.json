@@ -1,0 +1,12 @@
+[
+  {
+    "net": "design_full_i/engine/inst/grp_conv_layer_fu_387/grp_conv_layer_Outline_VITIS_LOOP_213_2_fu_2033/ap_CS_fsm_state25",
+    "original_loads": 1376,
+    "replicas_added": 9
+  },
+  {
+    "net": "design_full_i/engine/inst/grp_conv_layer_fu_387/grp_conv_layer_Outline_VITIS_LOOP_213_2_fu_2033/ap_CS_fsm_state5",
+    "original_loads": 626,
+    "replicas_added": 9
+  }
+]

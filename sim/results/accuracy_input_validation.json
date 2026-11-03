@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checks": [
+    "case_insensitive_calibration_group_excluded",
+    "missing_group_rejected",
+    "training_role_rejected",
+    "duplicate_rejected",
+    "path_escape_rejected",
+    "uncropped_image_rejected"
+  ]
+}
